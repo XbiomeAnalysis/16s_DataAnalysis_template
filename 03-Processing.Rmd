@@ -1,0 +1,53 @@
+# Data processing
+
+
+
+**Loading packages**
+
+```R
+library(XMAS)
+library(dplyr)
+library(tibble)
+library(phyloseq)
+library(ggplot2)
+library(ggpubr)
+```
+
+This part has too may procedures and we only choose some of them. Please go to **Chapter 6** to see more approaches and details for being familiar with this part.
+
+## Rarefy otu counts
+
+From previous results of quality evaluation, the sequence depth of samples are different which have effects on the downstream analysis. Here, choosing the **rarefy** (Normaliztion method: random subsampling counts to the smallest library size) to get the equal sample sums.
+
+```{r, warning=FALSE, message=FALSE}
+dada2_ps_rare <- normalize(dada2_ps_NoQC, method = "rarefy")
+dada2_ps_rare
+```
+
+In addition, we could also perform some other normalization methods on the rarefied phyloseq object. By the way, we didn't transform the data by using log algorithm because the count matrix is required by the following data analysis methods.
+
+## Extracting specific taxonomic level
+```{r, warning=FALSE, message=FALSE}
+dada2_ps_rare_genus <- summarize_taxa(dada2_ps_rare, taxa_level = "Genus")
+dada2_ps_rare_genus
+```
+
+## Filtering the low relative abundance or unclassified taxa by the threshold (total counts < 10)
+```{r, warning=FALSE, message=FALSE}
+dada2_ps_rare_genus_filter <- run_filter(dada2_ps_rare_genus, cutoff = 10, unclass = TRUE)
+dada2_ps_rare_genus_filter 
+```
+
+## Trimming the taxa with low occurrence less than threshold
+```{r, warning=FALSE, message=FALSE}
+dada2_ps_rare_genus_filter_trim <- run_trim(dada2_ps_rare_genus_filter, cutoff = 0.2, trim = "feature")
+dada2_ps_final <- dada2_ps_rare_genus_filter_trim
+dada2_ps_final
+```
+
+Finally, we obtained the final phyloseq-class object _dada2\_ps\_rare\_genus\_filter\_trim_ and changed its name.
+
+## Systematic Information
+```{r}
+sessionInfo()
+```

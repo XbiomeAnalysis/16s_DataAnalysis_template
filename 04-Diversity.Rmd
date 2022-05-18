@@ -1,0 +1,48 @@
+# Diversity analysis
+
+**Loading packages**
+
+```R
+library(XMAS)
+library(dplyr)
+library(tibble)
+library(phyloseq)
+library(ggplot2)
+library(ggpubr)
+```
+
+## Alpha diveristy
+
+* Calculate the alpha diversity 
+
+**Notes:** the otu table must be counts matrix (*rarefied but not trim counts matrix*) when you choose *Observed* etc measures. 
+```{r, warning=FALSE, message=FALSE}
+dada_ps_rare_genus_alpha <- run_alpha_diversity(ps=dada2_ps_rare_genus, measures = c("Shannon", "Chao1", "Observed"))
+print(dada_ps_rare_genus_alpha)
+```
+
+* visualization
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, fig.align="center", fig.cap="Alpha diversity (16s example)"}
+plot_boxplot(data=dada_ps_rare_genus_alpha,
+             y_index = c("Shannon", "Chao1", "Observed"),
+             group = "Group",
+             group_names = c("AA", "BB"),
+             group_color = c("red", "blue"),
+             do_test = TRUE,
+             method = "wilcox.test")
+```
+
+
+## Beta diversity
+
+* beta dipersion
+```{r, warning=FALSE, message=FALSE, fig.width=5, fig.height=4, fig.align="center", fig.cap="Beta diversity (16s example)"}
+dada2_ps_beta <- run_beta_diversity(ps=dada2_ps_final, method = "bray", group = "Group")
+dada2_ps_beta$BetaDispersion
+```
+
+
+## Systematic Information
+```{r}
+sessionInfo()
+```

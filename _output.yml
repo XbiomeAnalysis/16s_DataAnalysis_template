@@ -3,10 +3,10 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">Data analysis based on XMAS 2.0 package</a></li>
+        <li><a href="./">16s microbiota data analysis based on XMAS package</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/XbiomeAnalysis/XMAS_tutorial/blob/main/%s
+    edit: https://github.com/XbiomeAnalysis/16s_DataAnalysis_template/blob/main/%s
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   includes:

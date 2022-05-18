@@ -4,7 +4,7 @@ unlink('_book', recursive = TRUE)
 
 x = readLines('index.Rmd')
 i = 1
-s = paste0('title: "Data analysis based on XMAS package (', c('Bootstrap', 'Tufte'), ' Style)"')
+s = paste0('title: "16s microbiota data analysis based on XMAS package (', c('Bootstrap', 'Tufte'), ' Style)"')
 for (fmt in c('html_book', 'tufte_html_book')) {
   unlink('_book', recursive = TRUE)
   file.copy('index.Rmd', '_index.Rmd')
@@ -22,7 +22,7 @@ for (fmt in c('html_book', 'tufte_html_book')) {
   file.rename('_output.yml2', '_output.yml')
   if (res != 0) stop('Failed to compile the book to ', fmt)
   i = i + 1
-  bookdown::publish_book(paste0('XMAS_tutorial', i))
+  bookdown::publish_book(paste0('16S_tutorial', i))
 }
 unlink('_book', recursive = TRUE)
 
@@ -38,4 +38,4 @@ for (fmt in formats) {
   if (res != 0) stop('Failed to compile the book to ', fmt)
 }
 
-bookdown::publish_book('XMAS_tutorial')
+bookdown::publish_book('16S_tutorial')

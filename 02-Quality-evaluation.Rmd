@@ -1,0 +1,72 @@
+# Quality Control
+
+
+**Loading packages**
+
+```R
+library(XMAS)
+library(dplyr)
+library(tibble)
+library(phyloseq)
+library(ggplot2)
+library(ggpubr)
+```
+
+Quality control of DADA2 results will help us have more rational determinations on the further data analysis. 
+
+## Reads' track by DADA2
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=6, fig.height=4, fig.cap="Reads' track by DADA2 (16s example)"}
+plot_Dada2Track(
+  data=dada2_res$reads_track,
+  mode="PE",
+  relative_abundance=TRUE,
+  legend_position="top")
+```
+
+
+The percentage of the final remained read counts approximate **70%**, indicating that we should consider the sequence depth for analysis when we build the sequence library.
+
+## Spike-in sample (BRS) assessment
+```{r, warning=FALSE, collapse=TRUE}
+# extracting the genus level phyloseq  
+dada2_ps_genus <- summarize_taxa(ps = dada2_ps, taxa_level = "Genus")
+sample_data(dada2_ps_genus)
+
+RefCheck_16s <- run_RefCheck(
+    ps=dada2_ps_genus,
+    BRS_ID="S8005",
+    Reference=NULL,
+    Ref_type="16s",
+    Save=NULL)
+```
+
+
+## Spike-in sample's remove
+```{r, warning=FALSE, message=FALSE}
+dada2_ps_NoQC <- get_GroupPhyloseq(
+                     ps = dada2_ps,
+                     group = "Group",
+                     group_names = "QC",
+                     discard = TRUE
+                     )
+dada2_ps_NoQC
+```
+
+
+## Rarefaction curves
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=6, fig.height=4, fig.cap="Rarefaction curves (16s example)"}
+plot_RarefCure(ps = dada2_ps_NoQC,
+               taxa_level = "OTU",
+               step = 100,
+               label = "Group",
+               color = "Group",
+               parallel = TRUE,
+               se = TRUE)
+```
+
+The result showed that all the samples had **different sequence depth** but had the full sample richness.
+
+## Systematic Information
+```{r}
+sessionInfo()
+```

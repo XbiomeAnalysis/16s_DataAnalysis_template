@@ -1,0 +1,75 @@
+# Microbial composition
+
+**Loading packages**
+
+```R
+library(XMAS)
+library(dplyr)
+library(tibble)
+library(phyloseq)
+library(ggplot2)
+library(ggpubr)
+```
+
+
+A whole picture of the microbial composition.
+
+## Stacked barplot 
+
+* **XMAS** package
+```{r, warning=FALSE, message=FALSE, fig.width=8, fig.height=7, fig.align="center", fig.cap="Microbial composition (16s example)"}
+plot_StackBarPlot(
+        ps=dada2_ps_rare,
+        taxa_level="Phylum",
+        group = "Group",
+        cluster = TRUE)
+```
+
+* **XVIZ** package
+```{r, warning=FALSE, message=FALSE, fig.width=8, fig.height=9, fig.align="center", fig.cap="Microbial composition (16s example) XVIZ"}
+plot_stacked_bar(
+        phyloseq = dada2_ps_rare,
+        level = "Phylum",
+        feature = "Group")
+```
+
+## Core microbiota
+
+* convert absolute abundance into relative abundance 
+```{r}
+dada2_ps_final_rb <- normalize(dada2_ps_final, method = "TSS")
+dada2_ps_final_rb
+```
+
+* visualization
+```{r, warning=FALSE, message=FALSE, fig.width=8, fig.height=7, fig.align="center", fig.cap="Core taxa (16s example)"}
+prevalences <- seq(0.05, 1, 0.05)
+detections <- 10^seq(log10(1e-3), log10(0.2), length = 10)
+
+pl_core <- plot_core_taxa(dada2_ps_final_rb, 
+                    plot.type = "heatmap", 
+                    colours = gray(seq(0, 1, length=5)),
+                    prevalences = prevalences, 
+                    detections = detections, 
+                    min.prevalence = 0.5)+
+    xlab("Detection Threshold (Relative Abundance (%))")
+
+pl_core
+```
+
+The degree of color indicates the size of abundance and prevalence.
+
+* Use `core_members` to obtain the core taxa. detection for abundance and prevalence for occurrence.
+```{r, warning=FALSE, message=FALSE}
+core_taxa_name <- core_members(dada2_ps_final_rb, detection = 0.01, prevalence = 0.8)
+print(core_taxa_name)
+```
+
+**Result**:
+
+Only 2 genera (g__Bifidobacterium and g__Blautia) passed the threshold of detection and prevalence which we choose.
+
+## Systematic Information
+```{r}
+sessionInfo()
+```
