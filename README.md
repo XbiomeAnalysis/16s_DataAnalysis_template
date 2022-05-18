@@ -1,7 +1,3 @@
-# Tutorial for R XMAS package (v2.1.0)
+# Template for 16s data analysis by using XMAS 2.0 package
 
-
-This is tutorial of XMAS 2.1.0 based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
-
-
-
+Welcome to use this template for your work.
