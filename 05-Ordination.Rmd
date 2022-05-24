@@ -14,7 +14,7 @@ library(ggpubr)
 
 ## PERMANOVA
 ```{r, warning=FALSE, message=FALSE}
-dada2_ps_per <- run_permanova(ps=dada2_ps_final, method = "bray")
+dada2_ps_per <- run_permanova(ps=dada2_ps_rare_genus_filter_trim, method = "bray", columns = "Group")
 print(dada2_ps_per)
 ```
 
@@ -22,7 +22,7 @@ The PERMANOVA result of the Group (AdjustedPvalue > 0.05) revealed that the two 
 
 ## beta dispersion 
 ```{r}
-beta_df <- run_beta_diversity(ps=dada2_ps_final, method = "bray", group = "Group")
+beta_df <- run_beta_diversity(ps=dada2_ps_rare_genus_filter_trim, method = "bray", group = "Group")
 ```
 
 
@@ -31,7 +31,7 @@ beta_df <- run_beta_diversity(ps=dada2_ps_final, method = "bray", group = "Group
 We performed ordination by using Principal Coordinate Analysis (PCoA). If you want to try other methods please go to see **Chapter 8** for more details.
 ```{r, warning=FALSE, message=FALSE, fig.width=8, fig.height=8, fig.align="center", fig.cap="PCoA (16s example)"}
 dada2_ps_ordination <- run_ordination(
-                       ps = dada2_ps_final,
+                       ps = dada2_ps_rare_genus_filter_trim,
                        group = "Group",
                        method = "PCoA")
 
@@ -40,7 +40,6 @@ plot_Ordination(ResultList = dada2_ps_ordination,
                 group_names = c("AA", "BB"),
                 group_color = c("blue", "red"))
 ```
-
 
 ## Systematic Information
 ```{r}

@@ -19,24 +19,19 @@ There are more than 10 approaches to perform differential analysis. Here, we cho
 * Calculation
 ```{r, warning=FALSE, message=FALSE}
 dada2_ps_lefse <- run_lefse(
-                    dada2_ps_final,
+                    dada2_ps_rare_genus_filter_trim,
                     group = "Group",
                     group_names = c("AA", "BB"),
-                    transform = "identity",
-                    norm = "none",
-                    wl.p = 0.05,
-                    Lda = 0)
+                    Lda = 1)
 head(dada2_ps_lefse)
 ```
 
 * Visualization
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, fig.align="center", fig.cap="Lefse analysis (16s example)"}
-# in order to show barplot (don't run it in reality)
-dada2_ps_lefse$LDA_Score <- dada2_ps_lefse$LDA_Score * 1000
 plot_lefse(
   da_res = dada2_ps_lefse,
   x_index = "LDA_Score",
-  x_index_cutoff = 2,
+  x_index_cutoff = 1,
   group_color = c("green", "red"))
 ```
 
@@ -46,13 +41,9 @@ plot_lefse(
 * Calculation
 ```{r, warning=FALSE, message=FALSE}
 dada2_ps_wilcox <- run_wilcox(
-                    dada2_ps_final,
+                    dada2_ps_rare_genus_filter_trim,
                     group = "Group",
-                    group_names = c("AA", "BB"),
-                    transform = "identity",
-                    norm = "none",
-                    p_adjust = "BH",
-                    pvalue_cutoff = 0.05)
+                    group_names = c("AA", "BB"))
 
 head(dada2_ps_wilcox)
 ```
@@ -76,25 +67,15 @@ plot_volcano(
 
 Display the significant taxa with selection using boxplot.
 
-```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=3, fig.cap="Dominant Taxa"}
-DA_wilcox <- run_wilcox(
-   dada2_ps_final,
-   group = "Group",
-   group_names = c("AA", "BB"),
-   transform = "identity",
-   norm = "none",
-   p_adjust = "BH",
-   pvalue_cutoff = 0.05)
-
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=5, fig.cap="Dominant Taxa"}
 plot_topN_boxplot(
-    ps = dada2_ps_final,
-    da_res = DA_wilcox,
-    x_index = "Log2FoldChange (Median)\nAA_vs_BB",
-    x_index_cutoff = 0.2,
+    ps = dada2_ps_rare_genus_filter_trim,
+    da_res = dada2_ps_wilcox,
+    x_index = "Log2FoldChange (Rank)\nAA_vs_BB",
+    x_index_cutoff = 0.5,
     y_index = "Pvalue",
-    y_index_cutoff = 0.3,
-    prevalence = TRUE,
-    topN = 3,
+    y_index_cutoff = 0.05,
+    topN = 5,
     group = "Group")
 ```
 
@@ -105,14 +86,10 @@ here, we provide the `run_multiple_da` for obtaining the results list from multi
 
 ```{r, warning=FALSE, message=FALSE}
 multiple_res <- run_multiple_da(
-       dada2_ps_final,
+       dada2_ps_rare_genus_filter_trim,
        group = "Group",
        group_names = c("AA", "BB"),
-       da_method = c("aldex", "limma_voom", "mbzinb", "omnibus"),
-       norm = "none",
-       transform = "identity",
-       p_adjust = "none",
-       pvalue_cutoff = 0.05)
+       da_method = c("aldex", "limma_voom", "mbzinb", "omnibus"))
 
 names(multiple_res)
 ```
@@ -122,10 +99,12 @@ names(multiple_res)
 ```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=13, fig.cap="Multiple DA results"}
 plot_multiple_DA(
   Multip_DA_res = multiple_res,
+  x_index_list = c("EffectSize", "logFC", "mean.LFC", "abund.LFC.CompvarBB.est"),
+  x_index_cutoff = 1,
   y_index = "AdjustedPvalue",
   y_index_cutoff = 0.5,
-  cellwidth = 35,
-  cellheight = 10,
+  cellwidth = 50, 
+  cellheight = 15, 
   fontsize_number = 15)
 ```
 

@@ -27,9 +27,7 @@ plot_boxplot(data=dada_ps_rare_genus_alpha,
              y_index = c("Shannon", "Chao1", "Observed"),
              group = "Group",
              group_names = c("AA", "BB"),
-             group_color = c("red", "blue"),
-             do_test = TRUE,
-             method = "wilcox.test")
+             group_color = c("red", "blue"))
 ```
 
 
@@ -37,7 +35,7 @@ plot_boxplot(data=dada_ps_rare_genus_alpha,
 
 * beta dipersion
 ```{r, warning=FALSE, message=FALSE, fig.width=5, fig.height=4, fig.align="center", fig.cap="Beta diversity (16s example)"}
-dada2_ps_beta <- run_beta_diversity(ps=dada2_ps_final, method = "bray", group = "Group")
+dada2_ps_beta <- run_beta_diversity(ps=dada2_ps_rare_genus_filter_trim, method = "bray", group = "Group")
 dada2_ps_beta$BetaDispersion
 ```
 

@@ -19,7 +19,9 @@ library(ggpubr)
 
 ## DADA2 
 
-**dada2** results from standardized_analytics_workflow_R_function:
+**dada2** results from standardized_analytics_workflow_R_function
+
+### Importing results from dada2 pipeline
 
 1. /home/xuxiaomin/project/standardized_analytics_workflow_R_function/demo_data/16S/process/xdada2/dada2_res.rds
 
@@ -51,16 +53,40 @@ tree <- read_tree(
     package = "XMAS"    
     )
 )
+```
 
+### taxa table 
+
+We use `import_dada2_taxa` to convert dada2_res$tax_tab into our own taxa table
+```{r, warning=FALSE, message=FALSE}
 tax_tab <- import_dada2_taxa(dada2_res$tax_tab)
-otu_tab <- dada2_res$seq_tab
-sam_tab <- sam_tab %>% tibble::column_to_rownames("seqID")
 
+head(tax_tab, 1)
+```
+
+
+### otu table
+```{r, warning=FALSE, message=FALSE}
+otu_tab <- dada2_res$seq_tab
 # Shouldn't use the Total Number as SampleID (wrong: 123456; right: X123456)
 rownames(otu_tab) <- paste0("S", rownames(otu_tab))
+
+head(otu_tab[, 1, F])
+```
+
+
+### metadata table
+```{r, warning=FALSE, message=FALSE}
+sam_tab <- sam_tab %>% tibble::column_to_rownames("seqID")
+# Shouldn't use the Total Number as SampleID (wrong: 123456; right: X123456)
 rownames(sam_tab) <- paste0("S", rownames(sam_tab))
 
+head(sam_tab)
+```
 
+
+### phyloseq object
+```{r, warning=FALSE, message=FALSE}
 dada2_ps <- import_dada2(seq_tab = otu_tab, 
                    tax_tab = tax_tab, 
                    sam_tab = sam_tab, 
@@ -71,6 +97,23 @@ dada2_ps
 we obtain the **phyloseq-class object** and then use it to perform data analysis.
 
 Here, the phyloseq object comprises five components (*OTU Table*, *Sample Data*, *Taxonomy Table*, *Phylogenetic Tree* and *DNAStringSet*).
+
+
+* otu_table
+```{r, warning=FALSE, message=FALSE}
+dada2_ps@otu_table %>% data.frame() %>% head()
+```
+
+* tax_table
+```{r, warning=FALSE, message=FALSE}
+dada2_ps@tax_table %>% data.frame() %>% head()
+```
+
+* sample_table
+```{r, warning=FALSE, message=FALSE}
+dada2_ps@sam_data %>% data.frame() %>% head()
+```
+
 
 ##  Summarize phyloseq-class object
 ```{r, warning=FALSE, collapse=TRUE}

@@ -27,18 +27,19 @@ plot_StackBarPlot(
 
 * **XVIZ** package
 ```{r, warning=FALSE, message=FALSE, fig.width=8, fig.height=9, fig.align="center", fig.cap="Microbial composition (16s example) XVIZ"}
-plot_stacked_bar(
+plot_stacked_bar_XIVZ(
         phyloseq = dada2_ps_rare,
         level = "Phylum",
         feature = "Group")
 ```
 
+
 ## Core microbiota
 
 * convert absolute abundance into relative abundance 
 ```{r}
-dada2_ps_final_rb <- normalize(dada2_ps_final, method = "TSS")
-dada2_ps_final_rb
+dada2_ps_rare_genus_filter_trim_rb <- normalize(dada2_ps_rare_genus_filter_trim, method = "TSS")
+dada2_ps_rare_genus_filter_trim_rb
 ```
 
 * visualization
@@ -46,7 +47,7 @@ dada2_ps_final_rb
 prevalences <- seq(0.05, 1, 0.05)
 detections <- 10^seq(log10(1e-3), log10(0.2), length = 10)
 
-pl_core <- plot_core_taxa(dada2_ps_final_rb, 
+pl_core <- plot_core_taxa(dada2_ps_rare_genus_filter_trim_rb, 
                     plot.type = "heatmap", 
                     colours = gray(seq(0, 1, length=5)),
                     prevalences = prevalences, 
@@ -61,7 +62,7 @@ The degree of color indicates the size of abundance and prevalence.
 
 * Use `core_members` to obtain the core taxa. detection for abundance and prevalence for occurrence.
 ```{r, warning=FALSE, message=FALSE}
-core_taxa_name <- core_members(dada2_ps_final_rb, detection = 0.01, prevalence = 0.8)
+core_taxa_name <- core_members(dada2_ps_rare_genus_filter_trim_rb, detection = 0.01, prevalence = 0.8)
 print(core_taxa_name)
 ```
 
