@@ -3,13 +3,12 @@
 
 **Loading packages**
 
-```R
+```{r, echo=TRUE, results="hide", warning=FALSE, message=FALSE}
 library(XMAS)
 library(dplyr)
 library(tibble)
 library(phyloseq)
 library(ggplot2)
-library(ggpubr)
 ```
 
 Quality control of DADA2 results will help us have more rational determinations on the further data analysis. 

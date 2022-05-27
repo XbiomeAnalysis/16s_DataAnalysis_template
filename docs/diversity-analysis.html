@@ -24,7 +24,7 @@
 <meta name="author" content="Hua Zou" />
 
 
-<meta name="date" content="2022-05-25" />
+<meta name="date" content="2022-05-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -254,8 +254,7 @@ div.csl-indent {
 <span id="cb43-2"><a href="diversity-analysis.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb43-3"><a href="diversity-analysis.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
 <span id="cb43-4"><a href="diversity-analysis.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
-<span id="cb43-5"><a href="diversity-analysis.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb43-6"><a href="diversity-analysis.html#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span></code></pre></div>
+<span id="cb43-5"><a href="diversity-analysis.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <div id="alpha-diveristy" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Alpha diveristy<a href="diversity-analysis.html#alpha-diveristy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
@@ -296,8 +295,8 @@ div.csl-indent {
 <span id="cb46-3"><a href="diversity-analysis.html#cb46-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
 <span id="cb46-4"><a href="diversity-analysis.html#cb46-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>),</span>
 <span id="cb46-5"><a href="diversity-analysis.html#cb46-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-26"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-26-1.png" alt="Alpha diversity (16s example)" width="576" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-29"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-29-1.png" alt="Alpha diversity (16s example)" width="576" />
 <p class="caption">
 Figure 5.1: Alpha diversity (16s example)
 </p>
@@ -325,8 +324,8 @@ Figure 5.1: Alpha diversity (16s example)
 ## AA         0.21
 ## BB 0.21063</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="diversity-analysis.html#cb49-1" aria-hidden="true" tabindex="-1"></a>dada2_ps_beta<span class="sc">$</span>BetaDispersion</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-27"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-27-1.png" alt="Beta diversity (16s example)" width="480" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-30-1.png" alt="Beta diversity (16s example)" width="480" />
 <p class="caption">
 Figure 5.2: Beta diversity (16s example)
 </p>
@@ -349,50 +348,59 @@ Figure 5.2: Beta diversity (16s example)
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggpubr_0.4.0    ggplot2_3.3.5   phyloseq_1.38.0 tibble_3.1.6    dplyr_1.0.8     XMAS_2.1.1     
+## [1] ggpubr_0.4.0    ggplot2_3.3.5   phyloseq_1.38.0 tibble_3.1.6    dplyr_1.0.8     XMAS_2.1.2     
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] backports_1.4.1             Hmisc_4.6-0                 plyr_1.8.6                  igraph_1.2.11              
-##   [5] splines_4.1.2               BiocParallel_1.28.3         GenomeInfoDb_1.30.1         TH.data_1.1-0              
-##   [9] lpsymphony_1.22.0           digest_0.6.29               foreach_1.5.2               htmltools_0.5.2            
-##  [13] fansi_1.0.2                 checkmate_2.0.0             magrittr_2.0.2              memoise_2.0.1              
-##  [17] cluster_2.1.2               limma_3.50.1                Biostrings_2.62.0           annotate_1.72.0            
-##  [21] matrixStats_0.61.0          sandwich_3.0-1              metagenomeSeq_1.36.0        jpeg_0.1-9                 
-##  [25] colorspace_2.0-3            ggrepel_0.9.1               blob_1.2.2                  corncob_0.2.0              
-##  [29] xfun_0.30                   crayon_1.5.0                RCurl_1.98-1.6              jsonlite_1.8.0             
-##  [33] libcoin_1.0-9               genefilter_1.76.0           biglm_0.9-2.1               survival_3.3-1             
-##  [37] zoo_1.8-9                   iterators_1.0.14            ape_5.6-2                   glue_1.6.2                 
-##  [41] gtable_0.3.0                zlibbioc_1.40.0             XVector_0.34.0              DelayedArray_0.20.0        
-##  [45] car_3.0-12                  Rhdf5lib_1.16.0             shape_1.4.6                 BiocGenerics_0.40.0        
-##  [49] DEoptimR_1.0-10             abind_1.4-5                 scales_1.1.1                mvtnorm_1.1-3              
-##  [53] DBI_1.1.2                   edgeR_3.36.0                rstatix_0.7.0               Rcpp_1.0.8.2               
-##  [57] htmlTable_2.4.0             xtable_1.8-4                foreign_0.8-82              bit_4.0.4                  
-##  [61] Formula_1.2-4               stats4_4.1.2                glmnet_4.1-3                htmlwidgets_1.5.4          
-##  [65] httr_1.4.2                  getopt_1.20.3               DiagrammeR_1.0.9            gplots_3.1.1               
-##  [69] RColorBrewer_1.1-2          modeltools_0.2-23           ellipsis_0.3.2              farver_2.1.0               
-##  [73] pkgconfig_2.0.3             XML_3.99-0.9                nnet_7.3-17                 sass_0.4.0                 
-##  [77] locfit_1.5-9.5              utf8_1.2.2                  labeling_0.4.2              tidyselect_1.1.2           
-##  [81] rlang_1.0.2                 reshape2_1.4.4              AnnotationDbi_1.56.2        munsell_0.5.0              
-##  [85] tools_4.1.2                 visNetwork_2.1.0            cachem_1.0.6                cli_3.2.0                  
-##  [89] generics_0.1.2              RSQLite_2.2.10              ade4_1.7-18                 broom_0.7.12               
-##  [93] evaluate_0.15               biomformat_1.22.0           stringr_1.4.0               fastmap_1.1.0              
-##  [97] yaml_2.3.5                  knitr_1.37                  bit64_4.0.5                 robustbase_0.93-9          
-## [101] caTools_1.18.2              purrr_0.3.4                 KEGGREST_1.34.0             coin_1.4-2                 
-## [105] nlme_3.1-155                protoclust_1.6.3            RAIDA_1.0                   compiler_4.1.2             
-## [109] rstudioapi_0.13             png_0.1-7                   ggsignif_0.6.3              geneplotter_1.72.0         
-## [113] bslib_0.3.1                 pcaPP_1.9-74                stringi_1.7.6               highr_0.9                  
-## [117] Maaslin2_1.8.0              lattice_0.20-45             Matrix_1.4-0                vegan_2.5-7                
-## [121] permute_0.9-7               multtest_2.50.0             vctrs_0.3.8                 pillar_1.7.0               
-## [125] lifecycle_1.0.1             rhdf5filters_1.6.0          optparse_1.7.1              jquerylib_0.1.4            
-## [129] data.table_1.14.2           cowplot_1.1.1               bitops_1.0-7                qvalue_2.26.0              
-## [133] GenomicRanges_1.46.1        latticeExtra_0.6-29         R6_2.5.1                    bookdown_0.24              
-## [137] gridExtra_2.3               KernSmooth_2.23-20          IRanges_2.28.0              codetools_0.2-18           
-## [141] gtools_3.9.2                MASS_7.3-55                 assertthat_0.2.1            Wrench_1.12.0              
-## [145] rhdf5_2.38.1                SummarizedExperiment_1.24.0 DESeq2_1.34.0               withr_2.5.0                
-## [149] multcomp_1.4-18             S4Vectors_0.32.3            GenomeInfoDbData_1.2.7      mgcv_1.8-39                
-## [153] parallel_4.1.2              rpart_4.1.16                grid_4.1.2                  tidyr_1.2.0                
-## [157] rmarkdown_2.13              MatrixGenerics_1.6.0        carData_3.0-5               base64enc_0.1-3            
-## [161] Biobase_2.54.0</code></pre>
+##   [1] backports_1.4.1             Hmisc_4.6-0                 plyr_1.8.6                 
+##   [4] igraph_1.2.11               splines_4.1.2               BiocParallel_1.28.3        
+##   [7] GenomeInfoDb_1.30.1         TH.data_1.1-0               digest_0.6.29              
+##  [10] foreach_1.5.2               htmltools_0.5.2             fansi_1.0.2                
+##  [13] checkmate_2.0.0             magrittr_2.0.2              memoise_2.0.1              
+##  [16] cluster_2.1.2               limma_3.50.1                Biostrings_2.62.0          
+##  [19] annotate_1.72.0             matrixStats_0.61.0          sandwich_3.0-1             
+##  [22] metagenomeSeq_1.36.0        jpeg_0.1-9                  colorspace_2.0-3           
+##  [25] blob_1.2.2                  xfun_0.30                   crayon_1.5.0               
+##  [28] RCurl_1.98-1.6              jsonlite_1.8.0              libcoin_1.0-9              
+##  [31] genefilter_1.76.0           survival_3.3-1              zoo_1.8-9                  
+##  [34] iterators_1.0.14            ape_5.6-2                   glue_1.6.2                 
+##  [37] gtable_0.3.0                zlibbioc_1.40.0             XVector_0.34.0             
+##  [40] DelayedArray_0.20.0         car_3.0-12                  Rhdf5lib_1.16.0            
+##  [43] shape_1.4.6                 BiocGenerics_0.40.0         abind_1.4-5                
+##  [46] scales_1.1.1                mvtnorm_1.1-3               DBI_1.1.2                  
+##  [49] edgeR_3.36.0                rstatix_0.7.0               Rcpp_1.0.8.2               
+##  [52] htmlTable_2.4.0             xtable_1.8-4                foreign_0.8-82             
+##  [55] bit_4.0.4                   Formula_1.2-4               stats4_4.1.2               
+##  [58] glmnet_4.1-3                htmlwidgets_1.5.4           httr_1.4.2                 
+##  [61] DiagrammeR_1.0.9            gplots_3.1.1                RColorBrewer_1.1-2         
+##  [64] modeltools_0.2-23           ellipsis_0.3.2              pkgconfig_2.0.3            
+##  [67] XML_3.99-0.9                farver_2.1.0                nnet_7.3-17                
+##  [70] sass_0.4.0                  locfit_1.5-9.5              utf8_1.2.2                 
+##  [73] tidyselect_1.1.2            labeling_0.4.2              rlang_1.0.2                
+##  [76] reshape2_1.4.4              AnnotationDbi_1.56.2        munsell_0.5.0              
+##  [79] tools_4.1.2                 visNetwork_2.1.0            cachem_1.0.6               
+##  [82] cli_3.2.0                   generics_0.1.2              RSQLite_2.2.10             
+##  [85] ade4_1.7-18                 broom_0.7.12                evaluate_0.15              
+##  [88] biomformat_1.22.0           stringr_1.4.0               fastmap_1.1.0              
+##  [91] yaml_2.3.5                  knitr_1.37                  bit64_4.0.5                
+##  [94] caTools_1.18.2              purrr_0.3.4                 KEGGREST_1.34.0            
+##  [97] coin_1.4-2                  nlme_3.1-155                compiler_4.1.2             
+## [100] rstudioapi_0.13             png_0.1-7                   ggsignif_0.6.3             
+## [103] geneplotter_1.72.0          bslib_0.3.1                 stringi_1.7.6              
+## [106] highr_0.9                   lattice_0.20-45             Matrix_1.4-0               
+## [109] vegan_2.5-7                 permute_0.9-7               multtest_2.50.0            
+## [112] vctrs_0.3.8                 pillar_1.7.0                lifecycle_1.0.1            
+## [115] rhdf5filters_1.6.0          jquerylib_0.1.4             cowplot_1.1.1              
+## [118] data.table_1.14.2           bitops_1.0-7                GenomicRanges_1.46.1       
+## [121] latticeExtra_0.6-29         R6_2.5.1                    bookdown_0.24              
+## [124] gridExtra_2.3               KernSmooth_2.23-20          IRanges_2.28.0             
+## [127] codetools_0.2-18            MASS_7.3-55                 gtools_3.9.2               
+## [130] assertthat_0.2.1            Wrench_1.12.0               rhdf5_2.38.1               
+## [133] SummarizedExperiment_1.24.0 DESeq2_1.34.0               withr_2.5.0                
+## [136] multcomp_1.4-18             S4Vectors_0.32.3            GenomeInfoDbData_1.2.7     
+## [139] mgcv_1.8-39                 parallel_4.1.2              rpart_4.1.16               
+## [142] grid_4.1.2                  tidyr_1.2.0                 rmarkdown_2.13             
+## [145] MatrixGenerics_1.6.0        carData_3.0-5               base64enc_0.1-3            
+## [148] Biobase_2.54.0</code></pre>
 
 </div>
 </div>

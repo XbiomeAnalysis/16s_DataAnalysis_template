@@ -12,8 +12,6 @@ library(XMAS)
 library(dplyr)
 library(tibble)
 library(phyloseq)
-library(ggplot2)
-library(ggpubr)
 ```
 
 
