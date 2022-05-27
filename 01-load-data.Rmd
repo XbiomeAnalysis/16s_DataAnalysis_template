@@ -8,7 +8,7 @@ This tutorial will introduce you the basic steps to convert results from the in-
 
 **Loading packages**
 ```{r, echo=TRUE, results="hide", warning=FALSE, message=FALSE, fig.align="center"}
-library(XMAS)
+library(XMAS2)
 library(dplyr)
 library(tibble)
 library(phyloseq)
@@ -31,14 +31,14 @@ library(phyloseq)
 dada2_res <- readRDS(
   system.file(
     "extdata", "dada2_res.rds",
-    package = "XMAS"    
+    package = "XMAS2"    
     )
 )
 
 sam_tab <- read.table(
     system.file(
         "extdata", "dada2_metadata.tsv",
-        package = "XMAS"
+        package = "XMAS2"
     ),
     sep = "\t",
     header = TRUE,
@@ -48,7 +48,7 @@ sam_tab <- read.table(
 tree <- read_tree(
   system.file(
     "extdata", "tree.nwk",
-    package = "XMAS"    
+    package = "XMAS2"    
     )
 )
 ```

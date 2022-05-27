@@ -5,10 +5,12 @@
 **Loading packages**
 
 ```{r, echo=TRUE, results="hide", warning=FALSE, message=FALSE}
-library(XMAS)
+library(XMAS2)
 library(dplyr)
 library(tibble)
 library(phyloseq)
+library(conflicted)
+conflict_prefer("normalize", "XMAS2")
 ```
 
 This part has too may procedures and we only choose some of them. Please go to **[XMAS tutorial: Chapter 6](https://xbiomeanalysis.github.io/XMAS_tutorial/pre-processing.html)** to see more approaches and details for being familiar with this part.
