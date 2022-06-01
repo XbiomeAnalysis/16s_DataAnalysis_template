@@ -1,0 +1,257 @@
+# Test Example
+
+
+## Loading packages
+```{r, echo=TRUE, results="hide", warning=FALSE, message=FALSE}
+library(XMAS2)
+library(dplyr)
+library(tibble)
+library(phyloseq)
+library(ggplot2)
+library(ggpubr)
+library(SummarizedExperiment)
+library(readxl)
+```
+
+
+## Loading data 
+```{r, warning=FALSE, message=FALSE}
+dada2_res <- readRDS("DataSet/RawData/dada2_res.rds")
+tree <- read_tree("DataSet/RawData/tree.nwk")
+metadata <- read_xlsx("DataSet/RawData/诺禾宏基因组678月-ZH.xlsx", sheet = 3)
+
+metaphlan2_res <- read.table("DataSet/RawData/merged_metaphlan2.tsv",
+                             header = TRUE, stringsAsFactors = FALSE) %>%
+  tibble::rownames_to_column("ID")
+```
+
+
+## Metaphlan2 result
+```{r, warning=FALSE, message=FALSE}
+metaphlan2_res_list <- import_metaphlan_taxa(metaphlan2_res, taxa_level = "Species")
+tax_tab <- metaphlan2_res_list$tax_tab
+
+otu_tab <- metaphlan2_res_list$abu_tab
+colnames(otu_tab) <- gsub("X", "S_", colnames(otu_tab))
+
+sam_tab <- metadata %>% data.frame() %>%
+  dplyr::mutate(Group=ifelse(SampleType == "粪便", "Stool", 
+                             ifelse(SampleType == "QC", "QC", "Product"))) %>%
+  dplyr::select(SampleTubeID, Group, everything())
+rownames(sam_tab) <- paste0("S_", sam_tab$SeqID_MGS)
+
+overlap_samples <- intersect(rownames(sam_tab), colnames(otu_tab))
+
+otu_tab_cln <- otu_tab[, match(overlap_samples, colnames(otu_tab))]
+sam_tab_cln <- sam_tab[match(overlap_samples, rownames(sam_tab)), ]
+rownames(sam_tab_cln) <- overlap_samples
+
+metaphlan2_ps <- get_metaphlan_phyloseq(otu_tab = otu_tab_cln, 
+                                   sam_tab = sam_tab_cln,
+                                   tax_tab = tax_tab)
+metaphlan2_ps
+```
+
+
+## Step1: Reads' Track
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=5, fig.cap="DADA2' read track (Example)"}
+plot_Dada2Track(data=dada2_res$reads_track) +
+  guides(color="none")
+```
+
+## Step2: Convert inputs into phyloseq data
+```{r, warning=FALSE, message=FALSE}
+tax_tab_16s <- import_dada2_taxa(dada2_res$tax_tab)
+
+otu_tab_16s <- dada2_res$seq_tab
+# Shouldn't use the Total Number as SampleID (wrong: 123456; right: X123456)
+rownames(otu_tab_16s) <- paste0("S_", rownames(otu_tab_16s))
+
+sam_tab_16s <- metadata %>% data.frame() %>%
+  dplyr::mutate(Group=ifelse(SampleType == "粪便", "Stool", 
+                             ifelse(SampleType == "QC", "QC", "Product"))) %>%
+  dplyr::filter(SampleTubeID %in% sam_tab_cln$SampleTubeID) %>% 
+  dplyr::select(SampleTubeID, Group, everything())
+rownames(sam_tab_16s) <- paste0("S_", sam_tab_16s$SeqID_16s)
+
+overlap_samples_16s <- intersect(rownames(sam_tab_16s), rownames(otu_tab_16s))
+otu_tab_16s_cln <- otu_tab_16s[match(overlap_samples_16s, rownames(otu_tab_16s)), ]
+sam_tab_16s_cln <- sam_tab_16s[match(overlap_samples_16s, rownames(sam_tab_16s)), ]
+
+dada2_ps <- get_dada2_phyloseq(
+                   seq_tab = otu_tab_16s_cln, 
+                   tax_tab = tax_tab_16s, 
+                   sam_tab = sam_tab_16s_cln, 
+                   phy_tree = tree)
+dada2_ps
+
+if (!dir.exists("DataSet/Step2/")) {
+  dir.create("DataSet/Step2/")
+}
+saveRDS(dada2_ps, "DataSet/Step2/Donor_16s_phyloseq.RDS", compress = TRUE)
+```
+
+
+## Step3: BRS checking
+```{r, warning=FALSE, message=FALSE}
+dada2_ps <- readRDS("DataSet/Step2/Donor_16s_phyloseq.RDS")
+dada2_ps_genus <- summarize_taxa(dada2_ps, taxa_level = "Genus")
+tail(dada2_ps_genus@sam_data %>% data.frame())
+
+run_RefCheck(
+    ps=dada2_ps_genus,
+    BRS_ID="S_7327",
+    Reference=NULL,
+    Ref_type="16s",
+    Save=NULL)
+
+dada2_ps_remove_BRS <- get_GroupPhyloseq(
+                     ps = dada2_ps,
+                     group = "Group",
+                     group_names = "QC")
+dada2_ps_remove_BRS
+
+if (!dir.exists("DataSet/Step3/")) {
+  dir.create("DataSet/Step3/")
+}
+saveRDS(dada2_ps_remove_BRS, "DataSet/Step3/Donor_16s_phyloseq_remove_BRS.RDS", compress = TRUE)
+```
+
+
+## Step4: Rarefaction curves
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=5, fig.cap="Rarefaction curves (Example)"}
+dada2_ps_remove_BRS <- readRDS("DataSet/Step3/Donor_16s_phyloseq_remove_BRS.RDS")
+
+plot_RarefCurve(ps = dada2_ps_remove_BRS,
+               taxa_level = "OTU",
+               step = 100,
+               label = "Group",
+               color = "Group")
+```
+
+
+## Step5: Rarefy otu counts
+```{r, warning=FALSE, message=FALSE}
+dada2_ps_remove_BRS <- readRDS("DataSet/Step3/Donor_16s_phyloseq_remove_BRS.RDS")
+summarize_phyloseq(dada2_ps_remove_BRS)
+
+dada2_ps_rare <- norm_rarefy(dada2_ps_remove_BRS, size = 33267, rng_seed = 123)
+dada2_ps_rare
+
+if (!dir.exists("DataSet/Step5/")) {
+  dir.create("DataSet/Step5/")
+}
+saveRDS(dada2_ps_rare, "DataSet/Step5/Donor_16s_phyloseq_remove_BRS_rare.RDS", compress = TRUE)
+```
+
+
+## Step6: Extracting specific taxonomic level
+```{r, warning=FALSE, message=FALSE}
+dada2_ps_rare <- readRDS("DataSet/Step5/Donor_16s_phyloseq_remove_BRS_rare.RDS")
+
+dada2_ps_rare_genus <- summarize_taxa(dada2_ps_rare, taxa_level = "Genus")
+dada2_ps_rare_genus
+
+dada2_ps_rare_order <- summarize_taxa(dada2_ps_rare, taxa_level = "Order")
+dada2_ps_rare_order
+
+dada2_ps_rare_phylum <- summarize_taxa(dada2_ps_rare, taxa_level = "Phylum")
+dada2_ps_rare_phylum
+
+if (!dir.exists("DataSet/Step6/")) {
+  dir.create("DataSet/Step6/")
+}
+saveRDS(dada2_ps_rare_genus, "DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare_genus.RDS", compress = TRUE)
+saveRDS(dada2_ps_rare_order, "DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare_order.RDS", compress = TRUE)
+saveRDS(dada2_ps_rare_phylum, "DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare_phylum.RDS", compress = TRUE)
+```
+
+
+## Step7: GlobalView
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=5, fig.cap="diversity and ordination and composition(Example)"}
+dada2_ps_rare_genus <- readRDS("DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare_genus.RDS")
+
+# alpha
+dada2_ps_rare_genus_alpha <- run_alpha_diversity(ps=dada2_ps_rare_genus, 
+                                                measures = c("Shannon", "Chao1", "Observed"))
+plot_boxplot(data=dada2_ps_rare_genus_alpha,
+             y_index = c("Shannon", "Chao1", "Observed"),
+             group = "Group",
+             group_names = c("Stool", "Product"),
+             group_color = c("red", "blue"))
+
+# beta
+dada2_ps_beta <- run_beta_diversity(ps=dada2_ps_rare_genus, method = "bray")
+plot_distance_corrplot(dada2_ps_beta$BetaDistance)
+
+# permanova
+dada2_ps_per <- run_permanova(ps=dada2_ps_rare_genus, method = "bray", columns = "Group")
+print(dada2_ps_per)
+
+# beta dispersion
+beta_df <- run_beta_diversity(ps=dada2_ps_rare_genus, method = "bray", group = "Group")
+
+# ordination
+dada2_ps_ordination <- run_ordination(
+                       ps = dada2_ps_rare_genus,
+                       group = "Group",
+                       method = "PCoA")
+
+plot_Ordination(ResultList = dada2_ps_ordination, 
+                group = "Group", 
+                group_names = c("Stool", "Product"),
+                group_color = c("blue", "red"))
+
+# Microbial composition
+plot_stacked_bar_XIVZ(
+        phyloseq = dada2_ps_rare_genus,
+        level = "Phylum",
+        feature = "Group")
+```
+
+## Step8: Differential Analysis
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=5, fig.cap="Differential Analysis (Example)"}
+dada2_ps_rare_genus <- readRDS("DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare_genus.RDS")
+
+# filter & trim
+dada2_ps_rare_genus_filter <- run_filter(dada2_ps_rare_genus, cutoff = 10, unclass = TRUE)
+dada2_ps_rare_genus_filter_trim <- run_trim(dada2_ps_rare_genus_filter, cutoff = 0.2, trim = "feature")
+dada2_ps_rare_genus_filter_trim
+
+# lefse
+dada2_ps_lefse <- run_lefse(
+                    dada2_ps_rare_genus_filter_trim,
+                    group = "Group",
+                    group_names = c("Stool", "Product"),
+                    Lda = 2)
+plot_lefse(
+  da_res = dada2_ps_lefse,
+  x_index = "LDA_Score",
+  x_index_cutoff = 2,
+  group_color = c("green", "red"))
+
+
+dada2_ps_wilcox <- run_wilcox(
+                    dada2_ps_rare_genus_filter_trim,
+                    group = "Group",
+                    group_names = c("Stool", "Product"))
+plot_volcano(
+    dada2_ps_wilcox,
+    group_names = c("Stool", "Product"),
+    x_index = "Log2FoldChange (Rank)\nStool_vs_Product",
+    x_index_cutoff = 0.5,
+    y_index = "Pvalue",
+    y_index_cutoff = 0.05,
+    group_color = c("red", "grey", "blue"),
+    topN = 5)
+
+if (!dir.exists("DataSet/Step8/")) {
+  dir.create("DataSet/Step8/")
+}
+saveRDS(dada2_ps_rare_genus_filter_trim, "DataSet/Step8/Donor_16s_phyloseq_remove_BRS_rare_genus_filter_trim.RDS", compress = TRUE)
+```
+
+## Systematic Information
+```{r}
+sessionInfo()
+```
