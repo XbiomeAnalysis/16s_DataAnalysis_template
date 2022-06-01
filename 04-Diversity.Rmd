@@ -34,8 +34,14 @@ plot_boxplot(data=dada_ps_rare_genus_alpha,
 
 * beta dipersion
 ```{r, warning=FALSE, message=FALSE, fig.width=5, fig.height=4, fig.align="center", fig.cap="Beta diversity (16s example)"}
-dada2_ps_beta <- run_beta_diversity(ps=dada2_ps_rare_genus_filter_trim, method = "bray", group = "Group")
+dada2_ps_beta <- run_beta_diversity(ps=dada2_ps_rare_genus, method = "bray", group = "Group")
 dada2_ps_beta$BetaDispersion
+```
+
+
+* beta distance
+```{r, warning=FALSE, message=FALSE, fig.width=5, fig.height=4, fig.align="center", fig.cap="Beta distance"}
+plot_distance_corrplot(dada2_ps_beta$BetaDistance)
 ```
 
 

@@ -14,7 +14,27 @@ library(SummarizedExperiment)
 ```
 
 
-There are more than 10 approaches to perform differential analysis. Here, we choose two of them and recommend users going to **Chapter 10** to see more detials.
+There are more than 10 approaches to perform differential analysis. Here, we choose two of them and recommend users going to **[XMAS2: Chapter 11](https://xbiomeanalysis.github.io/XMAS_tutorial/differential-analysis.html)** to see more details.
+
+
+## Filtering and trimming
+
+We suggest that filtering taxa with low abundance (the summarized value under cutoff: `10`) and trimming taxa with low prevalence (default: `0.2`).
+
+### Filtering the low relative abundance or unclassified taxa by the threshold (total counts < 10)
+```{r, warning=FALSE, message=FALSE}
+dada2_ps_rare_genus_filter <- run_filter(dada2_ps_rare_genus, cutoff = 10, unclass = TRUE)
+dada2_ps_rare_genus_filter 
+```
+
+### Trimming the taxa with low occurrence less than threshold
+```{r, warning=FALSE, message=FALSE}
+dada2_ps_rare_genus_filter_trim <- run_trim(dada2_ps_rare_genus_filter, cutoff = 0.2, trim = "feature")
+dada2_ps_rare_genus_filter_trim
+```
+
+Finally, we obtained the final phyloseq-class object _dada2\_ps\_rare\_genus\_filter\_trim_ and changed its name.
+
 
 ## Liner discriminant analysis (LDA) effect size (LEfSe)
 
@@ -24,7 +44,7 @@ dada2_ps_lefse <- run_lefse(
                     dada2_ps_rare_genus_filter_trim,
                     group = "Group",
                     group_names = c("AA", "BB"),
-                    Lda = 1)
+                    Lda = 2)
 head(dada2_ps_lefse)
 ```
 
@@ -33,7 +53,7 @@ head(dada2_ps_lefse)
 plot_lefse(
   da_res = dada2_ps_lefse,
   x_index = "LDA_Score",
-  x_index_cutoff = 1,
+  x_index_cutoff = 2,
   group_color = c("green", "red"))
 ```
 
