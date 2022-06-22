@@ -43,19 +43,19 @@ dada2_ps_lefse <- run_lefse(
                     dada2_ps_rare_genus_filter_trim,
                     group = "Group",
                     group_names = c("AA", "BB"),
-                    Lda = 0)
+                    Lda = 2)
 head(dada2_ps_lefse)
 ```
 
 * Visualization
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, fig.align="center", fig.cap="Lefse analysis (16s example)"}
-# don't run this code when you do lefse in reality
-dada2_ps_lefse$LDA_Score <- dada2_ps_lefse$LDA_Score * 1000
+# # don't run this code when you do lefse in reality
+# dada2_ps_lefse$LDA_Score <- dada2_ps_lefse$LDA_Score * 1000
 
 plot_lefse(
   da_res = dada2_ps_lefse,
   x_index = "LDA_Score",
-  x_index_cutoff = 0,
+  x_index_cutoff = 2,
   group_color = c("green", "red"))
 ```
 

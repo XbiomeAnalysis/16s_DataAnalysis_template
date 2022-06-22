@@ -225,8 +225,8 @@ dada2_ps_lefse <- run_lefse(
                     group_names = c("Stool", "Product"),
                     Lda = 0)
 
-# don't run this code when you do lefse in reality
-dada2_ps_lefse$LDA_Score <- dada2_ps_lefse$LDA_Score * 1000
+# # don't run this code when you do lefse in reality
+# dada2_ps_lefse$LDA_Score <- dada2_ps_lefse$LDA_Score * 1000
 
 plot_lefse(
   da_res = dada2_ps_lefse,
