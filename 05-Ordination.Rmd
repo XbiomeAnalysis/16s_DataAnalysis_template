@@ -43,5 +43,5 @@ plot_Ordination(ResultList = dada2_ps_ordination,
 
 ## Systematic Information
 ```{r}
-sessionInfo()
+devtools::session_info()
 ```

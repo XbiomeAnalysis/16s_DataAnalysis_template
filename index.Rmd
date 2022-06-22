@@ -62,8 +62,11 @@ RefCheck <- boxGrob("Step3: BRS checking\nsummarize_taxa()/run_RefCheck()/get_Gr
                       txt_gp = gpar(col = "darkblue", cex = .8))
 Rarefaction <- boxGrob("Step4: Rarefaction curves\nplot_RarefCurve()/summarize_phyloseq()",
                       txt_gp = gpar(col = "darkblue", cex = .8))
-Rarefy <- boxGrob("Step5: Rarefy OTU table\nnorm_rarefy()",
+Normalization <- boxGrob("Step5: Normalization (Rarefy or not)",
                       txt_gp = gpar(col = "darkblue", cex = .8))
+Rarefy <- boxGrob("Rarefy OTU table [Optional]\nnorm_rarefy()",
+                      txt_gp = gpar(col = "darkgrey", cex = .8))
+
 Extract <- boxGrob("Step6: Extract specific taxonomic level\nsummarize_taxa()",
                       txt_gp = gpar(col = "darkblue", cex = .8))
 
@@ -85,7 +88,8 @@ vert <- spreadVertical(ReadsTrack,
                        ImportData = ImportData,
                        RefCheck = RefCheck,
                        Rarefaction = Rarefaction,
-                       Rarefy = Rarefy,
+                       Normalization = Normalization,
+                       #Rarefy = Rarefy,
                        Extract = Extract,
                        GlobalView = GlobalView,
                        grps = GlobalView_a,
@@ -96,6 +100,11 @@ grps <- alignVertical(reference = vert$grps,
 
 vert$grps <- NULL
 
+Rarefy <- moveBox(Rarefy,
+                  x = .8,
+                  y = coords(vert$Extract)$top + 
+                      Gmisc::distance(vert$Normalization, vert$Extract, half = TRUE, center = FALSE))
+
 for (i in 1:(length(vert) - 1)) {
   connectGrob(vert[[i]], vert[[i + 1]], type = "vert") %>%
     print
@@ -105,7 +114,10 @@ connectGrob(vert$GlobalView, grps[[1]], type = "N")
 connectGrob(vert$GlobalView, grps[[2]], type = "N")
 connectGrob(vert$GlobalView, grps[[3]], type = "N")
 
+connectGrob(vert$Extract, Rarefy, type = "L")
+
 vert
 grps
+Rarefy
 ```
 

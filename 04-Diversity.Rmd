@@ -47,5 +47,5 @@ plot_distance_corrplot(dada2_ps_beta$BetaDistance)
 
 ## Systematic Information
 ```{r}
-sessionInfo()
+devtools::session_info()
 ```

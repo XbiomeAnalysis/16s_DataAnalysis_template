@@ -58,7 +58,8 @@ After evaluating the sequencing quality, we remove the BRS.
 dada2_ps_remove_BRS <- get_GroupPhyloseq(
                      ps = dada2_ps,
                      group = "Group",
-                     group_names = "QC")
+                     group_names = "QC",
+                     discard = TRUE)
 dada2_ps_remove_BRS
 ```
 
@@ -90,5 +91,5 @@ Notice the **Sparsity (0.86)**, indicating the data has many zeros and pay atten
 
 ## Systematic Information
 ```{r}
-sessionInfo()
+devtools::session_info()
 ```

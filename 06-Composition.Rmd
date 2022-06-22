@@ -71,5 +71,5 @@ Only 2 genera (g__Bifidobacterium and g__Blautia) passed the threshold of detect
 
 ## Systematic Information
 ```{r}
-sessionInfo()
+devtools::session_info()
 ```

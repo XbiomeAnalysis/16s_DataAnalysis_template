@@ -9,7 +9,6 @@ library(tibble)
 library(phyloseq)
 library(ggplot2)
 library(ggpubr)
-library(SummarizedExperiment)
 library(readxl)
 ```
 
@@ -108,7 +107,8 @@ run_RefCheck(
 dada2_ps_remove_BRS <- get_GroupPhyloseq(
                      ps = dada2_ps,
                      group = "Group",
-                     group_names = "QC")
+                     group_names = "QC",
+                     discard = TRUE)
 dada2_ps_remove_BRS
 
 if (!dir.exists("DataSet/Step3/")) {
@@ -124,7 +124,7 @@ dada2_ps_remove_BRS <- readRDS("DataSet/Step3/Donor_16s_phyloseq_remove_BRS.RDS"
 
 plot_RarefCurve(ps = dada2_ps_remove_BRS,
                taxa_level = "OTU",
-               step = 100,
+               step = 400,
                label = "Group",
                color = "Group")
 ```
@@ -135,7 +135,7 @@ plot_RarefCurve(ps = dada2_ps_remove_BRS,
 dada2_ps_remove_BRS <- readRDS("DataSet/Step3/Donor_16s_phyloseq_remove_BRS.RDS")
 summarize_phyloseq(dada2_ps_remove_BRS)
 
-dada2_ps_rare <- norm_rarefy(dada2_ps_remove_BRS, size = 33267, rng_seed = 123)
+dada2_ps_rare <- norm_rarefy(dada2_ps_remove_BRS, size = 33267)
 dada2_ps_rare
 
 if (!dir.exists("DataSet/Step5/")) {
@@ -215,7 +215,7 @@ dada2_ps_rare_genus <- readRDS("DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare
 
 # filter & trim
 dada2_ps_rare_genus_filter <- run_filter(dada2_ps_rare_genus, cutoff = 10, unclass = TRUE)
-dada2_ps_rare_genus_filter_trim <- run_trim(dada2_ps_rare_genus_filter, cutoff = 0.2, trim = "feature")
+dada2_ps_rare_genus_filter_trim <- run_trim(dada2_ps_rare_genus_filter, cutoff = 0.1, trim = "feature")
 dada2_ps_rare_genus_filter_trim
 
 # lefse
@@ -223,11 +223,15 @@ dada2_ps_lefse <- run_lefse(
                     dada2_ps_rare_genus_filter_trim,
                     group = "Group",
                     group_names = c("Stool", "Product"),
-                    Lda = 2)
+                    Lda = 0)
+
+# don't run this code when you do lefse in reality
+dada2_ps_lefse$LDA_Score <- dada2_ps_lefse$LDA_Score * 1000
+
 plot_lefse(
   da_res = dada2_ps_lefse,
   x_index = "LDA_Score",
-  x_index_cutoff = 2,
+  x_index_cutoff = 1,
   group_color = c("green", "red"))
 
 
@@ -253,5 +257,5 @@ saveRDS(dada2_ps_rare_genus_filter_trim, "DataSet/Step8/Donor_16s_phyloseq_remov
 
 ## Systematic Information
 ```{r}
-sessionInfo()
+devtools::session_info()
 ```

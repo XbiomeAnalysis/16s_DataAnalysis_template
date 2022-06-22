@@ -10,7 +10,6 @@ library(tibble)
 library(phyloseq)
 library(ggplot2)
 library(ggpubr)
-library(SummarizedExperiment)
 ```
 
 
@@ -19,7 +18,7 @@ There are more than 10 approaches to perform differential analysis. Here, we cho
 
 ## Filtering and trimming
 
-We suggest that filtering taxa with low abundance (the summarized value under cutoff: `10`) and trimming taxa with low prevalence (default: `0.2`).
+We suggest that filtering taxa with low abundance (the summarized value under cutoff: `10`) and trimming taxa with low prevalence (default: `0.1`).
 
 ### Filtering the low relative abundance or unclassified taxa by the threshold (total counts < 10)
 ```{r, warning=FALSE, message=FALSE}
@@ -29,7 +28,7 @@ dada2_ps_rare_genus_filter
 
 ### Trimming the taxa with low occurrence less than threshold
 ```{r, warning=FALSE, message=FALSE}
-dada2_ps_rare_genus_filter_trim <- run_trim(dada2_ps_rare_genus_filter, cutoff = 0.2, trim = "feature")
+dada2_ps_rare_genus_filter_trim <- run_trim(dada2_ps_rare_genus_filter, cutoff = 0.1, trim = "feature")
 dada2_ps_rare_genus_filter_trim
 ```
 
@@ -44,16 +43,19 @@ dada2_ps_lefse <- run_lefse(
                     dada2_ps_rare_genus_filter_trim,
                     group = "Group",
                     group_names = c("AA", "BB"),
-                    Lda = 2)
+                    Lda = 0)
 head(dada2_ps_lefse)
 ```
 
 * Visualization
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, fig.align="center", fig.cap="Lefse analysis (16s example)"}
+# don't run this code when you do lefse in reality
+dada2_ps_lefse$LDA_Score <- dada2_ps_lefse$LDA_Score * 1000
+
 plot_lefse(
   da_res = dada2_ps_lefse,
   x_index = "LDA_Score",
-  x_index_cutoff = 2,
+  x_index_cutoff = 0,
   group_color = c("green", "red"))
 ```
 
@@ -133,6 +135,6 @@ plot_multiple_DA(
 
 ## Systematic Information
 ```{r}
-sessionInfo()
+devtools::session_info()
 ```
 

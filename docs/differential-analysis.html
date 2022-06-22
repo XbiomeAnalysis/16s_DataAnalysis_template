@@ -24,7 +24,7 @@
 <meta name="author" content="Hua Zou" />
 
 
-<meta name="date" content="2022-06-01" />
+<meta name="date" content="2022-06-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -269,12 +269,11 @@ div.csl-indent {
 <span id="cb67-3"><a href="differential-analysis.html#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
 <span id="cb67-4"><a href="differential-analysis.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
 <span id="cb67-5"><a href="differential-analysis.html#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb67-6"><a href="differential-analysis.html#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb67-7"><a href="differential-analysis.html#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SummarizedExperiment)</span></code></pre></div>
+<span id="cb67-6"><a href="differential-analysis.html#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span></code></pre></div>
 <p>There are more than 10 approaches to perform differential analysis. Here, we choose two of them and recommend users going to <strong><a href="https://xbiomeanalysis.github.io/XMAS_tutorial/differential-analysis.html">XMAS2: Chapter 11</a></strong> to see more details.</p>
 <div id="filtering-and-trimming" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Filtering and trimming<a href="differential-analysis.html#filtering-and-trimming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We suggest that filtering taxa with low abundance (the summarized value under cutoff: <code>10</code>) and trimming taxa with low prevalence (default: <code>0.2</code>).</p>
+<p>We suggest that filtering taxa with low abundance (the summarized value under cutoff: <code>10</code>) and trimming taxa with low prevalence (default: <code>0.1</code>).</p>
 <div id="filtering-the-low-relative-abundance-or-unclassified-taxa-by-the-threshold-total-counts-10" class="section level3 hasAnchor" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> Filtering the low relative abundance or unclassified taxa by the threshold (total counts &lt; 10)<a href="differential-analysis.html#filtering-the-low-relative-abundance-or-unclassified-taxa-by-the-threshold-total-counts-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="differential-analysis.html#cb68-1" aria-hidden="true" tabindex="-1"></a>dada2_ps_rare_genus_filter <span class="ot">&lt;-</span> <span class="fu">run_filter</span>(dada2_ps_rare_genus, <span class="at">cutoff =</span> <span class="dv">10</span>, <span class="at">unclass =</span> <span class="cn">TRUE</span>)</span>
@@ -286,12 +285,12 @@ div.csl-indent {
 </div>
 <div id="trimming-the-taxa-with-low-occurrence-less-than-threshold" class="section level3 hasAnchor" number="8.1.2">
 <h3><span class="header-section-number">8.1.2</span> Trimming the taxa with low occurrence less than threshold<a href="differential-analysis.html#trimming-the-taxa-with-low-occurrence-less-than-threshold" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="differential-analysis.html#cb70-1" aria-hidden="true" tabindex="-1"></a>dada2_ps_rare_genus_filter_trim <span class="ot">&lt;-</span> <span class="fu">run_trim</span>(dada2_ps_rare_genus_filter, <span class="at">cutoff =</span> <span class="fl">0.2</span>, <span class="at">trim =</span> <span class="st">&quot;feature&quot;</span>)</span>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="differential-analysis.html#cb70-1" aria-hidden="true" tabindex="-1"></a>dada2_ps_rare_genus_filter_trim <span class="ot">&lt;-</span> <span class="fu">run_trim</span>(dada2_ps_rare_genus_filter, <span class="at">cutoff =</span> <span class="fl">0.1</span>, <span class="at">trim =</span> <span class="st">&quot;feature&quot;</span>)</span>
 <span id="cb70-2"><a href="differential-analysis.html#cb70-2" aria-hidden="true" tabindex="-1"></a>dada2_ps_rare_genus_filter_trim</span></code></pre></div>
 <pre><code>## phyloseq-class experiment-level object
-## otu_table()   OTU Table:         [ 100 taxa and 23 samples ]
+## otu_table()   OTU Table:         [ 122 taxa and 23 samples ]
 ## sample_data() Sample Data:       [ 23 samples by 1 sample variables ]
-## tax_table()   Taxonomy Table:    [ 100 taxa by 6 taxonomic ranks ]</code></pre>
+## tax_table()   Taxonomy Table:    [ 122 taxa by 6 taxonomic ranks ]</code></pre>
 <p>Finally, we obtained the final phyloseq-class object <em>dada2_ps_rare_genus_filter_trim</em> and changed its name.</p>
 </div>
 </div>
@@ -304,36 +303,49 @@ div.csl-indent {
 <span id="cb72-2"><a href="differential-analysis.html#cb72-2" aria-hidden="true" tabindex="-1"></a>                    dada2_ps_rare_genus_filter_trim,</span>
 <span id="cb72-3"><a href="differential-analysis.html#cb72-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
 <span id="cb72-4"><a href="differential-analysis.html#cb72-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>),</span>
-<span id="cb72-5"><a href="differential-analysis.html#cb72-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Lda =</span> <span class="dv">2</span>)</span>
+<span id="cb72-5"><a href="differential-analysis.html#cb72-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Lda =</span> <span class="dv">0</span>)</span>
 <span id="cb72-6"><a href="differential-analysis.html#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dada2_ps_lefse)</span></code></pre></div>
-<pre><code>##                       TaxaID         Block Enrichment LDA_Score EffectSize Log2FoldChange (Median)\nAA_vs_BB Median Abundance\n(All)
-## 1          g__Parasutterella 9_AA vs 14_BB         AA -3.679337   1.668801                          4.402050               172.77125
-## 2 g__Ruminococcaceae_UCG_004 9_AA vs 14_BB         AA -2.467155   1.593295                                NA               241.24923
-## 3             g__Odoribacter 9_AA vs 14_BB         BB  2.720655   1.317365                                NA                21.93175
-## 4              g__Romboutsia 9_AA vs 14_BB         BB  3.750779   3.016968                         -6.856424              2189.79596
-## 5           g__Lactobacillus 9_AA vs 14_BB         BB  4.075009   2.628616                         -3.336128              1283.85401
-##   Median Abundance\nAA Median Abundance\nBB Log2FoldChange (Mean)\nAA_vs_BB Mean Abundance\n(All) Mean Abundance\nAA Mean Abundance\nBB
-## 1           1080.35695             51.09966                        4.481148             3901.0977          9320.3061           417.3209
-## 2           2451.90494              0.00000                        2.342928             1443.2092          2822.7139           556.3847
-## 3            604.99989              0.00000                        2.099583              578.0758          1083.9017           252.9020
-## 4             50.35627           5835.02623                       -3.334490             7094.1306          1086.1419         10956.4090
-## 5            520.46061           5256.08763                       -5.173067            19938.7655           892.0297         32183.0957
-##   Occurrence (100%)\n(All) Occurrence (100%)\nAA Occurrence (100%)\nBB       Odds Ratio (95% CI)
-## 1                    65.22                 88.89                 50.00           0.0025 (-12;12)
-## 2                    52.17                 77.78                 35.71             0.14 (-3.7;4)
-## 3                    52.17                 77.78                 35.71             0.31 (-2;2.6)
-## 4                    78.26                 55.56                 92.86                76 (85;68)
-## 5                    86.96                 77.78                 92.86 1.1e+08 (1.1e+08;1.1e+08)</code></pre>
+<pre><code>##                           TaxaID         Block Enrichment     LDA_Score EffectSize Log2FoldChange (Median)\nAA_vs_BB
+## 1              g__Parasutterella 9_AA vs 14_BB         AA -0.0014715906  0.8774709                          4.400391
+## 2             g__Intestinibacter 9_AA vs 14_BB         AA -0.0007356832  2.0044917                                NA
+## 3 g__Clostridium_sensu_stricto_1 9_AA vs 14_BB         BB  0.0014798111  1.8963802                                NA
+## 4     g__Ruminococcaceae_UCG_004 9_AA vs 14_BB         BB  0.0022632782  0.9044487                                NA
+## 5                 g__Odoribacter 9_AA vs 14_BB         BB  0.0024542214  1.5095670                                NA
+## 6                  g__Romboutsia 9_AA vs 14_BB         BB  0.0024779492  0.0060069                         -6.855390
+##   Median Abundance\n(All) Median Abundance\nAA Median Abundance\nBB Log2FoldChange (Mean)\nAA_vs_BB Mean Abundance\n(All)
+## 1            1.520946e-04         1.075685e-03         5.093725e-05                        4.382363          0.0036263994
+## 2            3.801043e-04         0.000000e+00         1.210743e-03                       -2.077598          0.0017821217
+## 3            2.247329e-04         0.000000e+00         9.859842e-04                       -4.839795          0.0055569332
+## 4            2.225414e-04         2.450057e-03         0.000000e+00                        2.352990          0.0013823035
+## 5            2.023104e-05         6.023837e-04         0.000000e+00                        2.136731          0.0005586919
+## 6            2.186038e-03         5.035627e-05         5.830848e-03                       -3.320093          0.0069407231
+##   Mean Abundance\nAA Mean Abundance\nBB Occurrence (100%)\n(All) Occurrence (100%)\nAA Occurrence (100%)\nBB
+## 1       0.0086242116       0.0004135201                    65.22                 88.89                 50.00
+## 2       0.0006019396       0.0025408102                    60.87                 22.22                 85.71
+## 3       0.0003117956       0.0089288074                    60.87                 22.22                 85.71
+## 4       0.0027080076       0.0005300652                    52.17                 77.78                 35.71
+## 5       0.0010546962       0.0002398320                    52.17                 77.78                 35.71
+## 6       0.0010726678       0.0107130444                    78.26                 55.56                 92.86
+##   Odds Ratio (95% CI)
+## 1     0.0051 (-10;10)
+## 2       3.7 (6.3;1.1)
+## 3    6500 (6500;6500)
+## 4     0.15 (-3.5;3.8)
+## 5        0.3 (-2;2.6)
+## 6          63 (71;55)</code></pre>
 <ul>
 <li>Visualization</li>
 </ul>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="differential-analysis.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_lefse</span>(</span>
-<span id="cb74-2"><a href="differential-analysis.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">da_res =</span> dada2_ps_lefse,</span>
-<span id="cb74-3"><a href="differential-analysis.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_index =</span> <span class="st">&quot;LDA_Score&quot;</span>,</span>
-<span id="cb74-4"><a href="differential-analysis.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_index_cutoff =</span> <span class="dv">2</span>,</span>
-<span id="cb74-5"><a href="differential-analysis.html#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-57"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-57-1.png" alt="Lefse analysis (16s example)" width="576" />
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="differential-analysis.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># don&#39;t run this code when you do lefse in reality</span></span>
+<span id="cb74-2"><a href="differential-analysis.html#cb74-2" aria-hidden="true" tabindex="-1"></a>dada2_ps_lefse<span class="sc">$</span>LDA_Score <span class="ot">&lt;-</span> dada2_ps_lefse<span class="sc">$</span>LDA_Score <span class="sc">*</span> <span class="dv">1000</span></span>
+<span id="cb74-3"><a href="differential-analysis.html#cb74-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="differential-analysis.html#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_lefse</span>(</span>
+<span id="cb74-5"><a href="differential-analysis.html#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">da_res =</span> dada2_ps_lefse,</span>
+<span id="cb74-6"><a href="differential-analysis.html#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_index =</span> <span class="st">&quot;LDA_Score&quot;</span>,</span>
+<span id="cb74-7"><a href="differential-analysis.html#cb74-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_index_cutoff =</span> <span class="dv">0</span>,</span>
+<span id="cb74-8"><a href="differential-analysis.html#cb74-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-92"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-92-1.png" alt="Lefse analysis (16s example)" width="576" />
 <p class="caption">
 Figure 8.1: Lefse analysis (16s example)
 </p>
@@ -350,27 +362,34 @@ Figure 8.1: Lefse analysis (16s example)
 <span id="cb75-4"><a href="differential-analysis.html#cb75-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>))</span>
 <span id="cb75-5"><a href="differential-analysis.html#cb75-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb75-6"><a href="differential-analysis.html#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dada2_ps_wilcox)</span></code></pre></div>
-<pre><code>##             TaxaID         Block Enrichment EffectSize Statistic    Pvalue AdjustedPvalue Log2FoldChange (Median)\nAA_vs_BB
-## 1   g__Actinomyces 9_AA vs 14_BB  Nonsignif   39.65079      44.5 0.2556616      0.7114368                        -0.9577718
-## 2 g__Adlercreutzia 9_AA vs 14_BB  Nonsignif   23.17460      44.0 0.1980169      0.7114368                                NA
-## 3  g__Agathobacter 9_AA vs 14_BB  Nonsignif 1222.58730      71.0 0.6293971      0.9106171                         0.1524904
-## 4     g__Alistipes 9_AA vs 14_BB  Nonsignif   23.03175      67.0 0.8239942      0.9286981                        -0.1085245
-## 5  g__Anaerostipes 9_AA vs 14_BB  Nonsignif   60.25397      57.0 0.7343041      0.9167109                         0.9551297
-## 6   g__Bacteroides 9_AA vs 14_BB  Nonsignif 4064.23016      89.0 0.1093014      0.7114368                         1.5367266
-##   Median Abundance\n(All) Median Abundance\nAA Median Abundance\nBB Log2FoldChange (Rank)\nAA_vs_BB Mean Rank Abundance\nAA
-## 1                      30                   26                 50.5                     -0.42227633                    9.94
-## 2                       0                    0                  9.0                     -0.43387758                    9.89
-## 3                     316                  329                296.0                      0.17342686                   12.89
-## 4                      64                   64                 69.0                      0.08724541                   12.44
-## 5                     537                  918                473.5                     -0.13367844                   11.33
-## 6                    3807                 9103               3137.5                      0.55428610                   14.89
-##   Mean Rank Abundance\nBB Occurrence (100%)\n(All) Occurrence (100%)\nAA Occurrence (100%)\nBB Odds Ratio (95% CI)
-## 1                   13.32                    82.61                 88.89                 78.57       4.1 (6.8;1.3)
-## 2                   13.36                    43.48                 33.33                 50.00        8.6 (13;4.3)
-## 3                   11.43                    65.22                 55.56                 71.43     0.39 (-1.4;2.2)
-## 4                   11.71                    73.91                 77.78                 71.43     0.88 (0.64;1.1)
-## 5                   12.43                    95.65                100.00                 92.86      1.1 (1.2;0.93)
-## 6                   10.14                   100.00                100.00                100.00       0.45 (-1.1;2)</code></pre>
+<pre><code>##               TaxaID         Block Enrichment EffectSize Statistic    Pvalue AdjustedPvalue
+## 1 g__Acidaminococcus 9_AA vs 14_BB  Nonsignif   70.56349      63.5 1.0000000      1.0000000
+## 2     g__Actinomyces 9_AA vs 14_BB  Nonsignif   39.65079      44.5 0.2556616      0.7581030
+## 3   g__Adlercreutzia 9_AA vs 14_BB  Nonsignif   23.17460      44.0 0.1980169      0.7581030
+## 4    g__Agathobacter 9_AA vs 14_BB  Nonsignif 1222.58730      71.0 0.6293971      0.9176351
+## 5     g__Akkermansia 9_AA vs 14_BB  Nonsignif  104.78571      64.5 0.9304707      0.9704909
+## 6       g__Alistipes 9_AA vs 14_BB  Nonsignif   23.03175      67.0 0.8239942      0.9403228
+##   Log2FoldChange (Median)\nAA_vs_BB Median Abundance\n(All) Median Abundance\nAA Median Abundance\nBB
+## 1                                NA                       0                    0                  0.0
+## 2                        -0.9577718                      30                   26                 50.5
+## 3                                NA                       0                    0                  9.0
+## 4                         0.1524904                     316                  329                296.0
+## 5                                NA                       0                    0                  0.0
+## 6                        -0.1085245                      64                   64                 69.0
+##   Log2FoldChange (Rank)\nAA_vs_BB Mean Rank Abundance\nAA Mean Rank Abundance\nBB Occurrence (100%)\n(All)
+## 1                      0.01201252                   12.06                   11.96                    21.74
+## 2                     -0.42227633                    9.94                   13.32                    82.61
+## 3                     -0.43387758                    9.89                   13.36                    43.48
+## 4                      0.17342686                   12.89                   11.43                    65.22
+## 5                      0.03358045                   12.17                   11.89                    21.74
+## 6                      0.08724541                   12.44                   11.71                    73.91
+##   Occurrence (100%)\nAA Occurrence (100%)\nBB Odds Ratio (95% CI)
+## 1                 22.22                 21.43    0.67 (-0.11;1.5)
+## 2                 88.89                 78.57       4.1 (6.8;1.3)
+## 3                 33.33                 50.00        8.6 (13;4.3)
+## 4                 55.56                 71.43     0.39 (-1.4;2.2)
+## 5                 22.22                 21.43      1.5 (2.3;0.71)
+## 6                 77.78                 71.43     0.88 (0.64;1.1)</code></pre>
 <ul>
 <li>Volcano</li>
 </ul>
@@ -383,8 +402,8 @@ Figure 8.1: Lefse analysis (16s example)
 <span id="cb77-7"><a href="differential-analysis.html#cb77-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index_cutoff =</span> <span class="fl">0.05</span>,</span>
 <span id="cb77-8"><a href="differential-analysis.html#cb77-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;grey&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
 <span id="cb77-9"><a href="differential-analysis.html#cb77-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">topN =</span> <span class="dv">5</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-59"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-59-1.png" alt="Wilcoxon Rank-Sum test (16s example)" width="768" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-94"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-94-1.png" alt="Wilcoxon Rank-Sum test (16s example)" width="768" />
 <p class="caption">
 Figure 8.2: Wilcoxon Rank-Sum test (16s example)
 </p>
@@ -402,8 +421,8 @@ Figure 8.2: Wilcoxon Rank-Sum test (16s example)
 <span id="cb78-7"><a href="differential-analysis.html#cb78-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index_cutoff =</span> <span class="fl">0.05</span>,</span>
 <span id="cb78-8"><a href="differential-analysis.html#cb78-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">topN =</span> <span class="dv">5</span>,</span>
 <span id="cb78-9"><a href="differential-analysis.html#cb78-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-60"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-60-1.png" alt="Dominant Taxa" width="768" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-95"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-95-1.png" alt="Dominant Taxa" width="768" />
 <p class="caption">
 Figure 8.3: Dominant Taxa
 </p>
@@ -417,10 +436,11 @@ Figure 8.3: Dominant Taxa
 <span id="cb79-3"><a href="differential-analysis.html#cb79-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
 <span id="cb79-4"><a href="differential-analysis.html#cb79-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>),</span>
 <span id="cb79-5"><a href="differential-analysis.html#cb79-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">da_method =</span> <span class="fu">c</span>(<span class="st">&quot;aldex&quot;</span>, <span class="st">&quot;limma_voom&quot;</span>, <span class="st">&quot;mbzinb&quot;</span>, <span class="st">&quot;omnibus&quot;</span>))</span></code></pre></div>
-<pre><code>## Start GMPR normalization ...
+<pre><code>## |------------(25%)----------(50%)----------(75%)----------|
+## Start GMPR normalization ...
 ## Start Winsorization ...
 ## Perform filtering ...
-## --A total of  68  taxa will be tested with a sample size of 23 !
+## --A total of  88  taxa will be tested with a sample size of 23 !
 ## --Omnibus test is selected!
 ## --Dispersion is treated as a parameter of interest!
 ## Start testing ...
@@ -451,67 +471,245 @@ Figure 8.3: Dominant Taxa
 <span id="cb83-7"><a href="differential-analysis.html#cb83-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cellwidth =</span> <span class="dv">50</span>, </span>
 <span id="cb83-8"><a href="differential-analysis.html#cb83-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">cellheight =</span> <span class="dv">15</span>, </span>
 <span id="cb83-9"><a href="differential-analysis.html#cb83-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fontsize_number =</span> <span class="dv">15</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-62"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-62-1.png" alt="Multiple DA results" width="768" />
-<p class="caption">
-Figure 8.4: Multiple DA results
-</p>
-</div>
 </div>
 <div id="systematic-information-6" class="section level2 hasAnchor" number="8.6">
 <h2><span class="header-section-number">8.6</span> Systematic Information<a href="differential-analysis.html#systematic-information-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="differential-analysis.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
-<pre><code>## R version 4.1.2 (2021-11-01)
-## Platform: x86_64-apple-darwin17.0 (64-bit)
-## Running under: macOS Monterey 12.2.1
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="differential-analysis.html#cb84-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div>
+<pre><code>## ─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+##  setting  value
+##  version  R version 4.1.2 (2021-11-01)
+##  os       macOS Monterey 12.2.1
+##  system   x86_64, darwin17.0
+##  ui       RStudio
+##  language (EN)
+##  collate  en_US.UTF-8
+##  ctype    en_US.UTF-8
+##  tz       Asia/Shanghai
+##  date     2022-06-22
+##  rstudio  2022.02.0+443 Prairie Trillium (desktop)
+##  pandoc   2.17.1.1 @ /Applications/RStudio.app/Contents/MacOS/quarto/bin/ (via rmarkdown)
 ## 
-## Matrix products: default
-## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
+## ─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+##  package              * version  date (UTC) lib source
+##  abind                  1.4-5    2016-07-21 [1] CRAN (R 4.1.0)
+##  ade4                   1.7-18   2021-09-16 [1] CRAN (R 4.1.0)
+##  ALDEx2                 1.26.0   2021-10-26 [1] Bioconductor
+##  annotate               1.72.0   2021-10-26 [1] Bioconductor
+##  AnnotationDbi          1.56.2   2021-11-09 [1] Bioconductor
+##  ape                  * 5.6-2    2022-03-02 [1] CRAN (R 4.1.2)
+##  askpass                1.1      2019-01-13 [1] CRAN (R 4.1.0)
+##  assertthat             0.2.1    2019-03-21 [1] CRAN (R 4.1.0)
+##  backports              1.4.1    2021-12-13 [1] CRAN (R 4.1.0)
+##  base64enc              0.1-3    2015-07-28 [1] CRAN (R 4.1.0)
+##  bayesm                 3.1-4    2019-10-15 [1] CRAN (R 4.1.0)
+##  Biobase              * 2.54.0   2021-10-26 [1] Bioconductor
+##  BiocGenerics         * 0.40.0   2021-10-26 [1] Bioconductor
+##  BiocParallel           1.28.3   2021-12-09 [1] Bioconductor
+##  biomformat             1.22.0   2021-10-26 [1] Bioconductor
+##  Biostrings             2.62.0   2021-10-26 [1] Bioconductor
+##  bit                    4.0.4    2020-08-04 [1] CRAN (R 4.1.0)
+##  bit64                  4.0.5    2020-08-30 [1] CRAN (R 4.1.0)
+##  bitops                 1.0-7    2021-04-24 [1] CRAN (R 4.1.0)
+##  blob                   1.2.2    2021-07-23 [1] CRAN (R 4.1.0)
+##  bookdown               0.24     2021-09-02 [1] CRAN (R 4.1.0)
+##  brio                   1.1.3    2021-11-30 [1] CRAN (R 4.1.0)
+##  broom                  0.7.12   2022-01-28 [1] CRAN (R 4.1.2)
+##  bslib                  0.3.1    2021-10-06 [1] CRAN (R 4.1.0)
+##  cachem                 1.0.6    2021-08-19 [1] CRAN (R 4.1.0)
+##  callr                  3.7.0    2021-04-20 [1] CRAN (R 4.1.0)
+##  car                    3.0-12   2021-11-06 [1] CRAN (R 4.1.0)
+##  carData                3.0-5    2022-01-06 [1] CRAN (R 4.1.2)
+##  caTools                1.18.2   2021-03-28 [1] CRAN (R 4.1.0)
+##  cellranger             1.1.0    2016-07-27 [1] CRAN (R 4.1.0)
+##  checkmate              2.0.0    2020-02-06 [1] CRAN (R 4.1.0)
+##  class                  7.3-20   2022-01-13 [1] CRAN (R 4.1.2)
+##  classInt               0.4-3    2020-04-07 [1] CRAN (R 4.1.0)
+##  cli                    3.2.0    2022-02-14 [1] CRAN (R 4.1.2)
+##  cluster                2.1.2    2021-04-17 [1] CRAN (R 4.1.2)
+##  codetools              0.2-18   2020-11-04 [1] CRAN (R 4.1.2)
+##  coin                   1.4-2    2021-10-08 [1] CRAN (R 4.1.0)
+##  colorspace             2.0-3    2022-02-21 [1] CRAN (R 4.1.2)
+##  compositions           2.0-4    2022-01-05 [1] CRAN (R 4.1.2)
+##  conflicted           * 1.1.0    2021-11-26 [1] CRAN (R 4.1.0)
+##  corrplot               0.92     2021-11-18 [1] CRAN (R 4.1.0)
+##  cowplot                1.1.1    2020-12-30 [1] CRAN (R 4.1.0)
+##  crayon                 1.5.0    2022-02-14 [1] CRAN (R 4.1.2)
+##  crosstalk              1.2.0    2021-11-04 [1] CRAN (R 4.1.0)
+##  data.table             1.14.2   2021-09-27 [1] CRAN (R 4.1.0)
+##  DBI                    1.1.2    2021-12-20 [1] CRAN (R 4.1.0)
+##  DelayedArray           0.20.0   2021-10-26 [1] Bioconductor
+##  DEoptimR               1.0-10   2022-01-03 [1] CRAN (R 4.1.2)
+##  desc                   1.4.1    2022-03-06 [1] CRAN (R 4.1.2)
+##  DESeq2                 1.34.0   2021-10-26 [1] Bioconductor
+##  devtools               2.4.3    2021-11-30 [1] CRAN (R 4.1.0)
+##  DiagrammeR             1.0.9    2022-03-05 [1] CRAN (R 4.1.2)
+##  digest                 0.6.29   2021-12-01 [1] CRAN (R 4.1.0)
+##  dplyr                * 1.0.8    2022-02-08 [1] CRAN (R 4.1.2)
+##  DT                     0.21     2022-02-26 [1] CRAN (R 4.1.2)
+##  e1071                  1.7-9    2021-09-16 [1] CRAN (R 4.1.0)
+##  edgeR                  3.36.0   2021-10-26 [1] Bioconductor
+##  ellipsis               0.3.2    2021-04-29 [1] CRAN (R 4.1.0)
+##  evaluate               0.15     2022-02-18 [1] CRAN (R 4.1.2)
+##  fansi                  1.0.2    2022-01-14 [1] CRAN (R 4.1.2)
+##  farver                 2.1.0    2021-02-28 [1] CRAN (R 4.1.0)
+##  fastmap                1.1.0    2021-01-25 [1] CRAN (R 4.1.0)
+##  foreach                1.5.2    2022-02-02 [1] CRAN (R 4.1.2)
+##  foreign                0.8-82   2022-01-13 [1] CRAN (R 4.1.2)
+##  forestplot             2.0.1    2021-09-03 [1] CRAN (R 4.1.0)
+##  Formula                1.2-4    2020-10-16 [1] CRAN (R 4.1.0)
+##  fs                     1.5.2    2021-12-08 [1] CRAN (R 4.1.0)
+##  genefilter             1.76.0   2021-10-26 [1] Bioconductor
+##  geneplotter            1.72.0   2021-10-26 [1] Bioconductor
+##  generics               0.1.2    2022-01-31 [1] CRAN (R 4.1.2)
+##  GenomeInfoDb         * 1.30.1   2022-01-30 [1] Bioconductor
+##  GenomeInfoDbData       1.2.7    2022-03-09 [1] Bioconductor
+##  GenomicRanges        * 1.46.1   2021-11-18 [1] Bioconductor
+##  ggplot2              * 3.3.5    2021-06-25 [1] CRAN (R 4.1.0)
+##  ggpubr               * 0.4.0    2020-06-27 [1] CRAN (R 4.1.0)
+##  ggrepel                0.9.1    2021-01-15 [1] CRAN (R 4.1.0)
+##  ggsci                  2.9      2018-05-14 [1] CRAN (R 4.1.0)
+##  ggsignif               0.6.3    2021-09-09 [1] CRAN (R 4.1.0)
+##  ggVennDiagram          1.2.1    2022-04-13 [1] Github (gaospecial/ggVennDiagram@db6742d)
+##  glmnet                 4.1-3    2021-11-02 [1] CRAN (R 4.1.0)
+##  glue                 * 1.6.2    2022-02-24 [1] CRAN (R 4.1.2)
+##  Gmisc                * 3.0.0    2022-01-03 [1] CRAN (R 4.1.2)
+##  gplots                 3.1.1    2020-11-28 [1] CRAN (R 4.1.0)
+##  gridExtra              2.3      2017-09-09 [1] CRAN (R 4.1.0)
+##  gtable                 0.3.0    2019-03-25 [1] CRAN (R 4.1.0)
+##  gtools                 3.9.2    2021-06-06 [1] CRAN (R 4.1.0)
+##  highr                  0.9      2021-04-16 [1] CRAN (R 4.1.0)
+##  Hmisc                  4.6-0    2021-10-07 [1] CRAN (R 4.1.0)
+##  htmlTable            * 2.4.0    2022-01-04 [1] CRAN (R 4.1.2)
+##  htmltools              0.5.2    2021-08-25 [1] CRAN (R 4.1.0)
+##  htmlwidgets            1.5.4    2021-09-08 [1] CRAN (R 4.1.0)
+##  httr                   1.4.2    2020-07-20 [1] CRAN (R 4.1.0)
+##  igraph                 1.2.11   2022-01-04 [1] CRAN (R 4.1.2)
+##  IRanges              * 2.28.0   2021-10-26 [1] Bioconductor
+##  iterators              1.0.14   2022-02-05 [1] CRAN (R 4.1.2)
+##  jpeg                   0.1-9    2021-07-24 [1] CRAN (R 4.1.0)
+##  jquerylib              0.1.4    2021-04-26 [1] CRAN (R 4.1.0)
+##  jsonlite               1.8.0    2022-02-22 [1] CRAN (R 4.1.2)
+##  kableExtra             1.3.4    2021-02-20 [1] CRAN (R 4.1.2)
+##  KEGGREST               1.34.0   2021-10-26 [1] Bioconductor
+##  KernSmooth             2.23-20  2021-05-03 [1] CRAN (R 4.1.2)
+##  knitr                  1.37     2021-12-16 [1] CRAN (R 4.1.0)
+##  labeling               0.4.2    2020-10-20 [1] CRAN (R 4.1.0)
+##  lattice              * 0.20-45  2021-09-22 [1] CRAN (R 4.1.2)
+##  latticeExtra           0.6-29   2019-12-19 [1] CRAN (R 4.1.0)
+##  libcoin                1.0-9    2021-09-27 [1] CRAN (R 4.1.0)
+##  lifecycle              1.0.1    2021-09-24 [1] CRAN (R 4.1.0)
+##  limma                  3.50.1   2022-02-17 [1] Bioconductor
+##  locfit                 1.5-9.5  2022-03-03 [1] CRAN (R 4.1.2)
+##  lubridate              1.8.0    2021-10-07 [1] CRAN (R 4.1.0)
+##  magrittr             * 2.0.2    2022-01-26 [1] CRAN (R 4.1.2)
+##  MASS                   7.3-55   2022-01-13 [1] CRAN (R 4.1.2)
+##  Matrix                 1.4-0    2021-12-08 [1] CRAN (R 4.1.0)
+##  MatrixGenerics       * 1.6.0    2021-10-26 [1] Bioconductor
+##  matrixStats          * 0.61.0   2021-09-17 [1] CRAN (R 4.1.0)
+##  mbzinb                 0.2      2022-03-16 [1] local
+##  memoise                2.0.1    2021-11-26 [1] CRAN (R 4.1.0)
+##  metagenomeSeq          1.36.0   2021-10-26 [1] Bioconductor
+##  mgcv                   1.8-39   2022-02-24 [1] CRAN (R 4.1.2)
+##  microbiome             1.16.0   2021-10-26 [1] Bioconductor
+##  modeltools             0.2-23   2020-03-05 [1] CRAN (R 4.1.0)
+##  multcomp               1.4-18   2022-01-04 [1] CRAN (R 4.1.2)
+##  multtest               2.50.0   2021-10-26 [1] Bioconductor
+##  munsell                0.5.0    2018-06-12 [1] CRAN (R 4.1.0)
+##  mvtnorm                1.1-3    2021-10-08 [1] CRAN (R 4.1.0)
+##  NADA                   1.6-1.1  2020-03-22 [1] CRAN (R 4.1.0)
+##  nlme                 * 3.1-155  2022-01-13 [1] CRAN (R 4.1.2)
+##  nnet                   7.3-17   2022-01-13 [1] CRAN (R 4.1.2)
+##  openssl                2.0.0    2022-03-02 [1] CRAN (R 4.1.2)
+##  permute              * 0.9-7    2022-01-27 [1] CRAN (R 4.1.2)
+##  pheatmap               1.0.12   2019-01-04 [1] CRAN (R 4.1.0)
+##  phyloseq             * 1.38.0   2021-10-26 [1] Bioconductor
+##  picante              * 1.8.2    2020-06-10 [1] CRAN (R 4.1.0)
+##  pillar                 1.7.0    2022-02-01 [1] CRAN (R 4.1.2)
+##  pkgbuild               1.3.1    2021-12-20 [1] CRAN (R 4.1.0)
+##  pkgconfig              2.0.3    2019-09-22 [1] CRAN (R 4.1.0)
+##  pkgload                1.2.4    2021-11-30 [1] CRAN (R 4.1.0)
+##  plyr                   1.8.6    2020-03-03 [1] CRAN (R 4.1.0)
+##  png                    0.1-7    2013-12-03 [1] CRAN (R 4.1.0)
+##  prettyunits            1.1.1    2020-01-24 [1] CRAN (R 4.1.0)
+##  processx               3.5.2    2021-04-30 [1] CRAN (R 4.1.0)
+##  protoclust             1.6.3    2019-01-31 [1] CRAN (R 4.1.0)
+##  proxy                  0.4-26   2021-06-07 [1] CRAN (R 4.1.0)
+##  ps                     1.6.0    2021-02-28 [1] CRAN (R 4.1.0)
+##  pscl                   1.5.5    2020-03-07 [1] CRAN (R 4.1.0)
+##  purrr                  0.3.4    2020-04-17 [1] CRAN (R 4.1.0)
+##  qvalue                 2.26.0   2021-10-26 [1] Bioconductor
+##  R6                     2.5.1    2021-08-19 [1] CRAN (R 4.1.0)
+##  RAIDA                  1.0      2022-03-14 [1] local
+##  RColorBrewer         * 1.1-2    2014-12-07 [1] CRAN (R 4.1.0)
+##  Rcpp                 * 1.0.8.2  2022-03-11 [1] CRAN (R 4.1.2)
+##  RcppZiggurat           0.1.6    2020-10-20 [1] CRAN (R 4.1.0)
+##  RCurl                  1.98-1.6 2022-02-08 [1] CRAN (R 4.1.2)
+##  readxl               * 1.4.0    2022-03-28 [1] CRAN (R 4.1.2)
+##  remotes                2.4.2    2021-11-30 [1] CRAN (R 4.1.0)
+##  reshape2               1.4.4    2020-04-09 [1] CRAN (R 4.1.0)
+##  reticulate             1.24     2022-01-26 [1] CRAN (R 4.1.2)
+##  Rfast                  2.0.6    2022-02-16 [1] CRAN (R 4.1.2)
+##  rhdf5                  2.38.1   2022-03-10 [1] Bioconductor
+##  rhdf5filters           1.6.0    2021-10-26 [1] Bioconductor
+##  Rhdf5lib               1.16.0   2021-10-26 [1] Bioconductor
+##  rlang                  1.0.2    2022-03-04 [1] CRAN (R 4.1.2)
+##  rmarkdown              2.13     2022-03-10 [1] CRAN (R 4.1.2)
+##  robustbase             0.93-9   2021-09-27 [1] CRAN (R 4.1.0)
+##  rpart                  4.1.16   2022-01-24 [1] CRAN (R 4.1.2)
+##  rprojroot              2.0.2    2020-11-15 [1] CRAN (R 4.1.0)
+##  RSpectra               0.16-0   2019-12-01 [1] CRAN (R 4.1.0)
+##  RSQLite                2.2.10   2022-02-17 [1] CRAN (R 4.1.2)
+##  rstatix                0.7.0    2021-02-13 [1] CRAN (R 4.1.0)
+##  rstudioapi             0.13     2020-11-12 [1] CRAN (R 4.1.0)
+##  Rtsne                  0.15     2018-11-10 [1] CRAN (R 4.1.0)
+##  RVenn                  1.1.0    2019-07-18 [1] CRAN (R 4.1.0)
+##  rvest                  1.0.2    2021-10-16 [1] CRAN (R 4.1.0)
+##  S4Vectors            * 0.32.3   2021-11-21 [1] Bioconductor
+##  sandwich               3.0-1    2021-05-18 [1] CRAN (R 4.1.0)
+##  sass                   0.4.0    2021-05-12 [1] CRAN (R 4.1.0)
+##  scales                 1.1.1    2020-05-11 [1] CRAN (R 4.1.0)
+##  sessioninfo            1.2.2    2021-12-06 [1] CRAN (R 4.1.0)
+##  sf                     1.0-7    2022-03-07 [1] CRAN (R 4.1.2)
+##  shape                  1.4.6    2021-05-19 [1] CRAN (R 4.1.0)
+##  stringi                1.7.6    2021-11-29 [1] CRAN (R 4.1.0)
+##  stringr                1.4.0    2019-02-10 [1] CRAN (R 4.1.0)
+##  SummarizedExperiment * 1.24.0   2021-10-26 [1] Bioconductor
+##  survival               3.3-1    2022-03-03 [1] CRAN (R 4.1.2)
+##  svglite                2.1.0    2022-02-03 [1] CRAN (R 4.1.2)
+##  systemfonts            1.0.4    2022-02-11 [1] CRAN (R 4.1.2)
+##  tensorA                0.36.2   2020-11-19 [1] CRAN (R 4.1.0)
+##  testthat               3.1.2    2022-01-20 [1] CRAN (R 4.1.2)
+##  TH.data                1.1-0    2021-09-27 [1] CRAN (R 4.1.0)
+##  tibble               * 3.1.6    2021-11-07 [1] CRAN (R 4.1.0)
+##  tidyr                  1.2.0    2022-02-01 [1] CRAN (R 4.1.2)
+##  tidyselect             1.1.2    2022-02-21 [1] CRAN (R 4.1.2)
+##  truncnorm              1.0-8    2018-02-27 [1] CRAN (R 4.1.0)
+##  umap                   0.2.8.0  2022-03-23 [1] CRAN (R 4.1.2)
+##  units                  0.8-0    2022-02-05 [1] CRAN (R 4.1.2)
+##  usethis                2.1.5    2021-12-09 [1] CRAN (R 4.1.0)
+##  utf8                   1.2.2    2021-07-24 [1] CRAN (R 4.1.0)
+##  vctrs                  0.3.8    2021-04-29 [1] CRAN (R 4.1.0)
+##  vegan                * 2.5-7    2020-11-28 [1] CRAN (R 4.1.0)
+##  viridis              * 0.6.2    2021-10-13 [1] CRAN (R 4.1.0)
+##  viridisLite          * 0.4.0    2021-04-13 [1] CRAN (R 4.1.0)
+##  visNetwork             2.1.0    2021-09-29 [1] CRAN (R 4.1.0)
+##  webshot                0.5.3    2022-04-14 [1] CRAN (R 4.1.2)
+##  withr                  2.5.0    2022-03-03 [1] CRAN (R 4.1.2)
+##  Wrench                 1.12.0   2021-10-26 [1] Bioconductor
+##  xfun                   0.30     2022-03-02 [1] CRAN (R 4.1.2)
+##  XMAS2                * 2.1.4    2022-06-20 [1] local
+##  XML                    3.99-0.9 2022-02-24 [1] CRAN (R 4.1.2)
+##  xml2                   1.3.3    2021-11-30 [1] CRAN (R 4.1.0)
+##  xtable                 1.8-4    2019-04-21 [1] CRAN (R 4.1.0)
+##  XVector                0.34.0   2021-10-26 [1] Bioconductor
+##  yaml                   2.3.5    2022-02-21 [1] CRAN (R 4.1.2)
+##  zCompositions          1.4.0    2022-01-13 [1] CRAN (R 4.1.2)
+##  zlibbioc               1.40.0   2021-10-26 [1] Bioconductor
+##  zoo                    1.8-9    2021-03-09 [1] CRAN (R 4.1.0)
 ## 
-## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+##  [1] /Library/Frameworks/R.framework/Versions/4.1/Resources/library
 ## 
-## attached base packages:
-## [1] grid      stats4    stats     graphics  grDevices utils     datasets  methods   base     
-## 
-## other attached packages:
-##  [1] magrittr_2.0.2              glue_1.6.2                  Gmisc_3.0.0                 htmlTable_2.4.0            
-##  [5] Rcpp_1.0.8.2                readxl_1.4.0                SummarizedExperiment_1.24.0 Biobase_2.54.0             
-##  [9] GenomicRanges_1.46.1        GenomeInfoDb_1.30.1         IRanges_2.28.0              S4Vectors_0.32.3           
-## [13] BiocGenerics_0.40.0         MatrixGenerics_1.6.0        matrixStats_0.61.0          ggpubr_0.4.0               
-## [17] ggplot2_3.3.5               phyloseq_1.38.0             tibble_3.1.6                dplyr_1.0.8                
-## [21] XMAS2_2.1.3                
-## 
-## loaded via a namespace (and not attached):
-##   [1] backports_1.4.1        Hmisc_4.6-0            corrplot_0.92          plyr_1.8.6             igraph_1.2.11         
-##   [6] splines_4.1.2          BiocParallel_1.28.3    TH.data_1.1-0          digest_0.6.29          foreach_1.5.2         
-##  [11] htmltools_0.5.2        fansi_1.0.2            checkmate_2.0.0        memoise_2.0.1          cluster_2.1.2         
-##  [16] limma_3.50.1           Biostrings_2.62.0      annotate_1.72.0        sandwich_3.0-1         metagenomeSeq_1.36.0  
-##  [21] jpeg_0.1-9             colorspace_2.0-3       blob_1.2.2             ggrepel_0.9.1          xfun_0.30             
-##  [26] crayon_1.5.0           RCurl_1.98-1.6         jsonlite_1.8.0         libcoin_1.0-9          genefilter_1.76.0     
-##  [31] survival_3.3-1         zoo_1.8-9              iterators_1.0.14       ape_5.6-2              gtable_0.3.0          
-##  [36] zlibbioc_1.40.0        XVector_0.34.0         DelayedArray_0.20.0    car_3.0-12             RcppZiggurat_0.1.6    
-##  [41] Rhdf5lib_1.16.0        shape_1.4.6            pscl_1.5.5             abind_1.4-5            scales_1.1.1          
-##  [46] pheatmap_1.0.12        mvtnorm_1.1-3          DBI_1.1.2              edgeR_3.36.0           rstatix_0.7.0         
-##  [51] xtable_1.8-4           foreign_0.8-82         bit_4.0.4              Formula_1.2-4          truncnorm_1.0-8       
-##  [56] glmnet_4.1-3           htmlwidgets_1.5.4      httr_1.4.2             gplots_3.1.1           RColorBrewer_1.1-2    
-##  [61] modeltools_0.2-23      ellipsis_0.3.2         NADA_1.6-1.1           pkgconfig_2.0.3        XML_3.99-0.9          
-##  [66] farver_2.1.0           nnet_7.3-17            sass_0.4.0             locfit_1.5-9.5         utf8_1.2.2            
-##  [71] tidyselect_1.1.2       labeling_0.4.2         rlang_1.0.2            reshape2_1.4.4         AnnotationDbi_1.56.2  
-##  [76] munsell_0.5.0          cellranger_1.1.0       tools_4.1.2            cachem_1.0.6           cli_3.2.0             
-##  [81] generics_0.1.2         RSQLite_2.2.10         ade4_1.7-18            broom_0.7.12           evaluate_0.15         
-##  [86] biomformat_1.22.0      stringr_1.4.0          fastmap_1.1.0          yaml_2.3.5             knitr_1.37            
-##  [91] bit64_4.0.5            caTools_1.18.2         forestplot_2.0.1       purrr_0.3.4            KEGGREST_1.34.0       
-##  [96] coin_1.4-2             nlme_3.1-155           mbzinb_0.2             compiler_4.1.2         rstudioapi_0.13       
-## [101] png_0.1-7              ggsignif_0.6.3         zCompositions_1.4.0    geneplotter_1.72.0     bslib_0.3.1           
-## [106] stringi_1.7.6          highr_0.9              lattice_0.20-45        Matrix_1.4-0           vegan_2.5-7           
-## [111] permute_0.9-7          multtest_2.50.0        vctrs_0.3.8            pillar_1.7.0           lifecycle_1.0.1       
-## [116] rhdf5filters_1.6.0     jquerylib_0.1.4        data.table_1.14.2      cowplot_1.1.1          bitops_1.0-7          
-## [121] latticeExtra_0.6-29    R6_2.5.1               bookdown_0.24          gridExtra_2.3          KernSmooth_2.23-20    
-## [126] codetools_0.2-18       MASS_7.3-55            gtools_3.9.2           assertthat_0.2.1       Wrench_1.12.0         
-## [131] rhdf5_2.38.1           DESeq2_1.34.0          withr_2.5.0            multcomp_1.4-18        GenomeInfoDbData_1.2.7
-## [136] mgcv_1.8-39            parallel_4.1.2         rpart_4.1.16           tidyr_1.2.0            Rfast_2.0.6           
-## [141] rmarkdown_2.13         carData_3.0-5          ALDEx2_1.26.0          lubridate_1.8.0        base64enc_0.1-3</code></pre>
+## ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</code></pre>
 
 </div>
 </div>
