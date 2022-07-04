@@ -16,8 +16,8 @@ library(readxl)
 ## Loading data 
 ```{r, warning=FALSE, message=FALSE}
 dada2_res <- readRDS("DataSet/RawData/dada2_res.rds")
-tree <- read_tree("DataSet/RawData/tree.nwk")
-metadata <- read_xlsx("DataSet/RawData/诺禾宏基因组678月-ZH.xlsx", sheet = 3)
+tree <- phyloseq::read_tree("DataSet/RawData/tree.nwk")
+metadata <- readxl::read_xlsx("DataSet/RawData/诺禾宏基因组678月-ZH.xlsx", sheet = 3)
 
 metaphlan2_res <- read.table("DataSet/RawData/merged_metaphlan2.tsv",
                              header = TRUE, stringsAsFactors = FALSE) %>%
@@ -96,14 +96,25 @@ saveRDS(dada2_ps, "DataSet/Step2/Donor_16s_phyloseq.RDS", compress = TRUE)
 dada2_ps <- readRDS("DataSet/Step2/Donor_16s_phyloseq.RDS")
 dada2_ps_genus <- summarize_taxa(dada2_ps, taxa_level = "Genus")
 tail(dada2_ps_genus@sam_data %>% data.frame())
+```
 
+```markdown
+run_RefCheck(
+    ps=dada2_ps_genus,
+    BRS_ID="S_7327",
+    Ref_type="16s")
+```
+
+```{r, warning=FALSE, collapse=TRUE, echo=FALSE}
 run_RefCheck(
     ps=dada2_ps_genus,
     BRS_ID="S_7327",
     Reference=NULL,
     Ref_type="16s",
     Save=NULL)
+```
 
+```{r, warning=FALSE, collapse=TRUE}
 dada2_ps_remove_BRS <- get_GroupPhyloseq(
                      ps = dada2_ps,
                      group = "Group",

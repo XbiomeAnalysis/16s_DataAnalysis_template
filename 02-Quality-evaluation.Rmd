@@ -40,7 +40,15 @@ do `run_RefCheck` under the optimal parameters.
 * *Save*: the directory to save the latest spike-in sample matrix (default: /share/projects/Analytics/analytics/XMAS/RefCheck/).
 
 To see more details to use `?run_RefCheck`.
-```{r, warning=FALSE, collapse=TRUE}
+
+```markdown
+run_RefCheck(
+    ps=dada2_ps_genus,
+    BRS_ID="S8005",
+    Ref_type="16s")
+```
+
+```{r, warning=FALSE, collapse=TRUE, echo=FALSE}
 run_RefCheck(
     ps=dada2_ps_genus,
     BRS_ID="S8005",
