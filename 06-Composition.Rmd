@@ -27,8 +27,8 @@ plot_stacked_bar_XIVZ(
 * **XMAS** package
 ```{r, warning=FALSE, message=FALSE, fig.width=8, fig.height=7, fig.align="center", fig.cap="Microbial composition (16s example)"}
 plot_StackBarPlot(
-        ps=dada2_ps_rare,
-        taxa_level="Phylum",
+        ps = dada2_ps_rare,
+        taxa_level = "Phylum",
         group = "Group",
         cluster = TRUE)
 ```
@@ -37,7 +37,8 @@ plot_StackBarPlot(
 
 * convert absolute abundance into relative abundance 
 ```{r, warning=FALSE, message=FALSE}
-dada2_ps_rare_rb <- XMAS2::normalize(dada2_ps_rare, method = "TSS")
+dada2_ps_rare_rb <- XMAS2::normalize(object = dada2_ps_rare, 
+                                     method = "TSS")
 dada2_ps_rare_rb
 ```
 

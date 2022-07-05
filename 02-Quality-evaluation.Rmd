@@ -15,7 +15,7 @@ Quality control of DADA2 results will help us have more rational determinations 
 
 ## Reads' track by DADA2
 ```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=6, fig.height=4, fig.cap="Reads' track by DADA2"}
-plot_Dada2Track(data=dada2_res$reads_track)
+plot_Dada2Track(data = dada2_res$reads_track)
 ```
 
 
@@ -26,7 +26,8 @@ The percentage of the final remained read counts approximate **70%**, indicating
 The taxonomic levels of spike-in sample's bacteria is genus. Firstly, using the `summarize_taxa` to get the genus level phyloseq object and get the BRS_ID.
 
 ```{r, warning=FALSE}
-dada2_ps_genus <- summarize_taxa(dada2_ps, taxa_level = "Genus")
+dada2_ps_genus <- summarize_taxa(ps = dada2_ps, 
+                                 taxa_level = "Genus")
 
 dada2_ps_genus@sam_data
 ```
@@ -43,17 +44,17 @@ To see more details to use `?run_RefCheck`.
 
 ```markdown
 run_RefCheck(
-    ps=dada2_ps_genus,
-    BRS_ID="S8005",
-    Ref_type="16s")
+    ps = dada2_ps_genus,
+    BRS_ID = "S8005",
+    Ref_type = "16s")
 ```
 
 ```{r, warning=FALSE, collapse=TRUE, echo=FALSE}
 run_RefCheck(
-    ps=dada2_ps_genus,
-    BRS_ID="S8005",
-    Reference=NULL,
-    Ref_type="16s",
+    ps = dada2_ps_genus,
+    BRS_ID = "S8005",
+    Reference = NULL,
+    Ref_type = "16s",
     Save=NULL)
 ```
 
@@ -64,10 +65,10 @@ After evaluating the sequencing quality, we remove the BRS.
 
 ```{r, warning=FALSE, message=FALSE}
 dada2_ps_remove_BRS <- get_GroupPhyloseq(
-                     ps = dada2_ps,
-                     group = "Group",
-                     group_names = "QC",
-                     discard = TRUE)
+                         ps = dada2_ps,
+                         group = "Group",
+                         group_names = "QC",
+                         discard = TRUE)
 dada2_ps_remove_BRS
 ```
 
@@ -75,10 +76,10 @@ dada2_ps_remove_BRS
 ## Rarefaction curves
 ```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=6, fig.height=4, fig.cap="Rarefaction curves"}
 plot_RarefCurve(ps = dada2_ps_remove_BRS,
-               taxa_level = "OTU",
-               step = 100,
-               label = "Group",
-               color = "Group")
+                taxa_level = "OTU",
+                step = 100,
+                label = "Group",
+                color = "Group")
 ```
 
 The result showed that all the samples had **different sequence depth** but had the full sample richness.
@@ -89,7 +90,7 @@ The result showed that all the samples had **different sequence depth** but had 
 Summarizing the phyloseq-class object by using `summarize_phyloseq`. It displayed that briefly introduction of the object.
 
 ```{r, warning=FALSE, collapse=TRUE}
-summarize_phyloseq(dada2_ps_remove_BRS)
+summarize_phyloseq(ps = dada2_ps_remove_BRS)
 ```
 
 The minus account of the OTU counts is *51181* in the phyloseq object, and we can use it as the threshold to rarefy. 

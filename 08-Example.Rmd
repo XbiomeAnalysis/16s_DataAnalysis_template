@@ -27,7 +27,8 @@ metaphlan2_res <- read.table("DataSet/RawData/merged_metaphlan2.tsv",
 
 ## Metaphlan2 result
 ```{r, warning=FALSE, message=FALSE}
-metaphlan2_res_list <- import_metaphlan_taxa(metaphlan2_res, taxa_level = "Species")
+metaphlan2_res_list <- import_metaphlan_taxa(data_metaphlan2 = metaphlan2_res, 
+                                             taxa_level = "Species")
 tax_tab <- metaphlan2_res_list$tax_tab
 
 otu_tab <- metaphlan2_res_list$abu_tab
@@ -45,22 +46,23 @@ otu_tab_cln <- otu_tab[, match(overlap_samples, colnames(otu_tab))]
 sam_tab_cln <- sam_tab[match(overlap_samples, rownames(sam_tab)), ]
 rownames(sam_tab_cln) <- overlap_samples
 
-metaphlan2_ps <- get_metaphlan_phyloseq(otu_tab = otu_tab_cln, 
-                                   sam_tab = sam_tab_cln,
-                                   tax_tab = tax_tab)
+metaphlan2_ps <- get_metaphlan_phyloseq(
+                    otu_tab = otu_tab_cln, 
+                    sam_tab = sam_tab_cln,
+                    tax_tab = tax_tab)
 metaphlan2_ps
 ```
 
 
 ## Step1: Reads' Track
 ```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=5, fig.cap="DADA2' read track (Example)"}
-plot_Dada2Track(data=dada2_res$reads_track) +
-  guides(color="none")
+plot_Dada2Track(data = dada2_res$reads_track) +
+  guides(color = "none")
 ```
 
 ## Step2: Convert inputs into phyloseq data
 ```{r, warning=FALSE, message=FALSE}
-tax_tab_16s <- import_dada2_taxa(dada2_res$tax_tab)
+tax_tab_16s <- import_dada2_taxa(dada2_taxa = dada2_res$tax_tab)
 
 otu_tab_16s <- dada2_res$seq_tab
 # Shouldn't use the Total Number as SampleID (wrong: 123456; right: X123456)
@@ -78,10 +80,10 @@ otu_tab_16s_cln <- otu_tab_16s[match(overlap_samples_16s, rownames(otu_tab_16s))
 sam_tab_16s_cln <- sam_tab_16s[match(overlap_samples_16s, rownames(sam_tab_16s)), ]
 
 dada2_ps <- get_dada2_phyloseq(
-                   seq_tab = otu_tab_16s_cln, 
-                   tax_tab = tax_tab_16s, 
-                   sam_tab = sam_tab_16s_cln, 
-                   phy_tree = tree)
+                seq_tab = otu_tab_16s_cln, 
+                tax_tab = tax_tab_16s, 
+                sam_tab = sam_tab_16s_cln, 
+                phy_tree = tree)
 dada2_ps
 
 if (!dir.exists("DataSet/Step2/")) {
@@ -94,32 +96,33 @@ saveRDS(dada2_ps, "DataSet/Step2/Donor_16s_phyloseq.RDS", compress = TRUE)
 ## Step3: BRS checking
 ```{r, warning=FALSE, message=FALSE}
 dada2_ps <- readRDS("DataSet/Step2/Donor_16s_phyloseq.RDS")
-dada2_ps_genus <- summarize_taxa(dada2_ps, taxa_level = "Genus")
+dada2_ps_genus <- summarize_taxa(ps = dada2_ps, 
+                                 taxa_level = "Genus")
 tail(dada2_ps_genus@sam_data %>% data.frame())
 ```
 
 ```markdown
 run_RefCheck(
-    ps=dada2_ps_genus,
-    BRS_ID="S_7327",
-    Ref_type="16s")
+    ps = dada2_ps_genus,
+    BRS_ID = "S_7327",
+    Ref_type = "16s")
 ```
 
 ```{r, warning=FALSE, collapse=TRUE, echo=FALSE}
 run_RefCheck(
-    ps=dada2_ps_genus,
-    BRS_ID="S_7327",
-    Reference=NULL,
-    Ref_type="16s",
-    Save=NULL)
+    ps = dada2_ps_genus,
+    BRS_ID = "S_7327",
+    Reference = NULL,
+    Ref_type = "16s",
+    Save = NULL)
 ```
 
 ```{r, warning=FALSE, collapse=TRUE}
 dada2_ps_remove_BRS <- get_GroupPhyloseq(
-                     ps = dada2_ps,
-                     group = "Group",
-                     group_names = "QC",
-                     discard = TRUE)
+                           ps = dada2_ps,
+                           group = "Group",
+                           group_names = "QC",
+                           discard = TRUE)
 dada2_ps_remove_BRS
 
 if (!dir.exists("DataSet/Step3/")) {
@@ -144,9 +147,10 @@ plot_RarefCurve(ps = dada2_ps_remove_BRS,
 ## Step5: Rarefy otu counts
 ```{r, warning=FALSE, message=FALSE}
 dada2_ps_remove_BRS <- readRDS("DataSet/Step3/Donor_16s_phyloseq_remove_BRS.RDS")
-summarize_phyloseq(dada2_ps_remove_BRS)
+summarize_phyloseq(ps = dada2_ps_remove_BRS)
 
-dada2_ps_rare <- norm_rarefy(dada2_ps_remove_BRS, size = 33267)
+dada2_ps_rare <- norm_rarefy(object = dada2_ps_remove_BRS, 
+                             size = 33267)
 dada2_ps_rare
 
 if (!dir.exists("DataSet/Step5/")) {
@@ -160,13 +164,16 @@ saveRDS(dada2_ps_rare, "DataSet/Step5/Donor_16s_phyloseq_remove_BRS_rare.RDS", c
 ```{r, warning=FALSE, message=FALSE}
 dada2_ps_rare <- readRDS("DataSet/Step5/Donor_16s_phyloseq_remove_BRS_rare.RDS")
 
-dada2_ps_rare_genus <- summarize_taxa(dada2_ps_rare, taxa_level = "Genus")
+dada2_ps_rare_genus <- summarize_taxa(ps = dada2_ps_rare, 
+                                      taxa_level = "Genus")
 dada2_ps_rare_genus
 
-dada2_ps_rare_order <- summarize_taxa(dada2_ps_rare, taxa_level = "Order")
+dada2_ps_rare_order <- summarize_taxa(ps = dada2_ps_rare, 
+                                      taxa_level = "Order")
 dada2_ps_rare_order
 
-dada2_ps_rare_phylum <- summarize_taxa(dada2_ps_rare, taxa_level = "Phylum")
+dada2_ps_rare_phylum <- summarize_taxa(ps = dada2_ps_rare, 
+                                       taxa_level = "Phylum")
 dada2_ps_rare_phylum
 
 if (!dir.exists("DataSet/Step6/")) {
@@ -183,30 +190,35 @@ saveRDS(dada2_ps_rare_phylum, "DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare_
 dada2_ps_rare_genus <- readRDS("DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare_genus.RDS")
 
 # alpha
-dada2_ps_rare_genus_alpha <- run_alpha_diversity(ps=dada2_ps_rare_genus, 
-                                                measures = c("Shannon", "Chao1", "Observed"))
-plot_boxplot(data=dada2_ps_rare_genus_alpha,
+dada2_ps_rare_genus_alpha <- run_alpha_diversity(ps = dada2_ps_rare_genus, 
+                                                 measures = c("Shannon", "Chao1", "Observed"))
+plot_boxplot(data = dada2_ps_rare_genus_alpha,
              y_index = c("Shannon", "Chao1", "Observed"),
              group = "Group",
              group_names = c("Stool", "Product"),
              group_color = c("red", "blue"))
 
 # beta
-dada2_ps_beta <- run_beta_diversity(ps=dada2_ps_rare_genus, method = "bray")
-plot_distance_corrplot(dada2_ps_beta$BetaDistance)
+dada2_ps_beta <- run_beta_diversity(ps = dada2_ps_rare_genus, 
+                                    method = "bray")
+plot_distance_corrplot(datMatrix = dada2_ps_beta$BetaDistance)
 
 # permanova
-dada2_ps_per <- run_permanova(ps=dada2_ps_rare_genus, method = "bray", columns = "Group")
+dada2_ps_per <- run_permanova(ps = dada2_ps_rare_genus, 
+                              method = "bray", 
+                              columns = "Group")
 print(dada2_ps_per)
 
 # beta dispersion
-beta_df <- run_beta_diversity(ps=dada2_ps_rare_genus, method = "bray", group = "Group")
+beta_df <- run_beta_diversity(ps = dada2_ps_rare_genus, 
+                              method = "bray", 
+                              group = "Group")
 
 # ordination
 dada2_ps_ordination <- run_ordination(
-                       ps = dada2_ps_rare_genus,
-                       group = "Group",
-                       method = "PCoA")
+                           ps = dada2_ps_rare_genus,
+                           group = "Group",
+                           method = "PCoA")
 
 plot_Ordination(ResultList = dada2_ps_ordination, 
                 group = "Group", 
@@ -225,33 +237,38 @@ plot_stacked_bar_XIVZ(
 dada2_ps_rare_genus <- readRDS("DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare_genus.RDS")
 
 # filter & trim
-dada2_ps_rare_genus_filter <- run_filter(dada2_ps_rare_genus, cutoff = 10, unclass = TRUE)
-dada2_ps_rare_genus_filter_trim <- run_trim(dada2_ps_rare_genus_filter, cutoff = 0.1, trim = "feature")
+dada2_ps_rare_genus_filter <- run_filter(ps = dada2_ps_rare_genus, 
+                                         cutoff = 10, 
+                                         unclass = TRUE)
+dada2_ps_rare_genus_filter_trim <- run_trim(object = dada2_ps_rare_genus_filter, 
+                                            cutoff = 0.1, 
+                                            trim = "feature")
 dada2_ps_rare_genus_filter_trim
 
 # lefse
 dada2_ps_lefse <- run_lefse(
-                    dada2_ps_rare_genus_filter_trim,
-                    group = "Group",
-                    group_names = c("Stool", "Product"),
-                    Lda = 0)
+                      ps = dada2_ps_rare_genus_filter_trim,
+                      group = "Group",
+                      group_names = c("Stool", "Product"),
+                      norm = "CPM",
+                      Lda = 0)
 
 # # don't run this code when you do lefse in reality
 # dada2_ps_lefse$LDA_Score <- dada2_ps_lefse$LDA_Score * 1000
 
 plot_lefse(
-  da_res = dada2_ps_lefse,
-  x_index = "LDA_Score",
-  x_index_cutoff = 1,
-  group_color = c("green", "red"))
+    da_res = dada2_ps_lefse,
+    x_index = "LDA_Score",
+    x_index_cutoff = 1,
+    group_color = c("green", "red"))
 
 
 dada2_ps_wilcox <- run_wilcox(
-                    dada2_ps_rare_genus_filter_trim,
-                    group = "Group",
-                    group_names = c("Stool", "Product"))
+                      ps = dada2_ps_rare_genus_filter_trim,
+                      group = "Group",
+                      group_names = c("Stool", "Product"))
 plot_volcano(
-    dada2_ps_wilcox,
+    da_res = dada2_ps_wilcox,
     group_names = c("Stool", "Product"),
     x_index = "Log2FoldChange (Rank)\nStool_vs_Product",
     x_index_cutoff = 0.5,

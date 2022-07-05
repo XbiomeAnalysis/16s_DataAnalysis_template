@@ -22,13 +22,17 @@ We suggest that filtering taxa with low abundance (the summarized value under cu
 
 ### Filtering the low relative abundance or unclassified taxa by the threshold (total counts < 10)
 ```{r, warning=FALSE, message=FALSE}
-dada2_ps_rare_genus_filter <- run_filter(dada2_ps_rare_genus, cutoff = 10, unclass = TRUE)
+dada2_ps_rare_genus_filter <- run_filter(ps = dada2_ps_rare_genus, 
+                                         cutoff = 10, 
+                                         unclass = TRUE)
 dada2_ps_rare_genus_filter 
 ```
 
 ### Trimming the taxa with low occurrence less than threshold
 ```{r, warning=FALSE, message=FALSE}
-dada2_ps_rare_genus_filter_trim <- run_trim(dada2_ps_rare_genus_filter, cutoff = 0.1, trim = "feature")
+dada2_ps_rare_genus_filter_trim <- run_trim(object = dada2_ps_rare_genus_filter, 
+                                            cutoff = 0.1, 
+                                            trim = "feature")
 dada2_ps_rare_genus_filter_trim
 ```
 
@@ -40,10 +44,11 @@ Finally, we obtained the final phyloseq-class object _dada2\_ps\_rare\_genus\_fi
 * Calculation
 ```{r, warning=FALSE, message=FALSE}
 dada2_ps_lefse <- run_lefse(
-                    dada2_ps_rare_genus_filter_trim,
-                    group = "Group",
-                    group_names = c("AA", "BB"),
-                    Lda = 2)
+                      ps = dada2_ps_rare_genus_filter_trim,
+                      group = "Group",
+                      group_names = c("AA", "BB"),
+                      norm = "CPM",
+                      Lda = 2)
 head(dada2_ps_lefse)
 ```
 
@@ -53,10 +58,10 @@ head(dada2_ps_lefse)
 # dada2_ps_lefse$LDA_Score <- dada2_ps_lefse$LDA_Score * 1000
 
 plot_lefse(
-  da_res = dada2_ps_lefse,
-  x_index = "LDA_Score",
-  x_index_cutoff = 2,
-  group_color = c("green", "red"))
+    da_res = dada2_ps_lefse,
+    x_index = "LDA_Score",
+    x_index_cutoff = 2,
+    group_color = c("green", "red"))
 ```
 
 
@@ -65,9 +70,9 @@ plot_lefse(
 * Calculation
 ```{r, warning=FALSE, message=FALSE}
 dada2_ps_wilcox <- run_wilcox(
-                    dada2_ps_rare_genus_filter_trim,
-                    group = "Group",
-                    group_names = c("AA", "BB"))
+                      ps = dada2_ps_rare_genus_filter_trim,
+                      group = "Group",
+                      group_names = c("AA", "BB"))
 
 head(dada2_ps_wilcox)
 ```
@@ -76,7 +81,7 @@ head(dada2_ps_wilcox)
 * Volcano
 ```{r, warning=FALSE, message=FALSE, fig.width=8, fig.height=6, fig.align="center", fig.cap="Wilcoxon Rank-Sum test (16s example)"}
 plot_volcano(
-    dada2_ps_wilcox,
+    da_res = dada2_ps_wilcox,
     group_names = c("AA", "BB"),
     x_index = "Log2FoldChange (Rank)\nAA_vs_BB",
     x_index_cutoff = 0.5,
@@ -110,10 +115,10 @@ here, we provide the `run_multiple_da` for obtaining the results list from multi
 
 ```{r, warning=FALSE, message=FALSE}
 multiple_res <- run_multiple_da(
-       dada2_ps_rare_genus_filter_trim,
-       group = "Group",
-       group_names = c("AA", "BB"),
-       da_method = c("aldex", "limma_voom", "mbzinb", "omnibus"))
+                   ps = dada2_ps_rare_genus_filter_trim,
+                   group = "Group",
+                   group_names = c("AA", "BB"),
+                   da_method = c("aldex", "limma_voom", "mbzinb", "omnibus"))
 
 names(multiple_res)
 ```
@@ -122,14 +127,14 @@ names(multiple_res)
 * plot  results
 ```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=13, fig.cap="Multiple DA results"}
 plot_multiple_DA(
-  Multip_DA_res = multiple_res,
-  x_index_list = c("EffectSize", "logFC", "mean.LFC", "abund.LFC.CompvarBB.est"),
-  x_index_cutoff = 1,
-  y_index = "AdjustedPvalue",
-  y_index_cutoff = 0.5,
-  cellwidth = 50, 
-  cellheight = 15, 
-  fontsize_number = 15)
+    Multip_DA_res = multiple_res,
+    x_index_list = c("EffectSize", "logFC", "mean.LFC", "abund.LFC.CompvarBB.est"),
+    x_index_cutoff = 1,
+    y_index = "AdjustedPvalue",
+    y_index_cutoff = 0.5,
+    cellwidth = 50, 
+    cellheight = 15, 
+    fontsize_number = 15)
 ```
 
 

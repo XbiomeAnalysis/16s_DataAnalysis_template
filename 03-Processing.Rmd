@@ -18,7 +18,8 @@ This part has too may procedures and we only choose some of them. Please go to *
 From previous results of quality evaluation, the sequence depth of samples are different which have effects on the downstream analysis. Here, choosing the **rarefy** (Normaliztion method: random subsampling counts to the smallest library size) to get the equal sample sums.
 
 ```{r, warning=FALSE, message=FALSE}
-dada2_ps_rare <- norm_rarefy(dada2_ps_remove_BRS, size = 51181)
+dada2_ps_rare <- norm_rarefy(object = dada2_ps_remove_BRS, 
+                             size = 51181)
 dada2_ps_rare
 ```
 
@@ -26,7 +27,8 @@ In addition, we could also perform some other normalization methods on the raref
 
 ## Extracting specific taxonomic level
 ```{r, warning=FALSE, message=FALSE}
-dada2_ps_rare_genus <- summarize_taxa(dada2_ps_rare, taxa_level = "Genus")
+dada2_ps_rare_genus <- summarize_taxa(ps = dada2_ps_rare, 
+                                      taxa_level = "Genus")
 dada2_ps_rare_genus
 ```
 

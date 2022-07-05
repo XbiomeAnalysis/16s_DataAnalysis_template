@@ -57,7 +57,7 @@ tree <- phyloseq::read_tree(
 
 We use `import_dada2_taxa` to convert dada2_res$tax_tab into our own taxa table
 ```{r, warning=FALSE, message=FALSE}
-tax_tab <- import_dada2_taxa(dada2_res$tax_tab)
+tax_tab <- import_dada2_taxa(dada2_taxa = dada2_res$tax_tab)
 
 head(tax_tab, 1)
 ```
@@ -85,10 +85,11 @@ head(sam_tab)
 
 ### phyloseq object
 ```{r, warning=FALSE, message=FALSE}
-dada2_ps <- get_dada2_phyloseq(seq_tab = otu_tab, 
-                   tax_tab = tax_tab, 
-                   sam_tab = sam_tab, 
-                   phy_tree = tree)
+dada2_ps <- get_dada2_phyloseq(
+                seq_tab = otu_tab, 
+                tax_tab = tax_tab, 
+                sam_tab = sam_tab, 
+                phy_tree = tree)
 dada2_ps
 ```
 
@@ -115,7 +116,7 @@ dada2_ps@sam_data %>% data.frame() %>% head()
 
 ##  Summarize phyloseq-class object
 ```{r, warning=FALSE, collapse=TRUE}
-summarize_phyloseq(dada2_ps)
+summarize_phyloseq(ps = dada2_ps)
 ```
 
 The minus account of the OTU counts is *51181* in the phyloseq object, and we can use it as the threshold to rarefy. 
