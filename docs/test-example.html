@@ -24,7 +24,7 @@
 <meta name="author" content="Hua Zou" />
 
 
-<meta name="date" content="2022-07-05" />
+<meta name="date" content="2022-07-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -318,8 +318,8 @@ div.csl-indent {
 <h2><span class="header-section-number">9.4</span> Step1: Reads’ Track<a href="test-example.html#step1-reads-track" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="test-example.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_Dada2Track</span>(<span class="at">data =</span> dada2_res<span class="sc">$</span>reads_track) <span class="sc">+</span></span>
 <span id="cb91-2"><a href="test-example.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-57"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-57-1.png" alt="DADA2' read track (Example)" width="768" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-61"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-61-1.png" alt="DADA2' read track (Example)" width="768" />
 <p class="caption">
 Figure 9.1: DADA2’ read track (Example)
 </p>
@@ -367,20 +367,20 @@ Figure 9.1: DADA2’ read track (Example)
 <span id="cb95-2"><a href="test-example.html#cb95-2" aria-hidden="true" tabindex="-1"></a>dada2_ps_genus <span class="ot">&lt;-</span> <span class="fu">summarize_taxa</span>(<span class="at">ps =</span> dada2_ps, </span>
 <span id="cb95-3"><a href="test-example.html#cb95-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">taxa_level =</span> <span class="st">&quot;Genus&quot;</span>)</span>
 <span id="cb95-4"><a href="test-example.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(dada2_ps_genus<span class="sc">@</span>sam_data <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>())</span></code></pre></div>
-<pre><code>##             SampleTubeID   Group Date_Sequencing ProductID SampleType ProductBatch Date_Sampling Date_Receiving SeqID_MGS
-## S_7929      GGM50-210730   Stool      2021-08-03       M50       粪便 CYM50-210735    2021.07.30     2021-08-06      7769
-## S_7930 CYM50-210735-0727 Product      2021-08-03       M50   肠菌胶囊 CYM50-210735    2021.07.27     2021-08-06      7770
-## S_7931 CYM50-210735-0728 Product      2021-08-03       M50   肠菌胶囊 CYM50-210735    2021.07.28     2021-08-06      7771
-## S_7932 CYM50-210735-0729 Product      2021-08-03       M50   肠菌胶囊 CYM50-210735    2021.07.29     2021-08-06      7772
-## S_7933 CYM50-210735-0730 Product      2021-08-03       M50   肠菌胶囊 CYM50-210735    2021.07.30     2021-08-06      7773
-## S_7327         Community      QC            &lt;NA&gt;       Ref         QC         &lt;NA&gt;          &lt;NA&gt;           &lt;NA&gt;      7222
-##        SeqID_16s                                             Pipeline_MGS
-## S_7929      7929 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
-## S_7930      7930 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
-## S_7931      7931 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
-## S_7932      7932 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
-## S_7933      7933 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
-## S_7327      7327 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
+<pre><code>##             SampleTubeID   Group Date_Sequencing ProductID SampleType ProductBatch Date_Sampling Date_Receiving
+## S_7929      GGM50-210730   Stool      2021-08-03       M50       粪便 CYM50-210735    2021.07.30     2021-08-06
+## S_7930 CYM50-210735-0727 Product      2021-08-03       M50   肠菌胶囊 CYM50-210735    2021.07.27     2021-08-06
+## S_7931 CYM50-210735-0728 Product      2021-08-03       M50   肠菌胶囊 CYM50-210735    2021.07.28     2021-08-06
+## S_7932 CYM50-210735-0729 Product      2021-08-03       M50   肠菌胶囊 CYM50-210735    2021.07.29     2021-08-06
+## S_7933 CYM50-210735-0730 Product      2021-08-03       M50   肠菌胶囊 CYM50-210735    2021.07.30     2021-08-06
+## S_7327         Community      QC            &lt;NA&gt;       Ref         QC         &lt;NA&gt;          &lt;NA&gt;           &lt;NA&gt;
+##        SeqID_MGS SeqID_16s                                             Pipeline_MGS
+## S_7929      7769      7929 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
+## S_7930      7770      7930 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
+## S_7931      7771      7931 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
+## S_7932      7772      7932 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
+## S_7933      7773      7933 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
+## S_7327      7222      7327 /share/work/HPC/work_tmp/PipelineJob_180_20210923/output
 ##                                                                Pipeline_16s
 ## S_7929 /share/projects/Engineering/pipeline_output/PipelineJob_304_20211203
 ## S_7930 /share/projects/Engineering/pipeline_output/PipelineJob_304_20211203
@@ -430,10 +430,10 @@ Figure 9.1: DADA2’ read track (Example)
 ## Enterococcus         14.51444842 14.66472707 11.04239952 11.66901114 13.16748 12.073609 12.887711 12.849247  7.258671
 ## Impurity_level        0.08562792  0.06531291  0.05987576  0.06228054  0.00000  0.000000  0.000000  0.000000 68.360000
 ##                          mean                                              Evaluation
-## Lactobacillus         5.48828 S_7327 didn&#39;t pass the threshold (2022-07-05 14:20:06).
-## Escherichia_Shigella 12.87508 S_7327 didn&#39;t pass the threshold (2022-07-05 14:20:06).
-## Enterococcus         12.23637 S_7327 didn&#39;t pass the threshold (2022-07-05 14:20:06).
-## Impurity_level        7.62590 S_7327 didn&#39;t pass the threshold (2022-07-05 14:20:06).</code></pre>
+## Lactobacillus         5.48828 S_7327 didn&#39;t pass the threshold (2022-07-19 17:52:18).
+## Escherichia_Shigella 12.87508 S_7327 didn&#39;t pass the threshold (2022-07-19 17:52:18).
+## Enterococcus         12.23637 S_7327 didn&#39;t pass the threshold (2022-07-19 17:52:18).
+## Impurity_level        7.62590 S_7327 didn&#39;t pass the threshold (2022-07-19 17:52:18).</code></pre>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="test-example.html#cb99-1" aria-hidden="true" tabindex="-1"></a>dada2_ps_remove_BRS <span class="ot">&lt;-</span> <span class="fu">get_GroupPhyloseq</span>(</span>
 <span id="cb99-2"><a href="test-example.html#cb99-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">ps =</span> dada2_ps,</span>
 <span id="cb99-3"><a href="test-example.html#cb99-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
@@ -605,8 +605,8 @@ Figure 9.1: DADA2’ read track (Example)
 ## rarefying sample S_7931
 ## rarefying sample S_7932
 ## rarefying sample S_7933</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-62"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-62-1.png" alt="Rarefaction curves (Example)" width="768" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-66"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-66-1.png" alt="Rarefaction curves (Example)" width="768" />
 <p class="caption">
 Figure 9.2: Rarefaction curves (Example)
 </p>
@@ -707,8 +707,8 @@ Figure 9.2: Rarefaction curves (Example)
 <span id="cb114-8"><a href="test-example.html#cb114-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
 <span id="cb114-9"><a href="test-example.html#cb114-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;Stool&quot;</span>, <span class="st">&quot;Product&quot;</span>),</span>
 <span id="cb114-10"><a href="test-example.html#cb114-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-65-1"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-65-1.png" alt="diversity and ordination and composition(Example)" width="768" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-69-1"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-69-1.png" alt="diversity and ordination and composition(Example)" width="1152" />
 <p class="caption">
 Figure 9.3: diversity and ordination and composition(Example)
 </p>
@@ -717,8 +717,8 @@ Figure 9.3: diversity and ordination and composition(Example)
 <span id="cb115-2"><a href="test-example.html#cb115-2" aria-hidden="true" tabindex="-1"></a>dada2_ps_beta <span class="ot">&lt;-</span> <span class="fu">run_beta_diversity</span>(<span class="at">ps =</span> dada2_ps_rare_genus, </span>
 <span id="cb115-3"><a href="test-example.html#cb115-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">method =</span> <span class="st">&quot;bray&quot;</span>)</span>
 <span id="cb115-4"><a href="test-example.html#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_distance_corrplot</span>(<span class="at">datMatrix =</span> dada2_ps_beta<span class="sc">$</span>BetaDistance)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-65-2"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-65-2.png" alt="diversity and ordination and composition(Example)" width="768" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-69-2"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-69-2.png" alt="diversity and ordination and composition(Example)" width="1152" />
 <p class="caption">
 Figure 9.4: diversity and ordination and composition(Example)
 </p>
@@ -761,8 +761,8 @@ Figure 9.4: diversity and ordination and composition(Example)
 <span id="cb120-8"><a href="test-example.html#cb120-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>, </span>
 <span id="cb120-9"><a href="test-example.html#cb120-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;Stool&quot;</span>, <span class="st">&quot;Product&quot;</span>),</span>
 <span id="cb120-10"><a href="test-example.html#cb120-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-65-3"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-65-3.png" alt="diversity and ordination and composition(Example)" width="768" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-69-3"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-69-3.png" alt="diversity and ordination and composition(Example)" width="1152" />
 <p class="caption">
 Figure 9.5: diversity and ordination and composition(Example)
 </p>
@@ -772,8 +772,8 @@ Figure 9.5: diversity and ordination and composition(Example)
 <span id="cb121-3"><a href="test-example.html#cb121-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">phyloseq =</span> dada2_ps_rare_genus,</span>
 <span id="cb121-4"><a href="test-example.html#cb121-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">level =</span> <span class="st">&quot;Phylum&quot;</span>,</span>
 <span id="cb121-5"><a href="test-example.html#cb121-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">feature =</span> <span class="st">&quot;Group&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-65-4"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-65-4.png" alt="diversity and ordination and composition(Example)" width="768" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-69-4"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-69-4.png" alt="diversity and ordination and composition(Example)" width="1152" />
 <p class="caption">
 Figure 9.6: diversity and ordination and composition(Example)
 </p>
@@ -801,7 +801,7 @@ Figure 9.6: diversity and ordination and composition(Example)
 <span id="cb124-4"><a href="test-example.html#cb124-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
 <span id="cb124-5"><a href="test-example.html#cb124-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;Stool&quot;</span>, <span class="st">&quot;Product&quot;</span>),</span>
 <span id="cb124-6"><a href="test-example.html#cb124-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">norm =</span> <span class="st">&quot;CPM&quot;</span>,</span>
-<span id="cb124-7"><a href="test-example.html#cb124-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Lda =</span> <span class="dv">0</span>)</span>
+<span id="cb124-7"><a href="test-example.html#cb124-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Lda =</span> <span class="dv">2</span>)</span>
 <span id="cb124-8"><a href="test-example.html#cb124-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb124-9"><a href="test-example.html#cb124-9" aria-hidden="true" tabindex="-1"></a><span class="co"># # don&#39;t run this code when you do lefse in reality</span></span>
 <span id="cb124-10"><a href="test-example.html#cb124-10" aria-hidden="true" tabindex="-1"></a><span class="co"># dada2_ps_lefse$LDA_Score &lt;- dada2_ps_lefse$LDA_Score * 1000</span></span>
@@ -809,10 +809,10 @@ Figure 9.6: diversity and ordination and composition(Example)
 <span id="cb124-12"><a href="test-example.html#cb124-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_lefse</span>(</span>
 <span id="cb124-13"><a href="test-example.html#cb124-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">da_res =</span> dada2_ps_lefse,</span>
 <span id="cb124-14"><a href="test-example.html#cb124-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index =</span> <span class="st">&quot;LDA_Score&quot;</span>,</span>
-<span id="cb124-15"><a href="test-example.html#cb124-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index_cutoff =</span> <span class="dv">1</span>,</span>
+<span id="cb124-15"><a href="test-example.html#cb124-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index_cutoff =</span> <span class="dv">2</span>,</span>
 <span id="cb124-16"><a href="test-example.html#cb124-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-66-1"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-66-1.png" alt="Differential Analysis (Example)" width="768" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-70-1"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-70-1.png" alt="Differential Analysis (Example)" width="768" />
 <p class="caption">
 Figure 9.7: Differential Analysis (Example)
 </p>
@@ -830,8 +830,8 @@ Figure 9.7: Differential Analysis (Example)
 <span id="cb125-11"><a href="test-example.html#cb125-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index_cutoff =</span> <span class="fl">0.05</span>,</span>
 <span id="cb125-12"><a href="test-example.html#cb125-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;grey&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
 <span id="cb125-13"><a href="test-example.html#cb125-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">topN =</span> <span class="dv">5</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-66-2"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-66-2.png" alt="Differential Analysis (Example)" width="768" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-70-2"></span>
+<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-70-2.png" alt="Differential Analysis (Example)" width="768" />
 <p class="caption">
 Figure 9.8: Differential Analysis (Example)
 </p>
@@ -844,7 +844,7 @@ Figure 9.8: Differential Analysis (Example)
 <div id="systematic-information-7" class="section level2 hasAnchor" number="9.12">
 <h2><span class="header-section-number">9.12</span> Systematic Information<a href="test-example.html#systematic-information-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="test-example.html#cb127-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div>
-<pre><code>## ─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+<pre><code>## ─ Session info ────────────────────────────────────────────────────────────────────────────────────────────────────────
 ##  setting  value
 ##  version  R version 4.1.2 (2021-11-01)
 ##  os       macOS Monterey 12.2.1
@@ -854,11 +854,11 @@ Figure 9.8: Differential Analysis (Example)
 ##  collate  en_US.UTF-8
 ##  ctype    en_US.UTF-8
 ##  tz       Asia/Shanghai
-##  date     2022-07-05
+##  date     2022-07-19
 ##  rstudio  2022.02.0+443 Prairie Trillium (desktop)
 ##  pandoc   2.17.1.1 @ /Applications/RStudio.app/Contents/MacOS/quarto/bin/ (via rmarkdown)
 ## 
-## ─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## ─ Packages ────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ##  package              * version  date (UTC) lib source
 ##  abind                  1.4-5    2016-07-21 [1] CRAN (R 4.1.0)
 ##  ade4                   1.7-18   2021-09-16 [1] CRAN (R 4.1.0)
@@ -896,6 +896,7 @@ Figure 9.8: Differential Analysis (Example)
 ##  coin                   1.4-2    2021-10-08 [1] CRAN (R 4.1.0)
 ##  colorspace             2.0-3    2022-02-21 [1] CRAN (R 4.1.2)
 ##  compositions           2.0-4    2022-01-05 [1] CRAN (R 4.1.2)
+##  conflicted             1.1.0    2021-11-26 [1] CRAN (R 4.1.0)
 ##  corrplot               0.92     2021-11-18 [1] CRAN (R 4.1.0)
 ##  cowplot                1.1.1    2020-12-30 [1] CRAN (R 4.1.0)
 ##  crayon                 1.5.0    2022-02-14 [1] CRAN (R 4.1.2)
@@ -950,6 +951,7 @@ Figure 9.8: Differential Analysis (Example)
 ##  jpeg                   0.1-9    2021-07-24 [1] CRAN (R 4.1.0)
 ##  jquerylib              0.1.4    2021-04-26 [1] CRAN (R 4.1.0)
 ##  jsonlite               1.8.0    2022-02-22 [1] CRAN (R 4.1.2)
+##  kableExtra             1.3.4    2021-02-20 [1] CRAN (R 4.1.2)
 ##  KEGGREST               1.34.0   2021-10-26 [1] Bioconductor
 ##  KernSmooth             2.23-20  2021-05-03 [1] CRAN (R 4.1.2)
 ##  knitr                  1.37     2021-12-16 [1] CRAN (R 4.1.0)
@@ -1012,6 +1014,7 @@ Figure 9.8: Differential Analysis (Example)
 ##  RSQLite                2.2.10   2022-02-17 [1] CRAN (R 4.1.2)
 ##  rstatix                0.7.0    2021-02-13 [1] CRAN (R 4.1.0)
 ##  rstudioapi             0.13     2020-11-12 [1] CRAN (R 4.1.0)
+##  rvest                  1.0.2    2021-10-16 [1] CRAN (R 4.1.0)
 ##  S4Vectors              0.32.3   2021-11-21 [1] Bioconductor
 ##  sandwich               3.0-1    2021-05-18 [1] CRAN (R 4.1.0)
 ##  sass                   0.4.0    2021-05-12 [1] CRAN (R 4.1.0)
@@ -1022,6 +1025,8 @@ Figure 9.8: Differential Analysis (Example)
 ##  stringr                1.4.0    2019-02-10 [1] CRAN (R 4.1.0)
 ##  SummarizedExperiment   1.24.0   2021-10-26 [1] Bioconductor
 ##  survival               3.3-1    2022-03-03 [1] CRAN (R 4.1.2)
+##  svglite                2.1.0    2022-02-03 [1] CRAN (R 4.1.2)
+##  systemfonts            1.0.4    2022-02-11 [1] CRAN (R 4.1.2)
 ##  tensorA                0.36.2   2020-11-19 [1] CRAN (R 4.1.0)
 ##  testthat               3.1.2    2022-01-20 [1] CRAN (R 4.1.2)
 ##  TH.data                1.1-0    2021-09-27 [1] CRAN (R 4.1.0)
@@ -1033,11 +1038,14 @@ Figure 9.8: Differential Analysis (Example)
 ##  utf8                   1.2.2    2021-07-24 [1] CRAN (R 4.1.0)
 ##  vctrs                  0.3.8    2021-04-29 [1] CRAN (R 4.1.0)
 ##  vegan                  2.5-7    2020-11-28 [1] CRAN (R 4.1.0)
+##  viridisLite            0.4.0    2021-04-13 [1] CRAN (R 4.1.0)
+##  webshot                0.5.3    2022-04-14 [1] CRAN (R 4.1.2)
 ##  withr                  2.5.0    2022-03-03 [1] CRAN (R 4.1.2)
 ##  Wrench                 1.12.0   2021-10-26 [1] Bioconductor
 ##  xfun                   0.30     2022-03-02 [1] CRAN (R 4.1.2)
-##  XMAS2                * 2.1.5    2022-07-05 [1] local
+##  XMAS2                * 2.1.6    2022-07-19 [1] local
 ##  XML                    3.99-0.9 2022-02-24 [1] CRAN (R 4.1.2)
+##  xml2                   1.3.3    2021-11-30 [1] CRAN (R 4.1.0)
 ##  xtable                 1.8-4    2019-04-21 [1] CRAN (R 4.1.0)
 ##  XVector                0.34.0   2021-10-26 [1] Bioconductor
 ##  yaml                   2.3.5    2022-02-21 [1] CRAN (R 4.1.2)
@@ -1047,7 +1055,7 @@ Figure 9.8: Differential Analysis (Example)
 ## 
 ##  [1] /Library/Frameworks/R.framework/Versions/4.1/Resources/library
 ## 
-## ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</code></pre>
+## ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</code></pre>
 
 </div>
 </div>
