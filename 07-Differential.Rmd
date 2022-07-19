@@ -96,7 +96,7 @@ plot_volcano(
 
 Display the significant taxa with selection using boxplot.
 
-```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=5, fig.cap="Dominant Taxa"}
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=12, fig.height=5, fig.cap="Dominant Taxa"}
 plot_topN_boxplot(
     ps = dada2_ps_rare_genus_filter_trim,
     da_res = dada2_ps_wilcox,
@@ -125,7 +125,7 @@ names(multiple_res)
 
 
 * plot  results
-```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=13, fig.cap="Multiple DA results"}
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=8, fig.cap="Multiple DA results"}
 plot_multiple_DA(
     Multip_DA_res = multiple_res,
     x_index_list = c("EffectSize", "logFC", "mean.LFC", "abund.LFC.CompvarBB.est"),

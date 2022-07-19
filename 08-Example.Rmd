@@ -186,7 +186,7 @@ saveRDS(dada2_ps_rare_phylum, "DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare_
 
 
 ## Step7: GlobalView
-```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=8, fig.height=5, fig.cap="diversity and ordination and composition(Example)"}
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=12, fig.height=5, fig.cap="diversity and ordination and composition(Example)"}
 dada2_ps_rare_genus <- readRDS("DataSet/Step6/Donor_16s_phyloseq_remove_BRS_rare_genus.RDS")
 
 # alpha
@@ -251,7 +251,7 @@ dada2_ps_lefse <- run_lefse(
                       group = "Group",
                       group_names = c("Stool", "Product"),
                       norm = "CPM",
-                      Lda = 0)
+                      Lda = 2)
 
 # # don't run this code when you do lefse in reality
 # dada2_ps_lefse$LDA_Score <- dada2_ps_lefse$LDA_Score * 1000
@@ -259,7 +259,7 @@ dada2_ps_lefse <- run_lefse(
 plot_lefse(
     da_res = dada2_ps_lefse,
     x_index = "LDA_Score",
-    x_index_cutoff = 1,
+    x_index_cutoff = 2,
     group_color = c("green", "red"))
 
 
