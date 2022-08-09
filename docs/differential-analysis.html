@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Differential Analysis | 16s microbiota data analysis based on XMAS package</title>
-  <meta name="description" content="Chapter 8 Differential Analysis | 16s microbiota data analysis based on XMAS package" />
+  <title>Chapter 8 Differential Analysis | MGS microbiota data analysis based on XMAS package</title>
+  <meta name="description" content="Chapter 8 Differential Analysis | MGS microbiota data analysis based on XMAS package" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Differential Analysis | 16s microbiota data analysis based on XMAS package" />
+  <meta property="og:title" content="Chapter 8 Differential Analysis | MGS microbiota data analysis based on XMAS package" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Chapter 8 Differential Analysis | 16s microbiota data analysis based on XMAS package" />
+  <meta property="og:description" content="Chapter 8 Differential Analysis | MGS microbiota data analysis based on XMAS package" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Differential Analysis | 16s microbiota data analysis based on XMAS package" />
+  <meta name="twitter:title" content="Chapter 8 Differential Analysis | MGS microbiota data analysis based on XMAS package" />
   
-  <meta name="twitter:description" content="Chapter 8 Differential Analysis | 16s microbiota data analysis based on XMAS package" />
+  <meta name="twitter:description" content="Chapter 8 Differential Analysis | MGS microbiota data analysis based on XMAS package" />
   
 
 <meta name="author" content="Hua Zou" />
@@ -52,6 +52,14 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.21/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -155,7 +163,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">16s microbiota data analysis based on XMAS package</a></li>
+<li><a href="./">MGS microbiota data analysis based on XMAS package</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a>
@@ -165,31 +173,27 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html"><i class="fa fa-check"></i><b>2</b> Convert inputdata into phyloseq object</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#dada2"><i class="fa fa-check"></i><b>2.1</b> DADA2</a>
+<li class="chapter" data-level="2.1" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#metaphlan23"><i class="fa fa-check"></i><b>2.1</b> Metaphlan2/3</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#importing-results-from-dada2-pipeline"><i class="fa fa-check"></i><b>2.1.1</b> Importing results from dada2 pipeline</a></li>
+<li class="chapter" data-level="2.1.1" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#importing-results"><i class="fa fa-check"></i><b>2.1.1</b> Importing results</a></li>
 <li class="chapter" data-level="2.1.2" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#taxa-table"><i class="fa fa-check"></i><b>2.1.2</b> taxa table</a></li>
 <li class="chapter" data-level="2.1.3" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#otu-table"><i class="fa fa-check"></i><b>2.1.3</b> otu table</a></li>
 <li class="chapter" data-level="2.1.4" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#metadata-table"><i class="fa fa-check"></i><b>2.1.4</b> metadata table</a></li>
 <li class="chapter" data-level="2.1.5" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#phyloseq-object"><i class="fa fa-check"></i><b>2.1.5</b> phyloseq object</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#summarize-phyloseq-class-object"><i class="fa fa-check"></i><b>2.2</b> Summarize phyloseq-class object</a></li>
+<li class="chapter" data-level="2.2" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#transform-the-abundance-of-taxa-whose-relative-abundance-under-limit-of-detection-lod-into-zeros"><i class="fa fa-check"></i><b>2.2</b> Transform the abundance of taxa whose relative abundance under Limit Of Detection (LOD) into Zeros</a></li>
 <li class="chapter" data-level="2.3" data-path="convert-inputdata-into-phyloseq-object.html"><a href="convert-inputdata-into-phyloseq-object.html#systematic-information"><i class="fa fa-check"></i><b>2.3</b> Systematic Information</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i><b>3</b> Quality Control</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="quality-control.html"><a href="quality-control.html#reads-track-by-dada2"><i class="fa fa-check"></i><b>3.1</b> Reads’ track by DADA2</a></li>
-<li class="chapter" data-level="3.2" data-path="quality-control.html"><a href="quality-control.html#spike-in-sample-brs-assessment"><i class="fa fa-check"></i><b>3.2</b> Spike-in sample (BRS) assessment</a></li>
-<li class="chapter" data-level="3.3" data-path="quality-control.html"><a href="quality-control.html#spike-in-samples-brs-remove"><i class="fa fa-check"></i><b>3.3</b> Spike-in sample’s (BRS) remove</a></li>
-<li class="chapter" data-level="3.4" data-path="quality-control.html"><a href="quality-control.html#rarefaction-curves"><i class="fa fa-check"></i><b>3.4</b> Rarefaction curves</a></li>
-<li class="chapter" data-level="3.5" data-path="quality-control.html"><a href="quality-control.html#summarize-phyloseq-class-object-1"><i class="fa fa-check"></i><b>3.5</b> Summarize phyloseq-class object</a></li>
-<li class="chapter" data-level="3.6" data-path="quality-control.html"><a href="quality-control.html#systematic-information-1"><i class="fa fa-check"></i><b>3.6</b> Systematic Information</a></li>
+<li class="chapter" data-level="3.1" data-path="quality-control.html"><a href="quality-control.html#spike-in-sample-brs"><i class="fa fa-check"></i><b>3.1</b> spike-in sample (BRS)</a></li>
+<li class="chapter" data-level="3.2" data-path="quality-control.html"><a href="quality-control.html#spike-in-samples-brs-remove"><i class="fa fa-check"></i><b>3.2</b> Spike-in sample’s (BRS) remove</a></li>
+<li class="chapter" data-level="3.3" data-path="quality-control.html"><a href="quality-control.html#systematic-information-1"><i class="fa fa-check"></i><b>3.3</b> Systematic Information</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-processing.html"><a href="data-processing.html"><i class="fa fa-check"></i><b>4</b> Data processing</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="data-processing.html"><a href="data-processing.html#rarefy-otu-counts"><i class="fa fa-check"></i><b>4.1</b> Rarefy otu counts</a></li>
-<li class="chapter" data-level="4.2" data-path="data-processing.html"><a href="data-processing.html#extracting-specific-taxonomic-level"><i class="fa fa-check"></i><b>4.2</b> Extracting specific taxonomic level</a></li>
-<li class="chapter" data-level="4.3" data-path="data-processing.html"><a href="data-processing.html#systematic-information-2"><i class="fa fa-check"></i><b>4.3</b> Systematic Information</a></li>
+<li class="chapter" data-level="4.1" data-path="data-processing.html"><a href="data-processing.html#extracting-specific-taxonomic-level"><i class="fa fa-check"></i><b>4.1</b> Extracting specific taxonomic level</a></li>
+<li class="chapter" data-level="4.2" data-path="data-processing.html"><a href="data-processing.html#systematic-information-2"><i class="fa fa-check"></i><b>4.2</b> Systematic Information</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="diversity-analysis.html"><a href="diversity-analysis.html"><i class="fa fa-check"></i><b>5</b> Diversity analysis</a>
 <ul>
@@ -212,9 +216,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="differential-analysis.html"><a href="differential-analysis.html"><i class="fa fa-check"></i><b>8</b> Differential Analysis</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="differential-analysis.html"><a href="differential-analysis.html#filtering-and-trimming"><i class="fa fa-check"></i><b>8.1</b> Filtering and trimming</a>
+<li class="chapter" data-level="8.1" data-path="differential-analysis.html"><a href="differential-analysis.html#filtering-trimming"><i class="fa fa-check"></i><b>8.1</b> Filtering &amp; Trimming</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="differential-analysis.html"><a href="differential-analysis.html#filtering-the-low-relative-abundance-or-unclassified-taxa-by-the-threshold-total-counts-10"><i class="fa fa-check"></i><b>8.1.1</b> Filtering the low relative abundance or unclassified taxa by the threshold (total counts &lt; 10)</a></li>
+<li class="chapter" data-level="8.1.1" data-path="differential-analysis.html"><a href="differential-analysis.html#filtering-the-low-relative-abundance-or-unclassified-taxa-by-the-threshold-total-counts-1e-4"><i class="fa fa-check"></i><b>8.1.1</b> Filtering the low relative abundance or unclassified taxa by the threshold (total counts &lt; 1e-4)</a></li>
 <li class="chapter" data-level="8.1.2" data-path="differential-analysis.html"><a href="differential-analysis.html#trimming-the-taxa-with-low-occurrence-less-than-threshold"><i class="fa fa-check"></i><b>8.1.2</b> Trimming the taxa with low occurrence less than threshold</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="differential-analysis.html"><a href="differential-analysis.html#liner-discriminant-analysis-lda-effect-size-lefse"><i class="fa fa-check"></i><b>8.2</b> Liner discriminant analysis (LDA) effect size (LEfSe)</a></li>
@@ -232,33 +236,25 @@ div.csl-indent {
 <li class="chapter" data-level="9.2.2" data-path="network-analysis.html"><a href="network-analysis.html#analyzing-the-constructed-network"><i class="fa fa-check"></i><b>9.2.2</b> Analyzing the constructed network</a></li>
 <li class="chapter" data-level="9.2.3" data-path="network-analysis.html"><a href="network-analysis.html#visualizing-the-network"><i class="fa fa-check"></i><b>9.2.3</b> Visualizing the network</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="network-analysis.html"><a href="network-analysis.html#single-network-with-sparcc-correlation-as-association-measure"><i class="fa fa-check"></i><b>9.3</b> Single network with sparcc correlation as association measure</a>
+<li class="chapter" data-level="9.3" data-path="network-analysis.html"><a href="network-analysis.html#dissimilarity-based-networks"><i class="fa fa-check"></i><b>9.3</b> Dissimilarity-based Networks</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="network-analysis.html"><a href="network-analysis.html#building-network-model-1"><i class="fa fa-check"></i><b>9.3.1</b> Building network model</a></li>
+<li class="chapter" data-level="9.3.1" data-path="network-analysis.html"><a href="network-analysis.html#building-network-module"><i class="fa fa-check"></i><b>9.3.1</b> Building network module</a></li>
 <li class="chapter" data-level="9.3.2" data-path="network-analysis.html"><a href="network-analysis.html#analyzing-the-constructed-network-1"><i class="fa fa-check"></i><b>9.3.2</b> Analyzing the constructed network</a></li>
+<li class="chapter" data-level="9.3.3" data-path="network-analysis.html"><a href="network-analysis.html#visualizing-the-network-1"><i class="fa fa-check"></i><b>9.3.3</b> Visualizing the network</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="network-analysis.html"><a href="network-analysis.html#dissimilarity-based-networks"><i class="fa fa-check"></i><b>9.4</b> Dissimilarity-based Networks</a>
-<ul>
-<li class="chapter" data-level="9.4.1" data-path="network-analysis.html"><a href="network-analysis.html#building-network-module"><i class="fa fa-check"></i><b>9.4.1</b> Building network module</a></li>
-<li class="chapter" data-level="9.4.2" data-path="network-analysis.html"><a href="network-analysis.html#analyzing-the-constructed-network-2"><i class="fa fa-check"></i><b>9.4.2</b> Analyzing the constructed network</a></li>
-<li class="chapter" data-level="9.4.3" data-path="network-analysis.html"><a href="network-analysis.html#visualizing-the-network-2"><i class="fa fa-check"></i><b>9.4.3</b> Visualizing the network</a></li>
-</ul></li>
-<li class="chapter" data-level="9.5" data-path="network-analysis.html"><a href="network-analysis.html#systematic-information-7"><i class="fa fa-check"></i><b>9.5</b> Systematic Information</a></li>
+<li class="chapter" data-level="9.4" data-path="network-analysis.html"><a href="network-analysis.html#systematic-information-7"><i class="fa fa-check"></i><b>9.4</b> Systematic Information</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="test-example.html"><a href="test-example.html"><i class="fa fa-check"></i><b>10</b> Test Example</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="test-example.html"><a href="test-example.html#loading-packages"><i class="fa fa-check"></i><b>10.1</b> Loading packages</a></li>
 <li class="chapter" data-level="10.2" data-path="test-example.html"><a href="test-example.html#loading-data"><i class="fa fa-check"></i><b>10.2</b> Loading data</a></li>
-<li class="chapter" data-level="10.3" data-path="test-example.html"><a href="test-example.html#metaphlan2-result"><i class="fa fa-check"></i><b>10.3</b> Metaphlan2 result</a></li>
-<li class="chapter" data-level="10.4" data-path="test-example.html"><a href="test-example.html#step1-reads-track"><i class="fa fa-check"></i><b>10.4</b> Step1: Reads’ Track</a></li>
-<li class="chapter" data-level="10.5" data-path="test-example.html"><a href="test-example.html#step2-convert-inputs-into-phyloseq-data"><i class="fa fa-check"></i><b>10.5</b> Step2: Convert inputs into phyloseq data</a></li>
-<li class="chapter" data-level="10.6" data-path="test-example.html"><a href="test-example.html#step3-brs-checking"><i class="fa fa-check"></i><b>10.6</b> Step3: BRS checking</a></li>
-<li class="chapter" data-level="10.7" data-path="test-example.html"><a href="test-example.html#step4-rarefaction-curves"><i class="fa fa-check"></i><b>10.7</b> Step4: Rarefaction curves</a></li>
-<li class="chapter" data-level="10.8" data-path="test-example.html"><a href="test-example.html#step5-rarefy-otu-counts"><i class="fa fa-check"></i><b>10.8</b> Step5: Rarefy otu counts</a></li>
-<li class="chapter" data-level="10.9" data-path="test-example.html"><a href="test-example.html#step6-extracting-specific-taxonomic-level"><i class="fa fa-check"></i><b>10.9</b> Step6: Extracting specific taxonomic level</a></li>
-<li class="chapter" data-level="10.10" data-path="test-example.html"><a href="test-example.html#step7-globalview"><i class="fa fa-check"></i><b>10.10</b> Step7: GlobalView</a></li>
-<li class="chapter" data-level="10.11" data-path="test-example.html"><a href="test-example.html#step8-differential-analysis"><i class="fa fa-check"></i><b>10.11</b> Step8: Differential Analysis</a></li>
-<li class="chapter" data-level="10.12" data-path="test-example.html"><a href="test-example.html#systematic-information-8"><i class="fa fa-check"></i><b>10.12</b> Systematic Information</a></li>
+<li class="chapter" data-level="10.3" data-path="test-example.html"><a href="test-example.html#step1-convert-inputs-into-phyloseq-data"><i class="fa fa-check"></i><b>10.3</b> Step1: Convert inputs into phyloseq data</a></li>
+<li class="chapter" data-level="10.4" data-path="test-example.html"><a href="test-example.html#step2-transform-limit-of-detection-lod-into-zeros"><i class="fa fa-check"></i><b>10.4</b> Step2: Transform limit of detection (LOD) into Zeros</a></li>
+<li class="chapter" data-level="10.5" data-path="test-example.html"><a href="test-example.html#step3-brs-checking"><i class="fa fa-check"></i><b>10.5</b> Step3: BRS checking</a></li>
+<li class="chapter" data-level="10.6" data-path="test-example.html"><a href="test-example.html#step4-extracting-specific-taxonomic-level"><i class="fa fa-check"></i><b>10.6</b> Step4: Extracting specific taxonomic level</a></li>
+<li class="chapter" data-level="10.7" data-path="test-example.html"><a href="test-example.html#step5-globalview"><i class="fa fa-check"></i><b>10.7</b> Step5: GlobalView</a></li>
+<li class="chapter" data-level="10.8" data-path="test-example.html"><a href="test-example.html#step6-differential-analysis"><i class="fa fa-check"></i><b>10.8</b> Step6: Differential Analysis</a></li>
+<li class="chapter" data-level="10.9" data-path="test-example.html"><a href="test-example.html#systematic-information-8"><i class="fa fa-check"></i><b>10.9</b> Systematic Information</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -273,7 +269,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">16s microbiota data analysis based on XMAS package</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MGS microbiota data analysis based on XMAS package</a>
           </h1>
         </div>
 
@@ -284,38 +280,62 @@ div.csl-indent {
 <div id="differential-analysis" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">Chapter 8</span> Differential Analysis<a href="differential-analysis.html#differential-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>Loading packages</strong></p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="differential-analysis.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(XMAS2)</span>
-<span id="cb68-2"><a href="differential-analysis.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb68-3"><a href="differential-analysis.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
-<span id="cb68-4"><a href="differential-analysis.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
-<span id="cb68-5"><a href="differential-analysis.html#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb68-6"><a href="differential-analysis.html#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span></code></pre></div>
-<p>There are more than 10 approaches to perform differential analysis. Here, we choose two of them and recommend users going to <strong><a href="https://xbiomeanalysis.github.io/XMAS_tutorial/differential-analysis.html">XMAS2: Chapter 11</a></strong> to see more details.</p>
-<div id="filtering-and-trimming" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> Filtering and trimming<a href="differential-analysis.html#filtering-and-trimming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We suggest that filtering taxa with low abundance (the summarized value under cutoff: <code>10</code>) and trimming taxa with low prevalence (default: <code>0.1</code>).</p>
-<div id="filtering-the-low-relative-abundance-or-unclassified-taxa-by-the-threshold-total-counts-10" class="section level3 hasAnchor" number="8.1.1">
-<h3><span class="header-section-number">8.1.1</span> Filtering the low relative abundance or unclassified taxa by the threshold (total counts &lt; 10)<a href="differential-analysis.html#filtering-the-low-relative-abundance-or-unclassified-taxa-by-the-threshold-total-counts-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="differential-analysis.html#cb69-1" aria-hidden="true" tabindex="-1"></a>dada2_ps_rare_genus_filter <span class="ot">&lt;-</span> <span class="fu">run_filter</span>(<span class="at">ps =</span> dada2_ps_rare_genus, </span>
-<span id="cb69-2"><a href="differential-analysis.html#cb69-2" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">cutoff =</span> <span class="dv">10</span>, </span>
-<span id="cb69-3"><a href="differential-analysis.html#cb69-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">unclass =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb69-4"><a href="differential-analysis.html#cb69-4" aria-hidden="true" tabindex="-1"></a>dada2_ps_rare_genus_filter </span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="differential-analysis.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(XMAS2)</span>
+<span id="cb59-2"><a href="differential-analysis.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb59-3"><a href="differential-analysis.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb59-4"><a href="differential-analysis.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
+<span id="cb59-5"><a href="differential-analysis.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb59-6"><a href="differential-analysis.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span></code></pre></div>
+<p>There are more than 10 approaches to perform differential analysis. Here, we choose two of them and recommend users going to <strong>Chapter 10</strong> to see more details.</p>
+<div id="filtering-trimming" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Filtering &amp; Trimming<a href="differential-analysis.html#filtering-trimming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We suggest that filtering taxa with low abundance (the summarized value under cutoff: <code>1e-4</code>) and trimming taxa with low prevalence (default: <code>0.1</code>).</p>
+<div id="filtering-the-low-relative-abundance-or-unclassified-taxa-by-the-threshold-total-counts-1e-4" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Filtering the low relative abundance or unclassified taxa by the threshold (total counts &lt; 1e-4)<a href="differential-analysis.html#filtering-the-low-relative-abundance-or-unclassified-taxa-by-the-threshold-total-counts-1e-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>filter by sum relative abundance</li>
+</ul>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="differential-analysis.html#cb60-1" aria-hidden="true" tabindex="-1"></a>metaphlan2_ps_species_filter <span class="ot">&lt;-</span> <span class="fu">run_filter</span>(<span class="at">ps =</span> metaphlan2_ps_LOD_species_remove_BRS, </span>
+<span id="cb60-2"><a href="differential-analysis.html#cb60-2" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">cutoff =</span> <span class="fl">1e-4</span>, </span>
+<span id="cb60-3"><a href="differential-analysis.html#cb60-3" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">unclass =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb60-4"><a href="differential-analysis.html#cb60-4" aria-hidden="true" tabindex="-1"></a>metaphlan2_ps_species_filter </span></code></pre></div>
 <pre><code>## phyloseq-class experiment-level object
-## otu_table()   OTU Table:         [ 149 taxa and 23 samples ]
-## sample_data() Sample Data:       [ 23 samples by 1 sample variables ]
-## tax_table()   Taxonomy Table:    [ 149 taxa by 6 taxonomic ranks ]</code></pre>
+## otu_table()   OTU Table:         [ 171 taxa and 22 samples ]
+## sample_data() Sample Data:       [ 22 samples by 2 sample variables ]
+## tax_table()   Taxonomy Table:    [ 171 taxa by 7 taxonomic ranks ]</code></pre>
+<ul>
+<li>filter by following two criterion <span class="citation">(<a href="#ref-thingholm2019obese" role="doc-biblioref">Thingholm et al. 2019</a>)</span></li>
+</ul>
+<blockquote>
+<p>Species from taxonomic profiles were retained for further analysis if their mean relative abundance exceeded 0.005
+(0.5%) across the dataset with a minimum abundance of 0.05 (5%) in at least one sample and non-zero abundance in at least
+60% of samples.</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li><p>Mean relative abundance: 0.005;</p></li>
+<li><p>Minimum relative abundance: 0.05;</p></li>
+</ol>
+<p>Here, we use 0.01 (the 1e-4 regarded as 0.01 compared to the Referece because Metaphlan2 data had been divided 100).</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="differential-analysis.html#cb62-1" aria-hidden="true" tabindex="-1"></a>metaphlan2_ps_species_filter2 <span class="ot">&lt;-</span> <span class="fu">run_filter2</span>(<span class="at">ps =</span> metaphlan2_ps_LOD_species_remove_BRS, </span>
+<span id="cb62-2"><a href="differential-analysis.html#cb62-2" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">cutoff_mean =</span> <span class="fl">1e-04</span>, </span>
+<span id="cb62-3"><a href="differential-analysis.html#cb62-3" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">cutoff_one =</span> <span class="fl">1e-03</span>, </span>
+<span id="cb62-4"><a href="differential-analysis.html#cb62-4" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">unclass =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb62-5"><a href="differential-analysis.html#cb62-5" aria-hidden="true" tabindex="-1"></a>metaphlan2_ps_species_filter2</span></code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 144 taxa and 22 samples ]
+## sample_data() Sample Data:       [ 22 samples by 2 sample variables ]
+## tax_table()   Taxonomy Table:    [ 144 taxa by 7 taxonomic ranks ]</code></pre>
 </div>
 <div id="trimming-the-taxa-with-low-occurrence-less-than-threshold" class="section level3 hasAnchor" number="8.1.2">
 <h3><span class="header-section-number">8.1.2</span> Trimming the taxa with low occurrence less than threshold<a href="differential-analysis.html#trimming-the-taxa-with-low-occurrence-less-than-threshold" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="differential-analysis.html#cb71-1" aria-hidden="true" tabindex="-1"></a>dada2_ps_rare_genus_filter_trim <span class="ot">&lt;-</span> <span class="fu">run_trim</span>(<span class="at">object =</span> dada2_ps_rare_genus_filter, </span>
-<span id="cb71-2"><a href="differential-analysis.html#cb71-2" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">cutoff =</span> <span class="fl">0.1</span>, </span>
-<span id="cb71-3"><a href="differential-analysis.html#cb71-3" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">trim =</span> <span class="st">&quot;feature&quot;</span>)</span>
-<span id="cb71-4"><a href="differential-analysis.html#cb71-4" aria-hidden="true" tabindex="-1"></a>dada2_ps_rare_genus_filter_trim</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="differential-analysis.html#cb64-1" aria-hidden="true" tabindex="-1"></a>metaphlan2_ps_species_filter_trim <span class="ot">&lt;-</span> <span class="fu">run_trim</span>(<span class="at">object =</span> metaphlan2_ps_species_filter, </span>
+<span id="cb64-2"><a href="differential-analysis.html#cb64-2" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">cutoff =</span> <span class="fl">0.1</span>, </span>
+<span id="cb64-3"><a href="differential-analysis.html#cb64-3" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">trim =</span> <span class="st">&quot;feature&quot;</span>)</span>
+<span id="cb64-4"><a href="differential-analysis.html#cb64-4" aria-hidden="true" tabindex="-1"></a>metaphlan2_ps_species_filter_trim</span></code></pre></div>
 <pre><code>## phyloseq-class experiment-level object
-## otu_table()   OTU Table:         [ 122 taxa and 23 samples ]
-## sample_data() Sample Data:       [ 23 samples by 1 sample variables ]
-## tax_table()   Taxonomy Table:    [ 122 taxa by 6 taxonomic ranks ]</code></pre>
-<p>Finally, we obtained the final phyloseq-class object <em>dada2_ps_rare_genus_filter_trim</em> and changed its name.</p>
+## otu_table()   OTU Table:         [ 149 taxa and 22 samples ]
+## sample_data() Sample Data:       [ 22 samples by 2 sample variables ]
+## tax_table()   Taxonomy Table:    [ 149 taxa by 7 taxonomic ranks ]</code></pre>
 </div>
 </div>
 <div id="liner-discriminant-analysis-lda-effect-size-lefse" class="section level2 hasAnchor" number="8.2">
@@ -323,56 +343,55 @@ div.csl-indent {
 <ul>
 <li>Calculation</li>
 </ul>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="differential-analysis.html#cb73-1" aria-hidden="true" tabindex="-1"></a>dada2_ps_lefse <span class="ot">&lt;-</span> <span class="fu">run_lefse</span>(</span>
-<span id="cb73-2"><a href="differential-analysis.html#cb73-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ps =</span> dada2_ps_rare_genus_filter_trim,</span>
-<span id="cb73-3"><a href="differential-analysis.html#cb73-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
-<span id="cb73-4"><a href="differential-analysis.html#cb73-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>),</span>
-<span id="cb73-5"><a href="differential-analysis.html#cb73-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">norm =</span> <span class="st">&quot;CPM&quot;</span>,</span>
-<span id="cb73-6"><a href="differential-analysis.html#cb73-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Lda =</span> <span class="dv">2</span>)</span>
-<span id="cb73-7"><a href="differential-analysis.html#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dada2_ps_lefse)</span></code></pre></div>
-<pre><code>##                           TaxaID         Block Enrichment LDA_Score EffectSize Log2FoldChange (Median)\nAA_vs_BB
-## 1              g__Parasutterella 9_AA vs 14_BB         AA -3.622720   2.337478                          4.400391
-## 2     g__Ruminococcaceae_UCG_004 9_AA vs 14_BB         AA -2.786635   2.323866                                NA
-## 3             g__Intestinibacter 9_AA vs 14_BB         BB  3.180391   2.707925                                NA
-## 4 g__Clostridium_sensu_stricto_1 9_AA vs 14_BB         BB  3.657070   2.999010                                NA
-## 5                  g__Romboutsia 9_AA vs 14_BB         BB  3.689270   3.101747                         -6.855390
-## 6               g__Lactobacillus 9_AA vs 14_BB         BB  4.080945   2.535860                         -3.319206
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="differential-analysis.html#cb66-1" aria-hidden="true" tabindex="-1"></a>metaphlan2_ps_lefse <span class="ot">&lt;-</span> <span class="fu">run_lefse</span>(</span>
+<span id="cb66-2"><a href="differential-analysis.html#cb66-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ps =</span> metaphlan2_ps_species_filter_trim,</span>
+<span id="cb66-3"><a href="differential-analysis.html#cb66-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
+<span id="cb66-4"><a href="differential-analysis.html#cb66-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>),</span>
+<span id="cb66-5"><a href="differential-analysis.html#cb66-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">norm =</span> <span class="st">&quot;CPM&quot;</span>,</span>
+<span id="cb66-6"><a href="differential-analysis.html#cb66-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Lda =</span> <span class="dv">2</span>)</span>
+<span id="cb66-7"><a href="differential-analysis.html#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metaphlan2_ps_lefse)</span></code></pre></div>
+<pre><code>##                                   TaxaID         Block Enrichment LDA_Score EffectSize Log2FoldChange (Median)\nAA_vs_BB
+## 1        s__Bacteroides_thetaiotaomicron 7_AA vs 15_BB         AA -4.408655   4.175519                          5.431276
+## 2               s__Megamonas_rupellensis 7_AA vs 15_BB         AA -2.817746   2.691235                                NA
+## 3                   s__Eggerthella_lenta 7_AA vs 15_BB         BB  2.892101   1.352461                                NA
+## 4         s__Adlercreutzia_equolifaciens 7_AA vs 15_BB         BB  2.895174   1.731109                                NA
+## 5 s__Lachnospiraceae_bacterium_8_1_57FAA 7_AA vs 15_BB         BB  2.922955   2.092586                                NA
+## 6                  s__Ruminococcus_obeum 7_AA vs 15_BB         BB  3.670856   2.984520                         -5.013357
 ##   Median Abundance\n(All) Median Abundance\nAA Median Abundance\nBB Log2FoldChange (Mean)\nAA_vs_BB Mean Abundance\n(All)
-## 1                152.0946           1075.68521             50.93725                        4.382363              3626.399
-## 2                222.5414           2450.05654              0.00000                        2.352990              1382.304
-## 3                380.1043              0.00000           1210.74287                       -2.077598              1782.122
-## 4                224.7329              0.00000            985.98421                       -4.839795              5556.933
-## 5               2186.0380             50.35627           5830.84783                       -3.320093              6940.723
-## 6               1281.2951            510.55140           5095.89137                       -5.210661             19394.730
+## 1                2857.052           46504.7952            1077.7570                        3.206709            23987.6919
+## 2                   0.000             693.6793               0.0000                        5.351556             1074.4770
+## 3                   0.000               0.0000             196.5372                       -3.050449              195.4140
+## 4                   0.000               0.0000               0.0000                              NA              902.8222
+## 5                   0.000               0.0000               0.0000                              NA              778.7779
+## 6                8029.311             354.0913           11436.3153                       -2.582014             9772.4021
 ##   Mean Abundance\nAA Mean Abundance\nBB Occurrence (100%)\n(All) Occurrence (100%)\nAA Occurrence (100%)\nBB
-## 1          8624.2116           413.5201                    65.22                 88.89                 50.00
-## 2          2708.0076           530.0652                    52.17                 77.78                 35.71
-## 3           601.9396          2540.8102                    60.87                 22.22                 85.71
-## 4           311.7956          8928.8074                    60.87                 22.22                 85.71
-## 5          1072.6678         10713.0444                    78.26                 55.56                 92.86
-## 6           845.7532         31319.0727                    86.96                 77.78                 92.86
-##         Odds Ratio (95% CI)
-## 1           0.0051 (-10;10)
-## 2           0.15 (-3.5;3.8)
-## 3             3.7 (6.3;1.1)
-## 4          6500 (6500;6500)
-## 5                63 (71;55)
-## 6 3.5e+08 (3.5e+08;3.5e+08)</code></pre>
+## 1          61188.062         6627.51904                    86.36                100.00                 80.00
+## 2           3208.536           78.58289                    27.27                 57.14                 13.33
+## 3             32.750          271.32387                    45.45                 14.29                 60.00
+## 4              0.000         1324.13920                    31.82                  0.00                 46.67
+## 5              0.000         1142.20756                    31.82                  0.00                 46.67
+## 6           2220.627        13296.56382                    90.91                 71.43                100.00
+##   Odds Ratio (95% CI)
+## 1    0.061 (-5.4;5.5)
+## 2      0.001 (-13;13)
+## 3         15 (20;9.7)
+## 4                &lt;NA&gt;
+## 5                &lt;NA&gt;
+## 6          19 (24;13)</code></pre>
 <ul>
 <li>Visualization</li>
 </ul>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="differential-analysis.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # don&#39;t run this code when you do lefse in reality</span></span>
-<span id="cb75-2"><a href="differential-analysis.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dada2_ps_lefse$LDA_Score &lt;- dada2_ps_lefse$LDA_Score * 1000</span></span>
-<span id="cb75-3"><a href="differential-analysis.html#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-4"><a href="differential-analysis.html#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_lefse</span>(</span>
-<span id="cb75-5"><a href="differential-analysis.html#cb75-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">da_res =</span> dada2_ps_lefse,</span>
-<span id="cb75-6"><a href="differential-analysis.html#cb75-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index =</span> <span class="st">&quot;LDA_Score&quot;</span>,</span>
-<span id="cb75-7"><a href="differential-analysis.html#cb75-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index_cutoff =</span> <span class="dv">2</span>,</span>
-<span id="cb75-8"><a href="differential-analysis.html#cb75-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-47"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-47-1.png" alt="Lefse analysis (16s example)" width="576" />
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="differential-analysis.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # don&#39;t run this code when you do lefse in reality</span></span>
+<span id="cb68-2"><a href="differential-analysis.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co"># metaphlan2_ps_lefse$LDA_Score &lt;- metaphlan2_ps_lefse$LDA_Score * 1000</span></span>
+<span id="cb68-3"><a href="differential-analysis.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_lefse</span>(</span>
+<span id="cb68-4"><a href="differential-analysis.html#cb68-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">da_res =</span> metaphlan2_ps_lefse,</span>
+<span id="cb68-5"><a href="differential-analysis.html#cb68-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index =</span> <span class="st">&quot;LDA_Score&quot;</span>,</span>
+<span id="cb68-6"><a href="differential-analysis.html#cb68-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index_cutoff =</span> <span class="dv">1</span>,</span>
+<span id="cb68-7"><a href="differential-analysis.html#cb68-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-63"></span>
+<img src="MGS-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-63-1.png" alt="Lefse analysis" width="768" />
 <p class="caption">
-Figure 8.1: Lefse analysis (16s example)
+Figure 8.1: Lefse analysis
 </p>
 </div>
 </div>
@@ -381,66 +400,74 @@ Figure 8.1: Lefse analysis (16s example)
 <ul>
 <li>Calculation</li>
 </ul>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="differential-analysis.html#cb76-1" aria-hidden="true" tabindex="-1"></a>dada2_ps_wilcox <span class="ot">&lt;-</span> <span class="fu">run_wilcox</span>(</span>
-<span id="cb76-2"><a href="differential-analysis.html#cb76-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ps =</span> dada2_ps_rare_genus_filter_trim,</span>
-<span id="cb76-3"><a href="differential-analysis.html#cb76-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
-<span id="cb76-4"><a href="differential-analysis.html#cb76-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>))</span>
-<span id="cb76-5"><a href="differential-analysis.html#cb76-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-6"><a href="differential-analysis.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dada2_ps_wilcox)</span></code></pre></div>
-<pre><code>##               TaxaID         Block Enrichment EffectSize Statistic    Pvalue AdjustedPvalue Log2FoldChange (Median)\nAA_vs_BB
-## 1 g__Acidaminococcus 9_AA vs 14_BB  Nonsignif   70.56349      63.5 1.0000000      1.0000000                                NA
-## 2     g__Actinomyces 9_AA vs 14_BB  Nonsignif   39.65079      44.5 0.2556616      0.7335420                        -0.9577718
-## 3   g__Adlercreutzia 9_AA vs 14_BB  Nonsignif   23.17460      44.0 0.1980169      0.7335420                                NA
-## 4    g__Agathobacter 9_AA vs 14_BB  Nonsignif 1222.58730      71.0 0.6293971      0.9141243                         0.1524904
-## 5     g__Akkermansia 9_AA vs 14_BB  Nonsignif  104.78571      64.5 0.9304707      0.9702344                                NA
-## 6       g__Alistipes 9_AA vs 14_BB  Nonsignif   23.03175      67.0 0.8239942      0.9308083                        -0.1085245
-##   Median Abundance\n(All) Median Abundance\nAA Median Abundance\nBB Log2FoldChange (Rank)\nAA_vs_BB Mean Rank Abundance\nAA
-## 1                       0                    0                  0.0                      0.01201252                   12.06
-## 2                      30                   26                 50.5                     -0.42227633                    9.94
-## 3                       0                    0                  9.0                     -0.43387758                    9.89
-## 4                     316                  329                296.0                      0.17342686                   12.89
-## 5                       0                    0                  0.0                      0.03358045                   12.17
-## 6                      64                   64                 69.0                      0.08724541                   12.44
-##   Mean Rank Abundance\nBB Occurrence (100%)\n(All) Occurrence (100%)\nAA Occurrence (100%)\nBB Odds Ratio (95% CI)
-## 1                   11.96                    21.74                 22.22                 21.43    0.67 (-0.11;1.5)
-## 2                   13.32                    82.61                 88.89                 78.57       4.1 (6.8;1.3)
-## 3                   13.36                    43.48                 33.33                 50.00        8.6 (13;4.3)
-## 4                   11.43                    65.22                 55.56                 71.43     0.39 (-1.4;2.2)
-## 5                   11.89                    21.74                 22.22                 21.43      1.5 (2.3;0.71)
-## 6                   11.71                    73.91                 77.78                 71.43     0.88 (0.64;1.1)</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="differential-analysis.html#cb69-1" aria-hidden="true" tabindex="-1"></a>metaphlan2_ps_wilcox <span class="ot">&lt;-</span> <span class="fu">run_wilcox</span>(</span>
+<span id="cb69-2"><a href="differential-analysis.html#cb69-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ps =</span> metaphlan2_ps_species_filter_trim,</span>
+<span id="cb69-3"><a href="differential-analysis.html#cb69-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
+<span id="cb69-4"><a href="differential-analysis.html#cb69-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>))</span>
+<span id="cb69-5"><a href="differential-analysis.html#cb69-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-6"><a href="differential-analysis.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metaphlan2_ps_wilcox)</span></code></pre></div>
+<pre><code>##                           TaxaID         Block Enrichment EffectSize Statistic     Pvalue AdjustedPvalue
+## 1  s__Acidaminococcus_fermentans 7_AA vs 15_BB  Nonsignif  0.1947240      49.0 0.75333110      0.9276557
+## 2   s__Acidaminococcus_intestini 7_AA vs 15_BB  Nonsignif  0.1532475      54.0 0.90599343      0.9925957
+## 3 s__Adlercreutzia_equolifaciens 7_AA vs 15_BB  Nonsignif  1.7460390      28.0 0.04076802      0.3973969
+## 4        s__Alistipes_finegoldii 7_AA vs 15_BB  Nonsignif  0.2905269      75.0 0.08188173      0.5131384
+## 5      s__Alistipes_indistinctus 7_AA vs 15_BB  Nonsignif  0.3410272      68.0 0.17792767      0.5131384
+## 6       s__Alistipes_onderdonkii 7_AA vs 15_BB  Nonsignif  0.2965909      66.5 0.29869756      0.5931886
+##   Log2FoldChange (Median)\nAA_vs_BB Median Abundance\n(All) Median Abundance\nAA Median Abundance\nBB
+## 1                                NA                       0            0.0000000                    0
+## 2                                NA                       0            0.0000000                    0
+## 3                                NA                       0            0.0000000                    0
+## 4                                NA                       0            0.0027362                    0
+## 5                                NA                       0            0.0000000                    0
+## 6                                NA                       0            0.0002823                    0
+##   Log2FoldChange (Rank)\nAA_vs_BB Mean Rank Abundance\nAA Mean Rank Abundance\nBB Occurrence (100%)\n(All)
+## 1                     -0.09269949                   11.00                   11.73                    18.18
+## 2                      0.03870725                   11.71                   11.40                    13.64
+## 3                     -0.71479501                    8.00                   13.13                    31.82
+## 4                      0.55679725                   14.71                   10.00                    40.91
+## 5                      0.38896713                   13.71                   10.47                    27.27
+## 6                      0.35298403                   13.50                   10.57                    45.45
+##   Occurrence (100%)\nAA Occurrence (100%)\nBB Odds Ratio (95% CI)
+## 1                 14.29                 20.00      1.5 (2.4;0.69)
+## 2                 14.29                 13.33    0.62 (-0.32;1.6)
+## 3                  0.00                 46.67                &lt;NA&gt;
+## 4                 57.14                 33.33     0.0025 (-12;12)
+## 5                 42.86                 20.00   0.0085 (-9.3;9.4)
+## 6                 57.14                 40.00     0.37 (-1.6;2.3)</code></pre>
 <ul>
 <li>Volcano</li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="differential-analysis.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_volcano</span>(</span>
-<span id="cb78-2"><a href="differential-analysis.html#cb78-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">da_res =</span> dada2_ps_wilcox,</span>
-<span id="cb78-3"><a href="differential-analysis.html#cb78-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>),</span>
-<span id="cb78-4"><a href="differential-analysis.html#cb78-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index =</span> <span class="st">&quot;Log2FoldChange (Rank)</span><span class="sc">\n</span><span class="st">AA_vs_BB&quot;</span>,</span>
-<span id="cb78-5"><a href="differential-analysis.html#cb78-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index_cutoff =</span> <span class="fl">0.5</span>,</span>
-<span id="cb78-6"><a href="differential-analysis.html#cb78-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index =</span> <span class="st">&quot;Pvalue&quot;</span>,</span>
-<span id="cb78-7"><a href="differential-analysis.html#cb78-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index_cutoff =</span> <span class="fl">0.05</span>,</span>
-<span id="cb78-8"><a href="differential-analysis.html#cb78-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;grey&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
-<span id="cb78-9"><a href="differential-analysis.html#cb78-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">topN =</span> <span class="dv">5</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-49"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-49-1.png" alt="Wilcoxon Rank-Sum test (16s example)" width="768" />
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="differential-analysis.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_volcano</span>(</span>
+<span id="cb71-2"><a href="differential-analysis.html#cb71-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">da_res =</span> metaphlan2_ps_wilcox,</span>
+<span id="cb71-3"><a href="differential-analysis.html#cb71-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>),</span>
+<span id="cb71-4"><a href="differential-analysis.html#cb71-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index =</span> <span class="st">&quot;Log2FoldChange (Rank)</span><span class="sc">\n</span><span class="st">AA_vs_BB&quot;</span>,</span>
+<span id="cb71-5"><a href="differential-analysis.html#cb71-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index_cutoff =</span> <span class="fl">0.5</span>,</span>
+<span id="cb71-6"><a href="differential-analysis.html#cb71-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index =</span> <span class="st">&quot;Pvalue&quot;</span>,</span>
+<span id="cb71-7"><a href="differential-analysis.html#cb71-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index_cutoff =</span> <span class="fl">0.05</span>,</span>
+<span id="cb71-8"><a href="differential-analysis.html#cb71-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">group_color =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;grey&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
+<span id="cb71-9"><a href="differential-analysis.html#cb71-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">topN =</span> <span class="dv">4</span>,</span>
+<span id="cb71-10"><a href="differential-analysis.html#cb71-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">taxa_name =</span> <span class="st">&quot;s__Megamonas_rupellensis&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-65"></span>
+<img src="MGS-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-65-1.png" alt="Wilcoxon Rank-Sum test" width="768" />
 <p class="caption">
-Figure 8.2: Wilcoxon Rank-Sum test (16s example)
+Figure 8.2: Wilcoxon Rank-Sum test
 </p>
 </div>
 </div>
 <div id="dominant-taxa" class="section level2 hasAnchor" number="8.4">
 <h2><span class="header-section-number">8.4</span> Dominant taxa<a href="differential-analysis.html#dominant-taxa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Display the significant taxa with selection using boxplot.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="differential-analysis.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_topN_boxplot</span>(</span>
-<span id="cb79-2"><a href="differential-analysis.html#cb79-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">ps =</span> dada2_ps_rare_genus_filter_trim,</span>
-<span id="cb79-3"><a href="differential-analysis.html#cb79-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">da_res =</span> dada2_ps_wilcox,</span>
-<span id="cb79-4"><a href="differential-analysis.html#cb79-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index =</span> <span class="st">&quot;Log2FoldChange (Rank)</span><span class="sc">\n</span><span class="st">AA_vs_BB&quot;</span>,</span>
-<span id="cb79-5"><a href="differential-analysis.html#cb79-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index_cutoff =</span> <span class="fl">0.5</span>,</span>
-<span id="cb79-6"><a href="differential-analysis.html#cb79-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index =</span> <span class="st">&quot;Pvalue&quot;</span>,</span>
-<span id="cb79-7"><a href="differential-analysis.html#cb79-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index_cutoff =</span> <span class="fl">0.05</span>,</span>
-<span id="cb79-8"><a href="differential-analysis.html#cb79-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">topN =</span> <span class="dv">5</span>,</span>
-<span id="cb79-9"><a href="differential-analysis.html#cb79-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-50"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-50-1.png" alt="Dominant Taxa" width="1152" />
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="differential-analysis.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_topN_boxplot</span>(</span>
+<span id="cb72-2"><a href="differential-analysis.html#cb72-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">ps =</span> metaphlan2_ps_species_filter_trim,</span>
+<span id="cb72-3"><a href="differential-analysis.html#cb72-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">da_res =</span> metaphlan2_ps_wilcox,</span>
+<span id="cb72-4"><a href="differential-analysis.html#cb72-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index =</span> <span class="st">&quot;Log2FoldChange (Rank)</span><span class="sc">\n</span><span class="st">AA_vs_BB&quot;</span>,</span>
+<span id="cb72-5"><a href="differential-analysis.html#cb72-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index_cutoff =</span> <span class="fl">0.5</span>,</span>
+<span id="cb72-6"><a href="differential-analysis.html#cb72-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index =</span> <span class="st">&quot;Pvalue&quot;</span>,</span>
+<span id="cb72-7"><a href="differential-analysis.html#cb72-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index_cutoff =</span> <span class="fl">0.05</span>,</span>
+<span id="cb72-8"><a href="differential-analysis.html#cb72-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">topN =</span> <span class="dv">4</span>,</span>
+<span id="cb72-9"><a href="differential-analysis.html#cb72-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-66"></span>
+<img src="MGS-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-66-1.png" alt="Dominant Taxa" width="1344" />
 <p class="caption">
 Figure 8.3: Dominant Taxa
 </p>
@@ -448,49 +475,31 @@ Figure 8.3: Dominant Taxa
 </div>
 <div id="multiple-differential-analysis-by-one-function" class="section level2 hasAnchor" number="8.5">
 <h2><span class="header-section-number">8.5</span> Multiple differential analysis by one function<a href="differential-analysis.html#multiple-differential-analysis-by-one-function" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>here, we provide the <code>run_multiple_da</code> for obtaining the results list from multiple differential analysis methods.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="differential-analysis.html#cb80-1" aria-hidden="true" tabindex="-1"></a>multiple_res <span class="ot">&lt;-</span> <span class="fu">run_multiple_da</span>(</span>
-<span id="cb80-2"><a href="differential-analysis.html#cb80-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ps =</span> dada2_ps_rare_genus_filter_trim,</span>
-<span id="cb80-3"><a href="differential-analysis.html#cb80-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
-<span id="cb80-4"><a href="differential-analysis.html#cb80-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>),</span>
-<span id="cb80-5"><a href="differential-analysis.html#cb80-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">da_method =</span> <span class="fu">c</span>(<span class="st">&quot;aldex&quot;</span>, <span class="st">&quot;limma_voom&quot;</span>, <span class="st">&quot;mbzinb&quot;</span>, <span class="st">&quot;omnibus&quot;</span>))</span></code></pre></div>
-<pre><code>## |------------(25%)----------(50%)----------(75%)----------|
-## Start GMPR normalization ...
-## Start Winsorization ...
-## Perform filtering ...
-## --A total of  102  taxa will be tested with a sample size of 23 !
-## --Omnibus test is selected!
-## --Dispersion is treated as a parameter of interest!
-## Start testing ...
-## 10 %
-## 20 %
-## 30 %
-## 40 %
-## 50 %
-## 60 %
-## 70 %
-## 80 %
-## 90 %
-## 100%!
-## Handle failed taxa using permutation test!
-## Permutation test ....
-## Completed!</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="differential-analysis.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(multiple_res)</span></code></pre></div>
-<pre><code>## [1] &quot;aldex&quot;      &quot;limma_voom&quot; &quot;mbzinb&quot;     &quot;omnibus&quot;</code></pre>
+<p>Here, we provide the <code>run_multiple_da</code> for obtaining the results list from multiple differential analysis methods.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="differential-analysis.html#cb73-1" aria-hidden="true" tabindex="-1"></a>multiple_res <span class="ot">&lt;-</span> <span class="fu">run_multiple_da</span>(</span>
+<span id="cb73-2"><a href="differential-analysis.html#cb73-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ps =</span> metaphlan2_ps_species_filter_trim,</span>
+<span id="cb73-3"><a href="differential-analysis.html#cb73-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">group =</span> <span class="st">&quot;Group&quot;</span>,</span>
+<span id="cb73-4"><a href="differential-analysis.html#cb73-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">group_names =</span> <span class="fu">c</span>(<span class="st">&quot;AA&quot;</span>, <span class="st">&quot;BB&quot;</span>),</span>
+<span id="cb73-5"><a href="differential-analysis.html#cb73-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">da_method =</span> <span class="fu">c</span>(<span class="st">&quot;wilcox&quot;</span>, <span class="st">&quot;limma_voom&quot;</span>, <span class="st">&quot;ttest&quot;</span>))</span>
+<span id="cb73-6"><a href="differential-analysis.html#cb73-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-7"><a href="differential-analysis.html#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(multiple_res)</span></code></pre></div>
+<pre><code>## [1] &quot;wilcox&quot;     &quot;limma_voom&quot; &quot;ttest&quot;</code></pre>
 <ul>
 <li>plot results</li>
 </ul>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="differential-analysis.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_multiple_DA</span>(</span>
-<span id="cb84-2"><a href="differential-analysis.html#cb84-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Multip_DA_res =</span> multiple_res,</span>
-<span id="cb84-3"><a href="differential-analysis.html#cb84-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index_list =</span> <span class="fu">c</span>(<span class="st">&quot;EffectSize&quot;</span>, <span class="st">&quot;logFC&quot;</span>, <span class="st">&quot;mean.LFC&quot;</span>, <span class="st">&quot;abund.LFC.CompvarBB.est&quot;</span>),</span>
-<span id="cb84-4"><a href="differential-analysis.html#cb84-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_index_cutoff =</span> <span class="dv">1</span>,</span>
-<span id="cb84-5"><a href="differential-analysis.html#cb84-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index =</span> <span class="st">&quot;AdjustedPvalue&quot;</span>,</span>
-<span id="cb84-6"><a href="differential-analysis.html#cb84-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_index_cutoff =</span> <span class="fl">0.5</span>,</span>
-<span id="cb84-7"><a href="differential-analysis.html#cb84-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">cellwidth =</span> <span class="dv">50</span>, </span>
-<span id="cb84-8"><a href="differential-analysis.html#cb84-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cellheight =</span> <span class="dv">15</span>, </span>
-<span id="cb84-9"><a href="differential-analysis.html#cb84-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontsize_number =</span> <span class="dv">15</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-52"></span>
-<img src="16s-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-52-1.png" alt="Multiple DA results" width="768" />
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="differential-analysis.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_multiple_DA</span>(</span>
+<span id="cb75-2"><a href="differential-analysis.html#cb75-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">Multip_DA_res =</span> multiple_res,</span>
+<span id="cb75-3"><a href="differential-analysis.html#cb75-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">x_index_list =</span> <span class="fu">c</span>(<span class="st">&quot;Log2FoldChange (Rank)</span><span class="sc">\n</span><span class="st">AA_vs_BB&quot;</span>, </span>
+<span id="cb75-4"><a href="differential-analysis.html#cb75-4" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;logFC&quot;</span>, </span>
+<span id="cb75-5"><a href="differential-analysis.html#cb75-5" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Log2FoldChange (geometricmean)</span><span class="sc">\n</span><span class="st">AA_vs_BB&quot;</span>),</span>
+<span id="cb75-6"><a href="differential-analysis.html#cb75-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">x_index_cutoff =</span> <span class="dv">0</span>,  </span>
+<span id="cb75-7"><a href="differential-analysis.html#cb75-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">y_index =</span> <span class="st">&quot;Pvalue&quot;</span>,</span>
+<span id="cb75-8"><a href="differential-analysis.html#cb75-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">y_index_cutoff =</span> <span class="fl">0.05</span>,</span>
+<span id="cb75-9"><a href="differential-analysis.html#cb75-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">cellwidth =</span> <span class="dv">35</span>,</span>
+<span id="cb75-10"><a href="differential-analysis.html#cb75-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">cellheight =</span> <span class="dv">10</span>,</span>
+<span id="cb75-11"><a href="differential-analysis.html#cb75-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">fontsize_number =</span> <span class="dv">15</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-68"></span>
+<img src="MGS-microbiota-data-analysis-based-on-XMAS-package_files/figure-html/unnamed-chunk-68-1.png" alt="Multiple DA results" width="960" />
 <p class="caption">
 Figure 8.4: Multiple DA results
 </p>
@@ -498,7 +507,7 @@ Figure 8.4: Multiple DA results
 </div>
 <div id="systematic-information-6" class="section level2 hasAnchor" number="8.6">
 <h2><span class="header-section-number">8.6</span> Systematic Information<a href="differential-analysis.html#systematic-information-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="differential-analysis.html#cb85-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="differential-analysis.html#cb76-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div>
 <pre><code>## ─ Session info ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ##  setting  value
 ##  version  R version 4.1.2 (2021-11-01)
@@ -524,6 +533,7 @@ Figure 8.4: Multiple DA results
 ##  assertthat             0.2.1    2019-03-21 [1] CRAN (R 4.1.0)
 ##  backports              1.4.1    2021-12-13 [1] CRAN (R 4.1.0)
 ##  base64enc              0.1-3    2015-07-28 [1] CRAN (R 4.1.0)
+##  bayesm                 3.1-4    2019-10-15 [1] CRAN (R 4.1.0)
 ##  Biobase                2.54.0   2021-10-26 [1] Bioconductor
 ##  BiocGenerics           0.40.0   2021-10-26 [1] Bioconductor
 ##  BiocParallel           1.28.3   2021-12-09 [1] Bioconductor
@@ -550,15 +560,18 @@ Figure 8.4: Multiple DA results
 ##  codetools              0.2-18   2020-11-04 [1] CRAN (R 4.1.2)
 ##  coin                   1.4-2    2021-10-08 [1] CRAN (R 4.1.0)
 ##  colorspace             2.0-3    2022-02-21 [1] CRAN (R 4.1.2)
+##  compositions           2.0-4    2022-01-05 [1] CRAN (R 4.1.2)
 ##  conflicted             1.1.0    2021-11-26 [1] CRAN (R 4.1.0)
 ##  corpcor                1.6.10   2021-09-16 [1] CRAN (R 4.1.0)
 ##  corrplot               0.92     2021-11-18 [1] CRAN (R 4.1.0)
 ##  cowplot                1.1.1    2020-12-30 [1] CRAN (R 4.1.0)
 ##  crayon                 1.5.0    2022-02-14 [1] CRAN (R 4.1.2)
+##  crosstalk              1.2.0    2021-11-04 [1] CRAN (R 4.1.0)
 ##  data.table             1.14.2   2021-09-27 [1] CRAN (R 4.1.0)
 ##  DBI                    1.1.2    2021-12-20 [1] CRAN (R 4.1.0)
 ##  DelayedArray           0.20.0   2021-10-26 [1] Bioconductor
 ##  deldir                 1.0-6    2021-10-23 [1] CRAN (R 4.1.0)
+##  DEoptimR               1.0-10   2022-01-03 [1] CRAN (R 4.1.2)
 ##  desc                   1.4.1    2022-03-06 [1] CRAN (R 4.1.2)
 ##  DESeq2                 1.34.0   2021-10-26 [1] Bioconductor
 ##  devtools               2.4.3    2021-11-30 [1] CRAN (R 4.1.0)
@@ -566,6 +579,7 @@ Figure 8.4: Multiple DA results
 ##  doParallel             1.0.17   2022-02-07 [1] CRAN (R 4.1.2)
 ##  doSNOW                 1.0.20   2022-02-04 [1] CRAN (R 4.1.2)
 ##  dplyr                * 1.0.8    2022-02-08 [1] CRAN (R 4.1.2)
+##  DT                     0.21     2022-02-26 [1] CRAN (R 4.1.2)
 ##  dynamicTreeCut         1.63-1   2016-03-11 [1] CRAN (R 4.1.0)
 ##  edgeR                  3.36.0   2021-10-26 [1] Bioconductor
 ##  ellipsis               0.3.2    2021-04-29 [1] CRAN (R 4.1.0)
@@ -686,6 +700,7 @@ Figure 8.4: Multiple DA results
 ##  Rhdf5lib               1.16.0   2021-10-26 [1] Bioconductor
 ##  rlang                  1.0.2    2022-03-04 [1] CRAN (R 4.1.2)
 ##  rmarkdown              2.14     2022-04-25 [1] CRAN (R 4.1.2)
+##  robustbase             0.93-9   2021-09-27 [1] CRAN (R 4.1.0)
 ##  rootSolve              1.8.2.3  2021-09-29 [1] CRAN (R 4.1.0)
 ##  rpart                  4.1.16   2022-01-24 [1] CRAN (R 4.1.2)
 ##  rprojroot              2.0.2    2020-11-15 [1] CRAN (R 4.1.0)
@@ -705,6 +720,7 @@ Figure 8.4: Multiple DA results
 ##  stringr                1.4.0    2019-02-10 [1] CRAN (R 4.1.0)
 ##  SummarizedExperiment   1.24.0   2021-10-26 [1] Bioconductor
 ##  survival               3.3-1    2022-03-03 [1] CRAN (R 4.1.2)
+##  tensorA                0.36.2   2020-11-19 [1] CRAN (R 4.1.0)
 ##  testthat               3.1.2    2022-01-20 [1] CRAN (R 4.1.2)
 ##  TH.data                1.1-0    2021-09-27 [1] CRAN (R 4.1.0)
 ##  tibble               * 3.1.6    2021-11-07 [1] CRAN (R 4.1.0)
@@ -734,6 +750,12 @@ Figure 8.4: Multiple DA results
 ## 
 ## ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</code></pre>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-thingholm2019obese" class="csl-entry">
+Thingholm, Louise B, Malte C Rühlemann, Manja Koch, Brie Fuqua, Guido Laucke, Ruwen Boehm, Corinna Bang, et al. 2019. <span>“Obese Individuals with and Without Type 2 Diabetes Show Different Gut Microbial Functional Capacity and Composition.”</span> <em>Cell Host &amp; Microbe</em> 26 (2): 252–64.
 </div>
 </div>
             </section>
@@ -773,7 +795,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/XbiomeAnalysis/16s_DataAnalysis_template/blob/main/07-Differential.Rmd",
+"link": "https://github.com/XbiomeAnalysis/MGS_DataAnalysis_template/blob/main/07-Differential.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -784,7 +806,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["16s microbiota data analysis based on XMAS package.pdf", "16s microbiota data analysis based on XMAS package.epub"],
+"download": ["MGS microbiota data analysis based on XMAS package.pdf", "MGS microbiota data analysis based on XMAS package.epub"],
 "search": {
 "engine": "fuse",
 "options": null
