@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Metagenomic Microbiota Data Analysis based on XMAS2 package
+# 16s Microbiota Data Analysis based on XMAS2 package
 
 ## :book: Procedures
 
